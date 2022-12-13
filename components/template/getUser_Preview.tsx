@@ -268,7 +268,7 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                         </div>
                         {/*Edit Profile*/}
                         <div className="mt-12 ml-20">
-                            <button  className="rounded-full py-1 px-3 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
+                            <button  className="rounded-full py-1 px-3 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
                                     Follow
                             </button>
                         </div>
@@ -282,7 +282,7 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                                 <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`}>{props.data_username}</Link>
                             </p>
                             {props.data_username == 'mashwishi' ?
-                                <div className="badge text-[#4C2C1D] badge-primary">Founder</div>
+                                <div className="badge text-[#4f2c15] badge-primary">Founder</div>
                                 :
                                 null
                             }
@@ -373,12 +373,12 @@ const GetUser_Preview = (props: GetUser_Preview) => {
 
                             {/*More Info*/}
                             <div className="flex flex-row ">
-                                <p className="text-sm text-[#B2BEFB]">Create your link profile in minutes!</p>
+                                <p className="text-sm text-primary">Create your link profile in minutes!</p>
                             </div>
 
                             <div className="flex flex-row mt-2">
                                 <Link href="/">
-                                    <button className="btn btn-sm">Create an Account</button>
+                                    <button className="btn btn-sm btn-primary">Create an Account</button>
                                 </Link>
                             </div>
 
@@ -499,7 +499,7 @@ const GetUser_Preview = (props: GetUser_Preview) => {
 
                     {/*More Info*/}
                     <div className="flex flex-row ">
-                    <p className="text-sm text-[#B2BEFB]">How would you rate {props.data_username}&apos;s profile?</p>
+                    <p className="text-sm text-primary">How would you rate {props.data_username}&apos;s profile?</p>
                     </div>
 
                     <div className="flex flex-row mt-2">

@@ -271,21 +271,21 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         <SignedIn>
                             {user?.username ?
                                 user?.username.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
-                                <button className="rounded-full py-1 px-8 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
+                                <button className="rounded-full py-1 px-8 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
                                     Edit
                                 </button>
                                 :
-                                <button className="rounded-full py-1 px-6 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
+                                <button className="rounded-full py-1 px-6 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
                                 Follow
                                 </button>
                             :
-                            <button className="rounded-full py-1 px-6 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
+                            <button className="rounded-full py-1 px-6 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
                                     Follow
                             </button>
                             }
                         </SignedIn>
                         <SignedOut>
-                            <button onClick={() => openSignIn()} className="rounded-full py-1 px-6 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
+                            <button onClick={() => openSignIn()} className="rounded-full py-1 px-6 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
                                     Follow
                             </button>
                         </SignedOut>
@@ -300,7 +300,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                 <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`}>{props.data_username}</Link>
                             </p>
                             {props.data_username == 'mashwishi' ?
-                                <div className="badge text-[#4C2C1D] badge-primary">Founder</div>
+                                <div className="badge text-[#4f2c15] badge-primary">Founder</div>
                                 :
                                 null
                             }
@@ -391,12 +391,12 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                 </div>
 
                                 <div className="flex flex-row ">
-                                    <p className="text-sm text-[#B2BEFB]">Keep your visitor updated!</p>
+                                    <p className="text-sm text-primary">Keep your visitor updated!</p>
                                 </div>
 
                                 <div className="flex flex-row mt-2">
                                     <Link href="/dashboard">
-                                        <button className="btn btn-sm bg-white text-[#E0A82E]">Edit Account</button>
+                                        <button className="btn btn-sm  btn-secondary">Edit Account</button>
                                     </Link>
                                 </div>
                             </div>
@@ -437,12 +437,12 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
 
                             {/*More Info*/}
                             <div className="flex flex-row ">
-                                <p className="text-sm text-[#B2BEFB]">Create your link profile in minutes!</p>
+                                <p className="text-sm text-primary">Create your link profile in minutes!</p>
                             </div>
 
                             <div className="flex flex-row mt-2">
                                 <Link href="/">
-                                    <button className="btn btn-sm">Create an Account</button>
+                                    <button className="btn btn-sm btn-primary">Create an Account</button>
                                 </Link>
                             </div>
 
@@ -567,7 +567,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
 
                                         {/*More Info*/}
                                         <div className="flex flex-row ">
-                                        <p className="text-sm text-[#B2BEFB]">How would you rate {props.data_username}&apos;s profile?</p>
+                                        <p className="text-sm text-primary">How would you rate {props.data_username}&apos;s profile?</p>
                                         </div>
 
                                         <div className="flex flex-row mt-2">
@@ -598,7 +598,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
 
                         {/*More Info*/}
                         <div className="flex flex-row ">
-                        <p className="text-sm text-[#B2BEFB]">How would you rate {props.data_username}&apos;s profile?</p>
+                        <p className="text-sm text-primary">How would you rate {props.data_username}&apos;s profile?</p>
                         </div>
 
                         <div className="flex flex-row mt-2">

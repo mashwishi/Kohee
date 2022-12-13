@@ -209,7 +209,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                             </h2>
                             <p className="mt-2 font-semibold text-zinc-700">
                             <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`}>{`@${props.data_username}`}</Link>
-                            {props.data_username == 'mashwishi' ? <div className="badge ml-1 text-[#4C2C1D] badge-primary">Founder</div> : null }
+                            {props.data_username == 'mashwishi' ? <div className="badge ml-1 text-[#4f2c15] badge-primary">Founder</div> : null }
                             </p>
 
                             <p className="mt-4 text-zinc-500">
@@ -278,21 +278,21 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                                 <SignedIn>
                                 {user?.username ?
                                     user?.username.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
-                                        <button className="w-[95%] rounded-xl border-2 border-[#4C2C1D] bg-[#4C2C1D] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4C2C1D]">
+                                        <button className="w-[95%] rounded-xl border-2 border-[#4f2c15] bg-[#4f2c15] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4f2c15]">
                                         Edit Profile
                                         </button>
                                         :
-                                        <button className="w-[95%] rounded-xl border-2 border-[#4C2C1D] bg-[#4C2C1D] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4C2C1D]">
+                                        <button className="w-[95%] rounded-xl border-2 border-[#4f2c15] bg-[#4f2c15] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4f2c15]">
                                         Follow
                                         </button>
                                     :
-                                    <button className="w-[95%] rounded-xl border-2 border-[#4C2C1D] bg-[#4C2C1D] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4C2C1D]">
+                                    <button className="w-[95%] rounded-xl border-2 border-[#4f2c15] bg-[#4f2c15] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4f2c15]">
                                     Follow
                                     </button>
                                 }
                                 </SignedIn>
                                 <SignedOut>
-                                    <button onClick={() => openSignIn()} className="w-[95%] rounded-xl border-2 border-[#4C2C1D] bg-[#4C2C1D] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4C2C1D]">
+                                    <button onClick={() => openSignIn()} className="w-[95%] rounded-xl border-2 border-[#4f2c15] bg-[#4f2c15] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4f2c15]">
                                     Follow
                                     </button>
                                 </SignedOut>
@@ -313,12 +313,12 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                                         </div>
 
                                         <div className="flex flex-row ">
-                                            <p className="text-sm text-[#B2BEFB]">Keep your visitor updated!</p>
+                                            <p className="text-sm text-primary">Keep your visitor updated!</p>
                                         </div>
 
                                         <div className="flex flex-row mt-2">
-                                            <Link href="/dashboard">
-                                                <button className="btn btn-sm bg-white text-[#E0A82E]">Edit Account</button>
+                                            <Link href="/">
+                                                <button className="btn btn-sm btn-secondary">Edit Account</button>
                                             </Link>
                                         </div>
                                     </div>
@@ -362,11 +362,11 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
 
                                 {/*More Info*/}
                                 <div className="flex flex-row ">
-                                    <p className="text-sm text-[#B2BEFB]">Create your link profile in minutes!</p>
+                                    <p className="text-sm text-primary">Create your link profile in minutes!</p>
                                 </div>
 
                                 <div className="flex flex-row mt-2">
-                                        <button onClick={() => openSignIn()} className="btn btn-sm">Create an Account</button>
+                                        <button onClick={() => openSignIn()} className="btn btn-sm btn-primary">Create an Account</button>
                                 </div>
 
                             </div>
@@ -389,7 +389,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
 
                                             {/*More Info*/}
                                             <div className="flex flex-row ">
-                                            <p className="text-sm text-[#B2BEFB]">How would you rate {props.data_username}&apos;s profile?</p>
+                                            <p className="text-sm text-primary">How would you rate {props.data_username}&apos;s profile?</p>
                                             </div>
 
                                             <div className="flex flex-row mt-2">
@@ -420,7 +420,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
 
                             {/*More Info*/}
                             <div className="flex flex-row ">
-                            <p className="text-sm text-[#B2BEFB]">How would you rate {props.data_username}&apos;s profile?</p>
+                            <p className="text-sm text-primary">How would you rate {props.data_username}&apos;s profile?</p>
                             </div>
 
                             <div className="flex flex-row mt-2">

@@ -9,7 +9,8 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=PT+Sans&display=optional"
             rel="stylesheet"
           />
-          <link rel="icon" type="image/png" href="/favicon.png" />
+          {/* <link rel="icon" type="image/png" href="/favicon.webp" /> */}
+          <link rel="icon" type="image/png" href="/bean.png" />
         </Head>
         <body>
           <Main />
