@@ -363,7 +363,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
 
                             {/*Title*/}
                             <div className="flex flex-row items-center">
-                                <p className="font-bold text-xl text-white">Become KOhee Creator!</p>
+                                <p className="font-bold text-xl text-white">Become Kohee Creator!</p>
                             </div>
 
                             {/*More Info*/}
