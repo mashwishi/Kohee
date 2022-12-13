@@ -8,10 +8,10 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'banner-1': "url('/banner-1.webp')",
-        'banner-2': "url('/banner-2.webp')",
+        'banner-1': "url('/banner-1.png')",
+        'banner-2': "url('/banner-2.png')",
         'banner-3': "url('/banner-3.jpg')",
-        'fallback-banner': "url('/fallback_banner.webp')",
+        'fallback-banner': "url('/fallback_banner.png')",
         'fallback-avatar': "url('/fallback_avatar.jpg')",
       }
     }
@@ -27,7 +27,7 @@ module.exports = {
     logs: true,
     rtl: false,
     prefix: "",
-    darkTheme: "light",
+    darkTheme: "bumblebee",
     themes: [
       "light",
       "dark",

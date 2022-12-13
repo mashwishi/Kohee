@@ -250,7 +250,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                     
                     {/*Banner*/}
                     <img 
-                    src={props.data_profile_banner_url ? props.data_profile_banner_url : `/fallback_banner.webp`} alt={`banner-${props.data_username}`}  
+                    src={props.data_profile_banner_url ? props.data_profile_banner_url : `/fallback_banner.png`} alt={`banner-${props.data_username}`}  
                     className="object-cover rounded-b-[50px] max-h-30 min-h-30"
                     />
                     
@@ -271,21 +271,21 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         <SignedIn>
                             {user?.username ?
                                 user?.username.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
-                                <button className="rounded-full py-1 px-8 text-[#8599FA] bg-[#E1E6FE] btn-sm font-semibold">
+                                <button className="rounded-full py-1 px-8 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
                                     Edit
                                 </button>
                                 :
-                                <button className="rounded-full py-1 px-6 text-[#8599FA] bg-[#E1E6FE] btn-sm font-semibold">
+                                <button className="rounded-full py-1 px-6 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
                                 Follow
                                 </button>
                             :
-                            <button className="rounded-full py-1 px-6 text-[#8599FA] bg-[#E1E6FE] btn-sm font-semibold">
+                            <button className="rounded-full py-1 px-6 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
                                     Follow
                             </button>
                             }
                         </SignedIn>
                         <SignedOut>
-                            <button onClick={() => openSignIn()} className="rounded-full py-1 px-6 text-[#8599FA] bg-[#E1E6FE] btn-sm font-semibold">
+                            <button onClick={() => openSignIn()} className="rounded-full py-1 px-6 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
                                     Follow
                             </button>
                         </SignedOut>
@@ -300,7 +300,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                 <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`}>{props.data_username}</Link>
                             </p>
                             {props.data_username == 'mashwishi' ?
-                                <div className="badge badge-accent">Founder</div>
+                                <div className="badge text-[#4C2C1D] badge-primary">Founder</div>
                                 :
                                 null
                             }
@@ -318,7 +318,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                             <p className=" font-semibold text-xs">
                             {/* User Badge - Temporary set all to mashwishi for preview */}
                             {//props.data_bio
-                            props.username.toLowerCase() == 'mashwishi' ? `I am the Founder of NEXUS APP and CLIQUE APP.` : `No bio yet`} 
+                            props.username.toLowerCase() == 'mashwishi' ? ` I am the Founder of Clique and Kohee.` : `No bio yet`} 
                             </p>
                         </div>
 
@@ -396,7 +396,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
 
                                 <div className="flex flex-row mt-2">
                                     <Link href="/dashboard">
-                                        <button className="btn btn-sm bg-white text-[#8599FA]">Edit Account</button>
+                                        <button className="btn btn-sm bg-white text-[#E0A82E]">Edit Account</button>
                                     </Link>
                                 </div>
                             </div>
@@ -559,7 +559,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                             {user?.username ?
                                 user?.username.toString().toLocaleLowerCase() !== props.data_username.toLocaleLowerCase() ?
                                 <>
-                                    <div className="bg-[url('/banner-1.webp')] bg-cover bg-[#657EF8]  mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
+                                    <div className="bg-[url('/banner-1.png')] bg-cover bg-[#657EF8] mb-6 mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
                                         {/*Title*/}
                                         <div className="flex flex-row items-center">
                                         <p className="font-bold text-xl text-white">Rate this profile</p>
@@ -589,7 +589,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                     </SignedIn>
                     {/*Rating Signout*/}
                     <SignedOut>
-                        <div className="bg-[url('/banner-1.webp')] bg-cover bg-[#657EF8]  mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
+                        <div className="bg-[url('/banner-1.png')] bg-cover bg-[#657EF8] mb-6 mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
 
                         {/*Title*/}
                         <div className="flex flex-row items-center">

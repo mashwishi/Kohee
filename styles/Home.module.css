@@ -17,7 +17,7 @@
 }
 
 .title a {
-  color: #6C47FF;
+  color: #4C2C1D;
   text-decoration: none;
 }
 
@@ -68,8 +68,8 @@
 .card:hover,
 .card:focus,
 .card:active {
-  color: #6C47FF;
-  border-color: #6C47FF;
+  color: #4C2C1D;
+  border-color: #4C2C1D;
 }
 
 .staticCard {
@@ -78,8 +78,8 @@
   padding: 1.5rem;
   text-align: left;
   text-decoration: none;
-  border: 1px solid #6C47FF;
-  color: #6C47FF;
+  border: 1px solid #4C2C1D;
+  color: #4C2C1D;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   width: 45%;

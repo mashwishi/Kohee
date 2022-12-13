@@ -152,7 +152,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                             
                             <div className="p-2 rounded-full">
                                 <a onClick={() => setShowShareModal(true)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#8599FA" className="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#E0A82E" className="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
                                         <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"/>
                                     </svg>
                                 </a>
@@ -164,7 +164,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                                         {
                                             isCopied ?
                                             <>
-                                                <div className="tooltip hover:tooltip-open tooltip-copied" data-tip="Copied">
+                                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-copied" data-tip="Copied">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#37CDBE" className="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
                                                         <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
                                                         <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
@@ -173,8 +173,8 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                                             </>
                                             :
                                             <>
-                                                <div className="tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#8599FA" className="bi bi-clipboard-fill" viewBox="0 0 16 16">
+                                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#E0A82E" className="bi bi-clipboard-fill" viewBox="0 0 16 16">
                                                         <path  d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
                                                     </svg>
                                                 </div>
@@ -209,13 +209,13 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                             </h2>
                             <p className="mt-2 font-semibold text-zinc-700">
                             <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`}>{`@${props.data_username}`}</Link>
-                            {props.data_username == 'mashwishi' ? <div className="badge badge-accent ml-1">Founder</div> : null }
+                            {props.data_username == 'mashwishi' ? <div className="badge ml-1 text-[#4C2C1D] badge-primary">Founder</div> : null }
                             </p>
 
                             <p className="mt-4 text-zinc-500">
                                 {/* User Badge - Temporary set all to mashwishi for preview */}
                                 {//props.data_bio
-                                props.username.toLowerCase() == 'mashwishi' ? `I am the Founder of NEXUS APP and CLIQUE APP.` : `No bio yet`} 
+                                props.username.toLowerCase() == 'mashwishi' ? ` I am the Founder of Clique and Kohee.` : `No bio yet`} 
                             </p>
                             </div>
 
@@ -223,34 +223,34 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                             {/* User Badge - Temporary set all to mashwishi for preview */}
                             {props.username.toLowerCase() == 'mashwishi' ? 
                             <div className="flex flex-row items-center mt-4">
-                                <div className="tooltip hover:tooltip-open tooltip-admin" data-tip="Admin">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-admin" data-tip="Admin">
                                 <img className="mr-1" src="/badge/others/admin.png" alt="admin-badge" width={22} height={26}/>
                                 </div>
-                                <div className="tooltip hover:tooltip-open tooltip-mod" data-tip="Moderator">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-mod" data-tip="Moderator">
                                     <img className="mr-1" src="/badge/others/moderator.png" alt="mod-badge" width={22} height={26}/>
                                 </div>
-                                <div className="tooltip hover:tooltip-open tooltip-vip" data-tip="VIP">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-vip" data-tip="VIP">
                                     <img className="mr-1" src="/badge/others/vip.png" alt="vip-badge" width={22} height={26}/>
                                 </div>
-                                <div className="tooltip hover:tooltip-open tooltip-partner" data-tip="Partner">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-partner" data-tip="Partner">
                                     <img className="mr-1" src="/badge/others/partner.png" alt="partner-badge" width={22} height={26}/>
                                 </div>
-                                <div className="tooltip hover:tooltip-open tooltip-contributor" data-tip="Contributor">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-contributor" data-tip="Contributor">
                                     <img className="mr-1" src="/badge/others/contributor.png" alt="contributor-badge" width={22} height={26}/>
                                 </div>
-                                <div className="tooltip hover:tooltip-open tooltip-sponsor" data-tip="Sponsor">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-sponsor" data-tip="Sponsor">
                                     <img className="mr-1" src="/badge/others/sponsor.png" alt="sponsor-badge" width={22} height={26}/>
                                 </div>
-                                <div className="tooltip hover:tooltip-open tooltip-supporter" data-tip="Supporter">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-supporter" data-tip="Supporter">
                                     <img className="mr-1" src="/badge/others/supporter.png" alt="supporter-badge" width={22} height={26}/>
                                 </div>
-                                <div className="tooltip hover:tooltip-open tooltip-business" data-tip="Business">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-business" data-tip="Business">
                                     <img className="mr-1" src="/badge/others/business.png" alt="business-badge" width={22} height={26}/>
                                 </div>
                             </div>
                             :
                             <div className="flex flex-row items-center mt-4">
-                                <div className="tooltip hover:tooltip-open tooltip-empty" data-tip="Empty">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-empty" data-tip="Empty">
                                     <img className="mr-1" src="/badge/empty.png" alt="empty-badge" width={22} height={26}/>
                                 </div>
                             </div>
@@ -278,21 +278,21 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                                 <SignedIn>
                                 {user?.username ?
                                     user?.username.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
-                                        <button className="w-[95%] rounded-xl border-2 border-[#E1E6FE] bg-[#E1E6FE] px-3 py-2 font-semibold text-[#8599FA] hover:bg-[#8599FA] hover:text-[#E1E6FE]">
+                                        <button className="w-[95%] rounded-xl border-2 border-[#4C2C1D] bg-[#4C2C1D] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4C2C1D]">
                                         Edit Profile
                                         </button>
                                         :
-                                        <button className="w-[95%] rounded-xl border-2 border-[#E1E6FE] bg-[#E1E6FE] px-3 py-2 font-semibold text-[#8599FA] hover:bg-[#8599FA] hover:text-[#E1E6FE]">
+                                        <button className="w-[95%] rounded-xl border-2 border-[#4C2C1D] bg-[#4C2C1D] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4C2C1D]">
                                         Follow
                                         </button>
                                     :
-                                    <button className="w-[95%] rounded-xl border-2 border-[#E1E6FE] bg-[#E1E6FE] px-3 py-2 font-semibold text-[#8599FA] hover:bg-[#8599FA] hover:text-[#E1E6FE]">
+                                    <button className="w-[95%] rounded-xl border-2 border-[#4C2C1D] bg-[#4C2C1D] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4C2C1D]">
                                     Follow
                                     </button>
                                 }
                                 </SignedIn>
                                 <SignedOut>
-                                    <button onClick={() => openSignIn()} className="w-[95%] rounded-xl border-2 border-[#E1E6FE] bg-[#E1E6FE] px-3 py-2 font-semibold text-[#8599FA] hover:bg-[#8599FA] hover:text-[#E1E6FE]">
+                                    <button onClick={() => openSignIn()} className="w-[95%] rounded-xl border-2 border-[#4C2C1D] bg-[#4C2C1D] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4C2C1D]">
                                     Follow
                                     </button>
                                 </SignedOut>
@@ -318,7 +318,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
 
                                         <div className="flex flex-row mt-2">
                                             <Link href="/dashboard">
-                                                <button className="btn btn-sm bg-white text-[#8599FA]">Edit Account</button>
+                                                <button className="btn btn-sm bg-white text-[#E0A82E]">Edit Account</button>
                                             </Link>
                                         </div>
                                     </div>
@@ -381,7 +381,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                                 {user?.username ?
                                     user?.username.toString().toLocaleLowerCase() !== props.data_username.toLocaleLowerCase() ?
                                     <>
-                                        <div className="bg-[url('/banner-1.webp')] bg-cover bg-[#657EF8]  mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
+                                        <div className="bg-[url('/banner-1.png')] bg-cover bg-[#657EF8] mb-6  mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
                                             {/*Title*/}
                                             <div className="flex flex-row items-center">
                                             <p className="font-bold text-xl text-white">Rate this profile</p>
@@ -411,7 +411,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                         </SignedIn>
                         {/*Rating Signout*/}
                         <SignedOut>
-                            <div className="bg-[url('/banner-1.webp')] bg-cover bg-[#657EF8]  mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
+                            <div className="bg-[url('/banner-1.png')] bg-cover bg-[#657EF8] mb-6 mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
 
                             {/*Title*/}
                             <div className="flex flex-row items-center">

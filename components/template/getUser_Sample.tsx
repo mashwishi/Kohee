@@ -149,7 +149,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                             {user?.username ?
                                 user?.username.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
                                     <div className="p-2 rounded-full">
-                                        <div className="tooltip hover:tooltip-open tooltip-edit" data-tip="Edit">
+                                        <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-edit" data-tip="Edit">
                                         <Link href="/dashboard">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-pencil-fill" viewBox="0 0 16 16">
                                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
@@ -169,7 +169,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                     {
                                         isCopied ?
                                         <>
-                                            <div className="tooltip hover:tooltip-open tooltip-copied" data-tip="Copied">
+                                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-copied" data-tip="Copied">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#37CDBE" className="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
                                                     <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
                                                     <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
@@ -178,7 +178,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                         </>
                                         :
                                         <>
-                                            <div className="tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
+                                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-clipboard-fill" viewBox="0 0 16 16">
                                                     <path  d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
                                                 </svg>
@@ -209,7 +209,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         <div className="flex flex-row space-x-2">
 
                             <div className="p-2 rounded-full">
-                                <div className="tooltip hover:tooltip-open tooltip-share" data-tip="Share">
+                                <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-share" data-tip="Share">
                                     <a onClick={() => setShowShareModal(true)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"/>
@@ -223,7 +223,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                     {
                                         isCopied ?
                                         <>
-                                            <div className="tooltip hover:tooltip-open tooltip-copied" data-tip="Copied">
+                                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-copied" data-tip="Copied">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#37CDBE" className="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
                                                     <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
                                                     <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
@@ -232,7 +232,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                         </>
                                         :
                                         <>
-                                            <div className="tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
+                                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-clipboard-fill" viewBox="0 0 16 16">
                                                     <path  d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
                                                 </svg>
@@ -250,7 +250,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                     
                     {/*Banner*/}
                     <img 
-                    src={props.data_profile_banner_url ? props.data_profile_banner_url : `/fallback_banner.webp`} alt={`banner-${props.data_username}`}  
+                    src={props.data_profile_banner_url ? props.data_profile_banner_url : `/fallback_banner.png`} alt={`banner-${props.data_username}`}  
                     className="object-cover rounded-b-[50px] max-h-30 min-h-30"
                     />
                     
@@ -269,7 +269,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         {/*Edit Profile*/}
                         <div className="mt-12 ml-20">
                         <SignedOut>
-                            <button  className="rounded-full py-1 px-3 text-[#8599FA] bg-[#E1E6FE] btn-sm font-semibold">
+                            <button  className="rounded-full py-1 px-3 text-[#E0A82E] bg-[#4C2C1D] btn-sm font-semibold">
                                     Follow
                             </button>
                         </SignedOut>
@@ -301,7 +301,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         <div className="flex flex-row space-x-1 my-2">
                             <p className=" font-semibold text-xs">
                             {/* User Badge - Temporary set all to mashwishi for preview */}
-                            I am the Founder of NEXUS APP and CLIQUE APP.
+                             I am the Founder of Clique and Kohee.
                             </p>
                         </div>
 
@@ -309,28 +309,28 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         {/* User Badge - Temporary set all to mashwishi for preview */}
                         {
                         <div className="flex flex-row items-center">
-                            <div className="tooltip hover:tooltip-open tooltip-admin" data-tip="Admin">
+                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-admin" data-tip="Admin">
                             <img className="mr-1" src="/badge/others/admin.png" alt="admin-badge" width={22} height={26}/>
                             </div>
-                            <div className="tooltip hover:tooltip-open tooltip-mod" data-tip="Moderator">
+                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-mod" data-tip="Moderator">
                                 <img className="mr-1" src="/badge/others/moderator.png" alt="mod-badge" width={22} height={26}/>
                             </div>
-                            <div className="tooltip hover:tooltip-open tooltip-vip" data-tip="VIP">
+                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-vip" data-tip="VIP">
                                 <img className="mr-1" src="/badge/others/vip.png" alt="vip-badge" width={22} height={26}/>
                             </div>
-                            <div className="tooltip hover:tooltip-open tooltip-partner" data-tip="Partner">
+                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-partner" data-tip="Partner">
                                 <img className="mr-1" src="/badge/others/partner.png" alt="partner-badge" width={22} height={26}/>
                             </div>
-                            <div className="tooltip hover:tooltip-open tooltip-contributor" data-tip="Contributor">
+                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-contributor" data-tip="Contributor">
                                 <img className="mr-1" src="/badge/others/contributor.png" alt="contributor-badge" width={22} height={26}/>
                             </div>
-                            <div className="tooltip hover:tooltip-open tooltip-sponsor" data-tip="Sponsor">
+                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-sponsor" data-tip="Sponsor">
                                 <img className="mr-1" src="/badge/others/sponsor.png" alt="sponsor-badge" width={22} height={26}/>
                             </div>
-                            <div className="tooltip hover:tooltip-open tooltip-supporter" data-tip="Supporter">
+                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-supporter" data-tip="Supporter">
                                 <img className="mr-1" src="/badge/others/supporter.png" alt="supporter-badge" width={22} height={26}/>
                             </div>
-                            <div className="tooltip hover:tooltip-open tooltip-business" data-tip="Business">
+                            <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-business" data-tip="Business">
                                 <img className="mr-1" src="/badge/others/business.png" alt="business-badge" width={22} height={26}/>
                             </div>
                         </div>
@@ -484,7 +484,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
 
                     {/*Rating Signout*/}
                     <SignedOut>
-                        <div className="bg-[url('/banner-1.webp')] bg-cover bg-[#657EF8]  mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
+                        <div className="bg-[url('/banner-1.png')] bg-cover bg-[#657EF8] mb-6 mx-4 mt-4 p-5 rounded-t-[15px] rounded-b-[15px] relative">
 
                         {/*Title*/}
                         <div className="flex flex-row items-center">

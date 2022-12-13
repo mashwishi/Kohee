@@ -113,7 +113,9 @@ const NavBar: NextPage = () => {
                         </div>
                         <div className="flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">
                             <div className="flex items-center">
-                                <Image className="cursor-pointer" src="/text-logo.png" alt="nexus" width="100%" height={20} priority />
+                                <Link href='/'>
+                                    <Image className="cursor-pointer" src="/text-logo.png" alt="kohee" width="100%" height={20} priority />
+                                </Link>
                             </div>
                         </div>
                         <div className="flex">
@@ -212,8 +214,9 @@ const NavBar: NextPage = () => {
             <nav>
                 <div className={`py-4 px-6 w-full flex xl:hidden justify-between items-center bg-white  ${show ? `fixed` : ``}`}>
                     <div className="w-24">
-                        <Image  id="logo" className="cursor-pointer" src="/text-logo.png" alt="nexus" width="100%" height={20} priority />
-
+                        <Link href='/'>
+                            <Image  id="logo" className="cursor-pointer" src="/text-logo.png" alt="kohee" width="100%" height={20} priority />
+                        </Link>
                     </div>
                     <div className="flex items-center">
                         <SignedIn>
@@ -249,7 +252,9 @@ const NavBar: NextPage = () => {
                                     <div className="mt-6 flex w-full items-center justify-between">
                                         <div className="flex items-center justify-between w-full">
                                             <div className="flex items-center">
-                                                <Image className="cursor-pointer" src="/text-logo.png" alt="nexus" width="100%" height={20} priority />
+                                            <Link href='/'>
+                                                <Image className="cursor-pointer" src="/text-logo.png" alt="kohee" width="100%" height={20} priority />
+                                            </Link>
                                             </div>
                                             <div id="cross" className="text-gray-800" onClick={() => setShow(!show)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
