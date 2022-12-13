@@ -70,7 +70,7 @@ const SetUser_Mobile: NextPage = () => {
                             <iframe 
                                 className="w-[375px] h-[667px] pointer-events-none" 
                                 src={process.env.NEXT_PUBLIC_HOSTNAME + `/preview/${user?.username ? user?.username : ''}`}
-                                title="NEXUS App Mobile View" 
+                                title="Kohee App Mobile View" 
                             />
                         </div>
                     </div>

@@ -16,7 +16,7 @@ const { openSignIn } = useClerk();
             <div className="w-full md:w-1/2 md:px-3">
 
                 <div className="flex justify-center mb-24">
-                    <Image className="cursor-pointer mx-auto sm:w-1/4" src="/nexus-fill.png" alt="nexus" width="235" height="255" priority />
+                    <Image className="cursor-pointer mx-auto sm:w-1/4" src="/nexus-fill.png" alt="kohee" width="235" height="255" priority />
                 </div>
                 
                 <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
@@ -27,7 +27,7 @@ const { openSignIn } = useClerk();
 
                 </h1>
                 <p className="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
-                    All of you are welcome in Nexus. Gather all of the content you produce, curate, and share online, no matter where it is dispersed, and reassemble it in one place –your Nexus — where it can be easily found.
+                    All of you are welcome in Kohee. Gather all of the content you produce, curate, and share online, no matter where it is dispersed, and reassemble it in one place –your Kohee — where it can be easily found.
                 </p>
                 <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                     
@@ -53,7 +53,7 @@ const { openSignIn } = useClerk();
                             <iframe 
                                 className="w-[375px] h-[667px] " 
                                 src={process.env.NEXT_PUBLIC_HOSTNAME + `/sample`}
-                                title="NEXUS App Mobile View" 
+                                title="Kohee App Mobile View" 
                                 scrolling="no"
                             />
                         </div>

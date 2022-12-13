@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <SignedOut>
           <footer>
             <PopupLink
-              label="NEXUS is open-source and non-profit project, You can support us by donating!"
+              label="Kohee is open-source and non-profit project, You can support us by donating!"
               repoLink="https://ko-fi.com/mashwishi"
             />
           </footer>

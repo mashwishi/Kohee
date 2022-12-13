@@ -7,7 +7,7 @@ const Pricing = () => {
       <>
           <HeadMeta 
           title_ext="Pricing" 
-          description="Nexus App > List of the pricing plan, Get more feature!" 
+          description="Kohee App > List of the pricing plan, Get more feature!" 
           />
 
           <Soon />

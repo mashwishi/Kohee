@@ -9,7 +9,7 @@
 <div align="center">
 <br />
   <a href="https://github.com/mashwishi/kohee">
-    <img src="https://i.imgur.com/PqCpvCd.png" alt="Logo" width="250">
+     <img src="https://i.imgur.com/VDv1hrf.png" alt="Kohee Logo" width="250">
   </a>
 <br /><br />
   <p align="center">
@@ -99,11 +99,11 @@ This section list of major frameworks/libraries we used to our your project.
 
 - [x] Create a repo
 - [x] Deploy live/staging with vercel
-- [x] Nexus Landing page
+- [x] Kohee Landing page
 - [x] User Social Media Authentication
 - [x] User Settings
-- [ ] Nexus user dashboard
-- [ ] Sharable profiles
+- [x] Sharable profiles
+- [ ] Kohee user dashboard
 - [ ] User Analytics
 - [ ] Ads to support the project
 

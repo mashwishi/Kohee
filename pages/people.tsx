@@ -7,7 +7,7 @@ const People = () => {
       <>
           <HeadMeta 
           title_ext="People" 
-          description="Nexus App > List of all users in this app, Explore users that are part of nexus." 
+          description="Kohee App > List of all users in this app, Explore users that are part of kohee." 
           />
 
           <Soon />

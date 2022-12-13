@@ -11,7 +11,7 @@ const HeadMeta = (props: HeadMeta) => {
   return (
     <>
       <Head>
-        <title>NEXUS {props.title_ext ? `| ${props.title_ext}` : `Create a better profile!`}</title>
+        <title>Kohee. {props.title_ext ? `| ${props.title_ext}` : `Create a better profile!`}</title>
       </Head>
     </>
   );

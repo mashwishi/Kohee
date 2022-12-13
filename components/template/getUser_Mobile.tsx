@@ -98,7 +98,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                                 <FacebookShareButton url={`${ShareUrl}`} hashtag={"#hashtag"} className='mr-2'>
                                                     <FacebookIcon size={32} />
                                                 </FacebookShareButton>
-                                                <TwitterShareButton url={`${ShareUrl}`} hashtags={["nexus", "nexusapp"]} className='mr-2'>
+                                                <TwitterShareButton url={`${ShareUrl}`} hashtags={["kohee", "koheeapp"]} className='mr-2'>
                                                     <TwitterIcon size={32} />
                                                 </TwitterShareButton>
                                                 <RedditShareButton url={`${ShareUrl}`} className='mr-2'>
@@ -432,7 +432,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
 
                             {/*Title*/}
                             <div className="flex flex-row items-center">
-                                <p className="font-bold text-xl text-white">Become Nexus Creator!</p>
+                                <p className="font-bold text-xl text-white">Become Kohee Creator!</p>
                             </div>
 
                             {/*More Info*/}

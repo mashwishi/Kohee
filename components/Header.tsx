@@ -32,7 +32,7 @@ const Header: NextPage = () => {
 
           <Link href="/">
             <span className="inline-flex items-center lg:mx-auto">
-              <Image className="cursor-pointer" src="/text-logo.png" alt="nexus" width="100%" height="20" priority />
+              <Image className="cursor-pointer" src="/text-logo.png" alt="kohee" width="100%" height="20" priority />
             </span>
           </Link>
           <ul className="flex items-center  ml-auto space-x-8 lg:flex">
