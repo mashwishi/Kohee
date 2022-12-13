@@ -50,6 +50,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             response.status == 200 ? 
             {
               user_id: `${data.id}`,
+              data: `${data}`,
               message: 'User successfully added to database!'
             } : 
             {
@@ -88,6 +89,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             response.status == 200 ? 
             {
               user_id: `${data.id}`,
+              data: `${data}`,
               message: 'User successfully updated to database!'
             } : 
             {
