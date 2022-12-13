@@ -8,21 +8,21 @@
 <br />
 <div align="center">
 <br />
-  <a href="https://github.com/mashwishi/nexus">
+  <a href="https://github.com/mashwishi/kohee">
     <img src="https://i.imgur.com/gqF6KhF.png" alt="Logo" width="250">
   </a>
 <br /><br />
   <p align="center">
     Creating an easiest way to share your social media links!
     <br />
-    <a href="https://nexusapp.ml/"><strong>View Demo »</strong></a>
+    <a href="https://kohee.app/"><strong>View Demo »</strong></a>
     <br />
     <br />
-    <a href="https://staging.nexusapp.ml/">Staging</a>
+    <a href="https://staging.kohee.app/">Staging</a>
     ·
-    <a href="https://github.com/mashwishi/nexus/issues">Report Bug</a>
+    <a href="https://github.com/mashwishi/kohee/issues">Report Bug</a>
     ·
-    <a href="https://github.com/mashwishi/nexus/issues">Request Feature</a>
+    <a href="https://github.com/mashwishi/kohee/issues">Request Feature</a>
   </p>
 </div>
 
@@ -64,7 +64,7 @@ To get a local copy up and running follow these simple example steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/mashwishi/nexus.git
+   git clone https://github.com/mashwishi/kohee.git
    ```
 2. Install NPM packages
    ```sh
@@ -107,7 +107,7 @@ This section list of major frameworks/libraries we used to our your project.
 - [ ] User Analytics
 - [ ] Ads to support the project
 
-See the [open issues](https://github.com/mashwishi/nexus/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/mashwishi/kohee/issues) for a full list of proposed features (and known issues).
 
 
 
@@ -143,16 +143,16 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/mashwishi/nexus.svg?style=for-the-badge
-[contributors-url]: https://github.com/mashwishi/nexus/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/mashwishi/nexus.svg?style=for-the-badge
-[forks-url]: https://github.com/mashwishi/nexus/network/members
-[stars-shield]: https://img.shields.io/github/stars/mashwishi/nexus.svg?style=for-the-badge
-[stars-url]: https://github.com/mashwishi/nexus/stargazers
-[issues-shield]: https://img.shields.io/github/issues/mashwishi/nexus.svg?style=for-the-badge
-[issues-url]: https://github.com/mashwishi/nexus/issues
-[license-shield]: https://img.shields.io/github/license/mashwishi/nexus.svg?style=for-the-badge
-[license-url]: https://github.com/mashwishi/nexus/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/mashwishi/kohee.svg?style=for-the-badge
+[contributors-url]: https://github.com/mashwishi/kohee/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/mashwishi/kohee.svg?style=for-the-badge
+[forks-url]: https://github.com/mashwishi/kohee/network/members
+[stars-shield]: https://img.shields.io/github/stars/mashwishi/kohee.svg?style=for-the-badge
+[stars-url]: https://github.com/mashwishi/kohee/stargazers
+[issues-shield]: https://img.shields.io/github/issues/mashwishi/kohee.svg?style=for-the-badge
+[issues-url]: https://github.com/mashwishi/kohee/issues
+[license-shield]: https://img.shields.io/github/license/mashwishi/kohee.svg?style=for-the-badge
+[license-url]: https://github.com/mashwishi/kohee/blob/master/LICENSE.txt
 
 [product-screenshot]: images/screenshot.png
 
