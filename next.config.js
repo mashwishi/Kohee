@@ -1,0 +1,12 @@
+/** @type {import('next').NextConfig} */
+module.exports = {
+  reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_CLERK_FRONTEND_API: process.env.NEXT_PUBLIC_CLERK_FRONTEND_API,
+    CLERK_API_KEY: process.env.CLERK_API_KEY,
+    NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT: process.env.NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT,
+    NEXT_PUBLIC_HASURA_REST_API: process.env.NEXT_PUBLIC_HASURA_REST_API,
+    HASURA_ADMIN_SECRET: process.env.HASURA_ADMIN_SECRET,
+    NEXT_PUBLIC_HOSTNAME: process.env.NEXT_PUBLIC_HOSTNAME, 
+  },
+}
