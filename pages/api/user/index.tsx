@@ -26,13 +26,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch(type) {
     case 'user.created':
 
-      if (req.method !== 'POST'){
-        res.json({ 
-          message: `Invalid Method`,
-          method: `POST`,
-        });
-        return
-      }
+      // if (req.method !== 'POST'){
+      //   res.json({ 
+      //     message: `Invalid Method`,
+      //     method: `POST`,
+      //   });
+      //   return
+      // }
 
       try {
         await axios.post(create_api_url, {
@@ -50,10 +50,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             response.status == 200 ? 
             {
               user_id: `${data.id}`,
-              data: `${data}`,
+              first_name: `${data.first_name}`,
+              username: `${data.first_name.toLowerCase()}`,
+              profile_image_url: `${data.profile_image_url}`,
+              updated_at: `${data.updated_at}`,
+              created_at: `${data.created_at}`,
               message: 'User successfully added to database!'
             } : 
             {
+              data: `${data}`,
               message: 'Failed, Something went wrong!'
             }
           );
@@ -66,13 +71,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     case 'user.updated':
 
-      if (req.method !== 'PUT'){
-        res.json({ 
-          message: `Invalid Method`,
-          method: `PUT`,
-        });
-        return
-      }
+      // if (req.method !== 'PUT'){
+      //   res.json({ 
+      //     message: `Invalid Method`,
+      //     method: `PUT`,
+      //   });
+      //   return
+      // }
       
       try {
         await axios.put(update_api_url, {
@@ -89,10 +94,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             response.status == 200 ? 
             {
               user_id: `${data.id}`,
-              data: `${data}`,
+              first_name: `${data.first_name}`,
+              last_name: `${data.last_name}`,
+              username: `${data.first_name.toLowerCase()}`,
+              profile_image_url: `${data.profile_image_url}`,
+              updated_at: `${data.updated_at}`,
+              created_at: `${data.created_at}`,
               message: 'User successfully updated to database!'
             } : 
             {
+              user_id: `${data.id}`,
+              first_name: `${data.first_name}`,
+              last_name: `${data.last_name}`,
+              username: `${data.first_name.toLowerCase()}`,
+              profile_image_url: `${data.profile_image_url}`,
+              updated_at: `${data.updated_at}`,
+              created_at: `${data.created_at}`,
               message: 'Failed, Something went wrong!'
             }
           );
@@ -105,13 +122,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     case 'user.deleted':
 
-      if (req.method !== 'DELETE'){
-        res.json({ 
-          message: `Invalid Method`,
-          method: `DELETE`,
-        });
-        return
-      }
+      // if (req.method !== 'DELETE'){
+      //   res.json({ 
+      //     message: `Invalid Method`,
+      //     method: `DELETE`,
+      //   });
+      //   return
+      // }
 
       try {
         await axios.delete(delete_api_url, { data: { id: `${data.id}` }, headers: headers })
@@ -123,6 +140,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               message: 'User successfully deleted to database!'
             } : 
             {
+              user_id: `${data.id}`,
               message: 'Failed, Something went wrong!'
             }
           );
