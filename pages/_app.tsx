@@ -70,7 +70,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <footer>
             <PopupLink
               label="Kohee is open-source and non-profit project, You can support us by donating!"
-              repoLink="https://ko-fi.com/mashwishi"
+              repoLink="https://ko-fi.com/koheeapp"
             />
           </footer>
         </SignedOut>
