@@ -9,7 +9,7 @@
 <div align="center">
 <br />
   <a href="https://github.com/mashwishi/kohee">
-    <img src="https://i.imgur.com/PqCpvCd.png" alt="Logo" width="250">
+    <img src="https://i.imgur.com/z750UGd.png" alt="Logo" width="300">
   </a>
 <br /><br />
   <p align="center">
