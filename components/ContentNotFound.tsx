@@ -1,8 +1,6 @@
-import { BrowserView, MobileView } from 'react-device-detect';
-import NavBar from './NavBar';
 import Link from "next/link";
 
-const NotFound = () => {
+const ContentNotFound = () => {
 
     return (
       <>
@@ -26,5 +24,5 @@ const NotFound = () => {
     );
   };
   
-  export default NotFound;
+  export default ContentNotFound;
   

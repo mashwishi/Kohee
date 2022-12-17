@@ -21,7 +21,10 @@ const publicPages = [
   "/sample", 
   "/docs/api",
   "/people",
-  "/pricing"
+  "/pricing",
+  "/terms-and-condtion",
+  "/privacy-policy",
+  "/about"
 ];
 
 const DisableNav = [
