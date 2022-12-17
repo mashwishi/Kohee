@@ -34,7 +34,7 @@ const Username = () => {
 
           setData(data.users[0])
 
-          ReactGA.pageview('/u/' + data.users[0].user_id)
+          ReactGA.pageview('/u/' + data.users[0].id)
 
           setLoading(false)
 
