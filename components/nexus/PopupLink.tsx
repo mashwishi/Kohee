@@ -24,7 +24,7 @@ const PopupLink = (props: PopupLink) => {
         </div>
         <div className="flex-none">
           <Link href={props.repoLink}>
-            <button className="btn btn-primary btn-sm">View on Ko-fi &rarr;</button>
+            <button className="btn btn-primary btn-sm">Donate &rarr;</button>
           </Link>
           <button className="btn btn-error btn-sm" onClick={() => setShowFooterPopup(false)}>X</button>
         </div>

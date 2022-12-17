@@ -6,6 +6,7 @@ import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detec
 import {useRouter} from "next/router";
 import { Analytics } from '@vercel/analytics/react';
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 // GOOGLE ANALYTICS
 import ReactGA from 'react-ga';
@@ -77,6 +78,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               repoLink="https://ko-fi.com/koheeapp"
             />
           </footer>
+          <Footer/>
         </SignedOut>
 
       </ClerkLoaded>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useClerk } from "@clerk/nextjs";
 import useAnalyticsEventTracker from "./useAnalyticsEventTracker";
 
+
 const Landing: NextPage = () => {
 
 const { openSignIn } = useClerk();
@@ -64,6 +65,7 @@ const gaEventTracker = useAnalyticsEventTracker('Mobile - Landing');
             </div>
         </div>
         </section>
+
     </>
 
     

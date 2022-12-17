@@ -9,6 +9,8 @@ import Landing from "../components/Landing";
 
 import HeadMeta from "../components/HeadMeta";
 
+
+
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 const Home = () => {
