@@ -7,13 +7,15 @@ import GetUser_Mobile from '../../components/template/getUser_Mobile'
 import GetUser_Desktop from '../../components/template/getUser_Desktop'
 import GetUser_CustomView from '../../components/template/getUser_Desktop'
 
+import ReactGA from 'react-ga';
 
-import NotMobile from '../../components/NotMobile'
+import NotFound from "../components/NotFound";
 
 const Username = () => {
   
     const router = useRouter()
     const { username } = router.query
+
 
       const [data, setData] = useState(null)
       const [isLoading, setLoading] = useState(false)
@@ -29,13 +31,18 @@ const Username = () => {
       })
         .then((res) => res.json())
         .then((data) => {
+
           setData(data.users[0])
+
+          ReactGA.pageview('/u/' + data.users[0].user_id)
+
           setLoading(false)
+
       })
     }, [])
 
     if (isLoading) return <LoadingPage/>
-    if (!data) return <p>No profile data</p>
+    if (!data) return <NotFound/>
 
   return (
     <>
