@@ -7,6 +7,10 @@ import {useRouter} from "next/router";
 import { Analytics } from '@vercel/analytics/react';
 import NavBar from "../components/NavBar";
 
+// GOOGLE ANALYTICS
+import ReactGA from 'react-ga';
+ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKING_ID ? process.env.GOOGLE_ANALYTICS_TRACKING_ID : '');
+
 const publicPages = [
   "/", 
   "/u/[username]", 

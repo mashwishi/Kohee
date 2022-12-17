@@ -2,10 +2,13 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { useClerk } from "@clerk/nextjs";
+import useAnalyticsEventTracker from "./useAnalyticsEventTracker";
 
 const Interact_Landing: NextPage = () => {
 
 const { openSignIn } = useClerk();
+
+const gaEventTracker = useAnalyticsEventTracker('Desktop - Landing');
 
   return (
     <>
@@ -41,7 +44,7 @@ const { openSignIn } = useClerk();
                 </p>
                 <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                     
-                    <button onClick={() => openSignIn()} className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-[#4f2c15] rounded-md sm:mb-0 hover:bg-[#7A4521] sm:w-auto">
+                    <button onClick={() => {openSignIn(); gaEventTracker('Get Started', 'Get Started');} } className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-[#4f2c15] rounded-md sm:mb-0 hover:bg-[#7A4521] sm:w-auto">
                     Get Started 
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </button>

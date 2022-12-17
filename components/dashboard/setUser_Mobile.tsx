@@ -1,11 +1,14 @@
 import type { NextPage } from "next";
 import { useClerk, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 const SetUser_Mobile: NextPage = () => {
   const { user } = useUser();
 
   const { openSignIn } = useClerk();
+
+  const gaEventTracker = useAnalyticsEventTracker('Mobile - Dashboard');
 
   return (
     <>
@@ -51,7 +54,7 @@ const SetUser_Mobile: NextPage = () => {
             <div>
               <h2 className="card-title ">
                 Card Live Preview
-                <Link href={`/u/${user?.username ? user?.username : ''}`}>
+                <Link href={`/u/${user?.username ? user?.username : ''}`} onClick={() => gaEventTracker('Card Live Preview', 'Card Live Preview')}>
                   <button className="btn btn-sm btn-square">
                     <svg xmlns="http://www.w3.org/2000/svg"fill="none" viewBox="0 0 16 16" className="inline-block w-6 h-6 stroke-current">
                       <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
