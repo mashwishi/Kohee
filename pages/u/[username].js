@@ -17,8 +17,8 @@ const Username = () => {
     const { username } = router.query
 
 
-      const [data, setData] = useState(null)
-      const [isLoading, setLoading] = useState(false)
+    const [data, setData] = useState(null)
+    const [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
       setLoading(true)

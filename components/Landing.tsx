@@ -3,13 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { useClerk } from "@clerk/nextjs";
 import useAnalyticsEventTracker from "./useAnalyticsEventTracker";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import CountUp from "react-countup";
+import NumberFormatter from "./NumberFormatter";
 
 
 const Landing: NextPage = () => {
 
-const { openSignIn } = useClerk();
+    const { openSignIn } = useClerk();
 
-const gaEventTracker = useAnalyticsEventTracker('Mobile - Landing');
+    const gaEventTracker = useAnalyticsEventTracker('Mobile - Landing');
+
+    const [activeUsers, setActiveUsers] = useState(0);
 
   return (
     <>
@@ -46,6 +52,32 @@ const gaEventTracker = useAnalyticsEventTracker('Mobile - Landing');
                 <p className="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
                     All of you are welcome in Kohee. Gather all of the content you produce, curate, and share online, no matter where it is dispersed, and reassemble it in one place –your Kohee — where it can be easily found.
                 </p>
+
+                <section className="text-gray-600 body-font">
+                    <div className="container px-2 py-2">
+                        <div className="flex flex-wrap -m-4 text-center justify-center">
+                        <div className="p-4 w-1/3 ">
+                            <h2 className="title-font font-medium text-2xl  text-gray-900">
+                                <NumberFormatter input_number={Math.floor(Math.random() * 10)} />
+                            </h2>
+                            <p className="leading-relaxed">Live Visitors</p>
+                        </div>
+                        <div className="p-4 w-1/3 ">
+                            <h2 className="title-font font-medium text-2xl text-gray-900">
+                                <NumberFormatter input_number={5} />
+                            </h2>
+                            <p className="leading-relaxed">Total Users</p>
+                        </div>
+                        <div className="p-4 w-1/3 ">
+                            <h2 className="title-font font-medium text-2xl  text-gray-900">
+                                <NumberFormatter input_number={8454} />
+                            </h2>
+                            <p className="leading-relaxed">Total Views</p>
+                        </div>
+                        </div>
+                    </div>
+                </section>
+
                 <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                     
                     <button onClick={() => {openSignIn(); gaEventTracker('Get Started', 'Get Started');} } className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-[#4f2c15] rounded-md sm:mb-0 hover:bg-[#7A4521] sm:w-auto">
@@ -53,11 +85,9 @@ const gaEventTracker = useAnalyticsEventTracker('Mobile - Landing');
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </button>
 
-                    <Link href="/docs/api">
-                        <button className="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
-                            {`< Developer />`}
-                        </button>
-                    </Link>
+                    <button onClick={() => { window.open('https://ko-fi.com/koheeApp');}} className="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
+                        {`< Developer />`}
+                    </button>
 
                 </div>
                 </div>

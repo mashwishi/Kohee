@@ -1,7 +1,15 @@
 import Soon from "../components/Soon";
+import ReactGA from 'react-ga'
 import HeadMeta from "../components/HeadMeta";
+import { useEffect } from "react";
+
 
 const People = () => {
+
+  useEffect(() => {
+    ReactGA.pageview('People')
+  }, [])
+
 
     return (
       <>
