@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useClerk, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
+import ReactGA from 'react-ga'
 
 const SetUser_Mobile: NextPage = () => {
   const { user } = useUser();
@@ -9,6 +10,8 @@ const SetUser_Mobile: NextPage = () => {
   const { openSignIn } = useClerk();
 
   const gaEventTracker = useAnalyticsEventTracker('Mobile - Dashboard');
+  
+  ReactGA.pageview('Dashboard')
 
   return (
     <>

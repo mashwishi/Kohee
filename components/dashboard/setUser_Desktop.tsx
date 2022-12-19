@@ -3,12 +3,16 @@ import { useClerk, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextj
 import Link from "next/link";
 import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
+import ReactGA from 'react-ga'
+
 const SetUser_Desktop: NextPage = () => {
   const { user } = useUser();
 
   const { openSignIn } = useClerk();
 
   const gaEventTracker = useAnalyticsEventTracker('Desktop - Dashboard');
+
+  ReactGA.pageview('Dashboard')
 
   return (
     <>

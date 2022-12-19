@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CountUp from "react-countup";
 import NumberFormatter from "./NumberFormatter";
+import ReactGA from 'react-ga'
 
 
 const Landing: NextPage = () => {
@@ -14,6 +15,8 @@ const Landing: NextPage = () => {
     const { openSignIn } = useClerk();
 
     const gaEventTracker = useAnalyticsEventTracker('Mobile - Landing');
+
+    ReactGA.pageview('Home')
 
     const [activeUsers, setActiveUsers] = useState(0);
 
