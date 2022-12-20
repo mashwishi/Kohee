@@ -5,20 +5,38 @@ import { BrowserView, MobileView, CustomView } from 'react-device-detect';
 
 import GetUser_Mobile from '../../components/template/getUser_Mobile'
 import GetUser_Desktop from '../../components/template/getUser_Desktop'
-import GetUser_CustomView from '../../components/template/getUser_Desktop'
+
+import { browserName, deviceDetect, deviceType} from 'react-device-detect';
 
 import Link from 'next/link';
-
 import ReactGA from 'react-ga'
+
+
 
 const Username = () => {
   
     const router = useRouter()
+
     const { username } = router.query
+
 
 
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(false)
+
+    //Country API Free
+    const [userCountryLoc, setUserCountryLoc] = useState('')
+
+    //Type: mobile = Mobile | browser = Desktop
+    const [userDeviceTypeuserDeviceOS, setUserDeviceTypesetUserDeviceOS] = useState(deviceType === `browser` ? `Desktop` : deviceType == `mobile` ? `Mobile` : `Unknown`)
+
+    //OS and Version
+    const [userDetect, setUserDetect] = useState(deviceDetect)
+    const [userDeviceOS, setUserDeviceOS] = useState(userDetect.isBrowser ? `${userDetect.osName + ' ' + userDetect.osVersion}` : userDetect.isMobile ? `${userDetect.os + ' ' + userDetect.osVersion}` : `Unknown`)
+    
+    //Browser Name
+    const [userBrowser, setUserBrowser] = useState(browserName)
+
 
     useEffect(() => {
       setLoading(true)
@@ -30,16 +48,34 @@ const Username = () => {
         },
       })
         .then((res) => res.json())
-        .then((data) => {
+        .then((data) => { 
 
           setData(data.users[0])
 
           ReactGA.pageview('/u/' + data.users[0].id)
 
+          async function fetchCountry() {
+            const response = await fetch(process.env.IP_API_URL);
+            const data = await response.json();
+            setUserCountryLoc(data.country_name);
+          }
+
+          fetchCountry();
+
           setLoading(false)
 
+          if(userCountryLoc){
+
+            //Run Analytics here
+            //OS: Android, Windows, iOS, etc.. | Type: Desktop/Mobile | Country | Browser
+            //TODO: https://app.clickup.com/t/865bbhg1p
+            console.log(  userDeviceOS  + '\n' + userDeviceTypeuserDeviceOS  + '\n' + userCountryLoc + '\n' +  userBrowser )
+
+          }
+
+
       })
-    }, [])
+    }, [userBrowser, userDeviceOS,  userDeviceTypeuserDeviceOS, userCountryLoc])
 
     if (isLoading) return <LoadingPage/>
     
@@ -61,6 +97,7 @@ const Username = () => {
         </section>
       </>
     )
+
 
   return (
     <>
@@ -100,5 +137,6 @@ const Username = () => {
     </>
   );
 };
+
   
 export default Username;

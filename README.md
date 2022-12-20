@@ -75,12 +75,17 @@ To get a local copy up and running follow these simple example steps.
     CLERK_API_KEY=''
     HASURA_ADMIN_SECRET=''
 
+    ENDPOINT_KEY_PROD=''
+    ENDPOINT_KEY_LOCAL=''
+
     NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT=''
     NEXT_PUBLIC_HASURA_REST_API=''
     NEXT_PUBLIC_CLERK_FRONTEND_API=''
-    NEXT_PUBLIC_HOSTNAME=''
+    NEXT_PUBLIC_HOSTNAME='https://<yourdomainhere>'
 
     GOOGLE_ANALYTICS_TRACKING_ID ='UA-'
+
+    IP_API_URL = 'https://ipapi.co/json/'
     ```
     Universal Analytics will no longer process new data in standard properties beginning July 1, 2023.
     The `react-ga` is now deprecated (12/18/2022) since it is still not July 1, 2023 I will keep this configuration and wait for `react-ga` updates while waiting for an alternative solution.

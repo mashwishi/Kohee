@@ -5,9 +5,6 @@ import { useClerk } from "@clerk/nextjs";
 import useAnalyticsEventTracker from "./useAnalyticsEventTracker";
 import { useEffect, useRef, useState } from "react";
 
-import CountUp from 'react-countup';
-import axios from "axios";
-
 import NumberFormatter from "./NumberFormatter";
 
 import ReactGA from 'react-ga'
@@ -19,8 +16,6 @@ const Interact_Landing: NextPage = () => {
     const gaEventTracker = useAnalyticsEventTracker('Desktop - Landing');
 
     ReactGA.pageview('Home')
-
-    const [activeUsers, setActiveUsers] = useState(0);
 
     return (
     <>
