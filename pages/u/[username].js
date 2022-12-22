@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import LoadingPage from  "../../components/LoadingPage"
 import { BrowserView, MobileView, CustomView } from 'react-device-detect';
 
-import GetUser_Mobile from '../../components/template/getUser_Mobile'
-import GetUser_Desktop from '../../components/template/getUser_Desktop'
+import LoadingPage from '../../components/global/LoadingPage';
+import GetUser_Mobile from '../../components/user/getUser_Mobile';
+import GetUser_Desktop from '../../components/user/getUser_Desktop';
 
 import { browserName, deviceDetect, deviceType} from 'react-device-detect';
 

@@ -1,6 +1,6 @@
-import Soon from "../components/Soon";
+import Soon from "../components/global/Soon";
 import ReactGA from 'react-ga'
-import HeadMeta from "../components/HeadMeta";
+import HeadMeta from "../components/global/HeadMeta";
 import { useEffect } from "react";
 
 

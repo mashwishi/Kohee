@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import LoadingPage from  "../../components/LoadingPage"
 import { BrowserView, MobileView, CustomView } from 'react-device-detect';
 
-import GetUser_Preview from '../../components/template/getUser_Preview'
+import LoadingPage from '../../components/global/LoadingPage';
+import GetUser_Preview from '../../components/user/getUser_Preview'
 
 const Username = () => {
   

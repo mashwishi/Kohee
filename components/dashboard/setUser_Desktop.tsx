@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useClerk, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
+import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
 
 import ReactGA from 'react-ga'
 

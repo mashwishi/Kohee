@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { useClerk } from "@clerk/nextjs";
-import useAnalyticsEventTracker from "./useAnalyticsEventTracker";
+import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
 import { useEffect, useRef, useState } from "react";
 
-import NumberFormatter from "./NumberFormatter";
+import NumberFormatter from "../global/NumberFormatter";
 
 import ReactGA from 'react-ga'
 
@@ -46,7 +46,7 @@ const Interact_Landing: NextPage = () => {
                         <div className="flex flex-wrap -m-4 text-center justify-center">
                         <div className="p-4 sm:w-1/4 w-1/2">
                             <h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-900">
-                                <NumberFormatter input_number={Math.floor(Math.random() * 10)} />
+                                <NumberFormatter input_number={Math.floor(Math.random() * 5)} />
                             </h2>
                             <p className="leading-relaxed">Live Visitors</p>
                         </div>

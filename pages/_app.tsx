@@ -5,8 +5,8 @@ import {ClerkLoaded, ClerkProvider, SignedIn, SignedOut} from "@clerk/nextjs";
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import {useRouter} from "next/router";
 import { Analytics } from '@vercel/analytics/react';
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import NavBar from "../components/global/NavBar";
+import Footer from "../components/global/Footer";
 
 // GOOGLE ANALYTICS
 import ReactGA from 'react-ga';
@@ -22,7 +22,7 @@ const publicPages = [
   "/docs/api",
   "/people",
   "/pricing",
-  "/terms-and-condtion",
+  "/terms-and-condition",
   "/privacy-policy",
   "/about"
 ];

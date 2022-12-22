@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import LoadingPage from  "../components/LoadingPage"
-import GetUser_Sample from '../components/template/getUser_Sample'
+import GetUser_Sample from '../components/user/getUser_Sample'
+import LoadingPage from '../components/global/LoadingPage'
 
 
 const Sample = () => {

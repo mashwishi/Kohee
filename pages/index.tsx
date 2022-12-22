@@ -4,10 +4,10 @@ import React from "react";
 import SetUser_Desktop from "../components/dashboard/setUser_Desktop";
 import SetUser_Mobile from "../components/dashboard/setUser_Mobile";
 
-import Interact_Landing from "../components/Interact_Landing";
-import Landing from "../components/Landing";
+import Interact_Landing from "../components/home/Interact_Landing";
+import Landing from "../components/home/Landing";
 
-import HeadMeta from "../components/HeadMeta";
+import HeadMeta from "../components/global/HeadMeta";
 
 
 
