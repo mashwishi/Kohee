@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import Marquee from "react-fast-marquee";
 import { useClerk } from "@clerk/nextjs";
 import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
 import { useEffect, useRef, useState } from "react";
@@ -40,31 +41,6 @@ const Interact_Landing: NextPage = () => {
                 </div>
                 
                 <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-                    
-                <section className="text-gray-600 body-font">
-                    <div className="container px-5 py-2">
-                        <div className="flex flex-wrap -m-4 text-center justify-center">
-                        <div className="p-4 sm:w-1/4 w-1/2">
-                            <h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-900">
-                                <NumberFormatter input_number={Math.floor(Math.random() * 5)} />
-                            </h2>
-                            <p className="leading-relaxed">Live Visitors</p>
-                        </div>
-                        <div className="p-4 sm:w-1/4 w-1/2">
-                            <h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-900">
-                                <NumberFormatter input_number={5} />
-                            </h2>
-                            <p className="leading-relaxed">Total Users</p>
-                        </div>
-                        <div className="p-4 sm:w-1/4 w-1/2">
-                            <h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-900">
-                                <NumberFormatter input_number={8454} />
-                            </h2>
-                            <p className="leading-relaxed">Total Views</p>
-                        </div>
-                        </div>
-                    </div>
-                </section>
 
                 <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-5xl">
 
@@ -118,6 +94,37 @@ const Interact_Landing: NextPage = () => {
             </div>
         </div>
         </section>
+
+        <section className="px-4 py-4 mx-auto max-w-7xl">
+            <h1 className="mb-4 text-sm font-bold tracking-wide text-center text-gray-800 uppercase">We&apos;re proud to use these amazing frameworks and services.</h1>
+            <Marquee>
+                <div className="mr-16">
+                <Image src="/logos/vercel.png" width="200" height="120" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/github.png" width="200" height="110" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/hasura.png" width="200" height="60" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/clerk.png" width="200" height="60" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/daisyui.png" width="200" height="60" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/tailwind.png" width="300" height="38" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/hostinger.png" width="200" height="55" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/clickup.png" width="200" height="50" alt="vercel" priority/>
+                </div>
+            </Marquee>
+        </section>
+
         
     </>
   );

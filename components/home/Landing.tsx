@@ -8,6 +8,7 @@ import axios from "axios";
 import CountUp from "react-countup";
 import NumberFormatter from "../global/NumberFormatter";
 import ReactGA from 'react-ga'
+import Marquee from "react-fast-marquee";
 
 
 const Landing: NextPage = () => {
@@ -56,31 +57,6 @@ const Landing: NextPage = () => {
                     All of you are welcome in Kohee. Gather all of the content you produce, curate, and share online, no matter where it is dispersed, and reassemble it in one place –your Kohee — where it can be easily found.
                 </p>
 
-                <section className="text-gray-600 body-font">
-                    <div className="container px-2 py-2">
-                        <div className="flex flex-wrap -m-4 text-center justify-center">
-                        <div className="p-4 w-1/3 ">
-                            <h2 className="title-font font-medium text-2xl  text-gray-900">
-                                <NumberFormatter input_number={Math.floor(Math.random() * 5)} />
-                            </h2>
-                            <p className="leading-relaxed">Live Visitors</p>
-                        </div>
-                        <div className="p-4 w-1/3 ">
-                            <h2 className="title-font font-medium text-2xl text-gray-900">
-                                <NumberFormatter input_number={5} />
-                            </h2>
-                            <p className="leading-relaxed">Total Users</p>
-                        </div>
-                        <div className="p-4 w-1/3 ">
-                            <h2 className="title-font font-medium text-2xl  text-gray-900">
-                                <NumberFormatter input_number={8454} />
-                            </h2>
-                            <p className="leading-relaxed">Total Views</p>
-                        </div>
-                        </div>
-                    </div>
-                </section>
-
                 <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                     
                     <button onClick={() => {openSignIn(); gaEventTracker('Get Started', 'Get Started');} } className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-[#4f2c15] rounded-md sm:mb-0 hover:bg-[#7A4521] sm:w-auto">
@@ -102,6 +78,36 @@ const Landing: NextPage = () => {
             </div>
             </div>
         </div>
+        </section>
+
+        <section className="px-4 py-4 mx-auto max-w-7xl">
+            <h1 className="mb-4 text-sm font-bold tracking-wide text-center text-gray-800 uppercase">We&apos;re proud to use these amazing frameworks and services.</h1>
+            <Marquee>
+                <div className="mr-16">
+                <Image src="/logos/vercel.png" width="200" height="120" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/github.png" width="200" height="110" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/hasura.png" width="200" height="60" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/clerk.png" width="200" height="60" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/daisyui.png" width="200" height="60" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/tailwind.png" width="300" height="38" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/hostinger.png" width="200" height="55" alt="vercel" priority/>
+                </div>
+                <div className="mr-16">
+                <Image src="/logos/clickup.png" width="200" height="50" alt="vercel" priority/>
+                </div>
+            </Marquee>
         </section>
 
     </>

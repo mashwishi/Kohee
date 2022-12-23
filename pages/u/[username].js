@@ -11,15 +11,11 @@ import { browserName, deviceDetect, deviceType} from 'react-device-detect';
 import Link from 'next/link';
 import ReactGA from 'react-ga'
 
-
-
 const Username = () => {
   
     const router = useRouter()
 
     const { username } = router.query
-
-
 
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(false)
