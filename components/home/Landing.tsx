@@ -80,7 +80,7 @@ const Landing: NextPage = () => {
         </div>
         </section>
 
-        <section className="px-4 py-4 mx-auto max-w-7xl">
+        <section className="px-4 py-4 mx-auto max-w-7xl pointer-events-none">
             <h1 className="mb-4 text-sm font-bold tracking-wide text-center text-gray-800 uppercase">We&apos;re proud to use these amazing frameworks and services.</h1>
             <Marquee>
                 <div className="mr-16">

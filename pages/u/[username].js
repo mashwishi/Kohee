@@ -36,41 +36,52 @@ const Username = () => {
 
     useEffect(() => {
       setLoading(true)
-      fetch(`${process.env.NEXT_PUBLIC_HASURA_REST_API}/user/get/${username.toLowerCase()}`, {
-        method: 'GET',
-        headers: {
-        'Content-Type': 'application/json',
-        'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => { 
 
-          setData(data.users[0])
-
-          ReactGA.pageview('/u/' + data.users[0].id)
-
-          async function fetchCountry() {
-            const response = await fetch(process.env.IP_API_URL);
+      async function getData() {
+        const fetchData = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data:{
+                    username: `${username.toLowerCase()}`
+                }
+            })
+        };
+        
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
             const data = await response.json();
-            setUserCountryLoc(data.country_name);
-          }
 
-          fetchCountry();
+            setData(data.data)
 
-          setLoading(false)
+            ReactGA.pageview('/u/' + data.users[0].id)
 
-          if(userCountryLoc){
+            async function fetchCountry() {
+              const response = await fetch(process.env.IP_API_URL);
+              const data = await response.json();
+              setUserCountryLoc(data.country_name);
+            }
+  
+            fetchCountry();
+  
+            if(userCountryLoc){
+  
+              //Run Analytics here
+              //OS: Android, Windows, iOS, etc.. | Type: Desktop/Mobile | Country | Browser
+              //TODO: https://app.clickup.com/t/865bbhg1p
+              console.log(  userDeviceOS  + '\n' + userDeviceTypeuserDeviceOS  + '\n' + userCountryLoc + '\n' +  userBrowser )
+  
+            }
 
-            //Run Analytics here
-            //OS: Android, Windows, iOS, etc.. | Type: Desktop/Mobile | Country | Browser
-            //TODO: https://app.clickup.com/t/865bbhg1p
-            console.log(  userDeviceOS  + '\n' + userDeviceTypeuserDeviceOS  + '\n' + userCountryLoc + '\n' +  userBrowser )
+            setLoading(false)
+        } catch (error) {
+            console.error(error);
+        }
+      }
+      getData()
 
-          }
-
-
-      })
     }, [userBrowser, userDeviceOS,  userDeviceTypeuserDeviceOS, userCountryLoc])
 
     if (isLoading) return <LoadingPage/>

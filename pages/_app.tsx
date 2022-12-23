@@ -15,7 +15,6 @@ ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKING_ID ? process.env.GOOGLE
 const publicPages = [
   "/", 
   "/u/[username]", 
-  "/api/user/create",
   "/sign-up",
   "/sign-in",
   "/sample", 

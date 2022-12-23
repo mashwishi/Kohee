@@ -26,23 +26,29 @@ const People = () => {
 
     ReactGA.pageview('People')
 
-    fetch(`${process.env.NEXT_PUBLIC_HASURA_REST_API}/users/all`, {
-      method: 'GET',
-      headers: {
-      'Content-Type': 'application/json',
-      'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => { 
+    async function getData() {
+      const fetchData = {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json'
+          }
+      };
+      
+      try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/all`);
+          const data = await response.json();
 
-          setUserCount(data?.users.length > 0 ? data.users.length : 0) 
+          setUserCount(data?.data?.users.length > 0 ? data.data.users.length : 0) 
 
-          setUserObj(data?.users)
-          setUserObjFiltered(data?.users)
-
+          setUserObj(data?.data?.users)
+          setUserObjFiltered(data?.data?.users)
+  
           setLoading(false)
-    })
+      } catch (error) {
+          console.error(error);
+      }
+  }
+  getData()
 
   }, [])
 
