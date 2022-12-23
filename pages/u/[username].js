@@ -113,6 +113,8 @@ const Username = () => {
         followers={0}
         visits={0}
         ratings={0} 
+        data_banner={data.banner}
+        data_bio={data.bio}
         data_profile_banner_url={data.profile_banner_url}
         data_username={data.username}
         data_user_id={data.user_id}
@@ -132,6 +134,8 @@ const Username = () => {
         ratings={0} 
         data_profile_banner_url={data.profile_banner_url}
         data_username={data.username}
+        data_banner={data.banner}
+        data_bio={data.bio}
         data_user_id={data.user_id}
         data_updated_at={data.updated_at}
         data_profile_image_url={data.profile_image_url}

@@ -43,6 +43,8 @@ import {
 type GetUser_Mobile = {
     data_username: string;
     data_user_id: string;
+    data_banner: string;
+    data_bio: string;
     data_updated_at: string;
     data_profile_image_url: string;
     data_profile_banner_url: string;
@@ -300,8 +302,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         {/*Profile Full Name*/}
                         <div className="flex flex-row space-x-1 my-2">
                             <p className=" font-semibold text-xs">
-                            {/* User Badge - Temporary set all to mashwishi for preview */}
-                             I am the Founder of Clique and Kohee.
+                            {props.data_bio ? props.data_bio : null} 
                             </p>
                         </div>
 

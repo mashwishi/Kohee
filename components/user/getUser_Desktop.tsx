@@ -55,6 +55,8 @@ import {
 type GetUser_Desktop = {
     data_username: string;
     data_user_id: string;
+    data_banner: string;
+    data_bio: string;
     data_updated_at: string;
     data_profile_image_url: string;
     data_profile_banner_url: string;
@@ -213,9 +215,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                             </p>
 
                             <p className="mt-4 text-zinc-500">
-                                {/* User Badge - Temporary set all to mashwishi for preview */}
-                                {//props.data_bio
-                                props.username.toLowerCase() == 'mashwishi' ? ` I am the Founder of Clique and Kohee.` : `No bio yet`} 
+                                {props.data_bio ? props.data_bio : null} 
                             </p>
                             </div>
 

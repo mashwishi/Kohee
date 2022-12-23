@@ -87,25 +87,25 @@ const Landing: NextPage = () => {
                 <Image src="/logos/vercel.png" width="200" height="120" alt="vercel" priority/>
                 </div>
                 <div className="mr-16">
-                <Image src="/logos/github.png" width="200" height="110" alt="vercel" priority/>
+                <Image src="/logos/github.png" width="200" height="110" alt="github" priority/>
                 </div>
                 <div className="mr-16">
-                <Image src="/logos/hasura.png" width="200" height="60" alt="vercel" priority/>
+                <Image src="/logos/hasura.png" width="200" height="60" alt="hasura" priority/>
                 </div>
                 <div className="mr-16">
-                <Image src="/logos/clerk.png" width="200" height="60" alt="vercel" priority/>
+                <Image src="/logos/clerk.png" width="200" height="60" alt="clerk" priority/>
                 </div>
                 <div className="mr-16">
-                <Image src="/logos/daisyui.png" width="200" height="60" alt="vercel" priority/>
+                <Image src="/logos/daisyui.png" width="200" height="60" alt="daisyui" priority/>
                 </div>
                 <div className="mr-16">
-                <Image src="/logos/tailwind.png" width="300" height="38" alt="vercel" priority/>
+                <Image src="/logos/tailwind.png" width="300" height="38" alt="tailwind" priority/>
                 </div>
                 <div className="mr-16">
-                <Image src="/logos/hostinger.png" width="200" height="55" alt="vercel" priority/>
+                <Image src="/logos/hostinger.png" width="200" height="55" alt="hostinger" priority/>
                 </div>
                 <div className="mr-16">
-                <Image src="/logos/clickup.png" width="200" height="50" alt="vercel" priority/>
+                <Image src="/logos/clickup.png" width="200" height="50" alt="clickup" priority/>
                 </div>
             </Marquee>
         </section>

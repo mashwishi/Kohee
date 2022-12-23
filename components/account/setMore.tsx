@@ -88,6 +88,7 @@ const SetMore: NextPage = () => {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/bio`, latestBio);
                 const data = await response.json();
                 setisSuccessBio(true)
+                setEditSwtch(false)
             } catch (error) {
                 setisErrorBio(true)
                 console.error(error);

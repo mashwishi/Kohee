@@ -8,7 +8,7 @@ const Sample = () => {
   
     const router = useRouter()
 
-    const { username } = 'Mashwishi'
+    const username = 'Mashwishi'
 
       const [data, setData] = useState(null)
       const [isLoading, setLoading] = useState(false)
@@ -53,6 +53,8 @@ const Sample = () => {
         followers={4968}
         visits={2458}
         ratings={5} 
+        data_banner={data.banner}
+        data_bio={data.bio}
         data_profile_banner_url={data.profile_banner_url}
         data_username={data.username}
         data_user_id={data.user_id}
