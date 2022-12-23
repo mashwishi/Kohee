@@ -8,7 +8,7 @@ import GetUser_Preview from '../../components/user/getUser_Preview'
 const Username = () => {
   
     const router = useRouter()
-    const username = router.query
+    const { username } = router.query
 
       const [data, setData] = useState(null)
       const [isLoading, setLoading] = useState(false)
@@ -24,16 +24,16 @@ const Username = () => {
             },
             body: JSON.stringify({
                 data:{
-                    username: `${username.toLowerCase()}`
+                    username: `${username.toString().toLowerCase()}`
                 }
             })
         };
         
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
-            const data = await response.json();
-
-            setData(data.data)
+            const datax = await response.json();
+            
+            setData(datax.data)
   
             setLoading(false)
         } catch (error) {

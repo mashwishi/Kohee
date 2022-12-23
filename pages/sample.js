@@ -24,7 +24,7 @@ const Sample = () => {
             },
             body: JSON.stringify({
                 data:{
-                    username: `${username.toLowerCase()}`
+                    username: `${username.toString().toLowerCase()}`
                 }
             })
         };

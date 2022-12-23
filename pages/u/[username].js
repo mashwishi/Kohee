@@ -15,7 +15,7 @@ const Username = () => {
   
     const router = useRouter()
 
-    const username = router.query
+    const { username } = router.query
 
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(false)
@@ -45,18 +45,20 @@ const Username = () => {
             },
             body: JSON.stringify({
                 data:{
-                    username: `${username.toLowerCase()}`
+                    username: `${username.toString().toLocaleLowerCase()}`
                 }
             })
         };
         
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
-            const data = await response.json();
+            const datax = await response.json();
 
-            setData(data.data)
+            setData(datax.data)
 
-            ReactGA.pageview('/u/' + data.users[0].id)
+            ReactGA.pageview('/u/' + datax.data.user_id)
+
+            setLoading(false)
 
             async function fetchCountry() {
               const response = await fetch(process.env.IP_API_URL);
@@ -75,7 +77,6 @@ const Username = () => {
   
             }
 
-            setLoading(false)
         } catch (error) {
             console.error(error);
         }
