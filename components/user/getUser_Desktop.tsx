@@ -74,9 +74,9 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
 
     const [showShareModal, setShowShareModal] = useState(false);
 
-    const [isCopied, setCopied] = useClipboard(`${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`);
+    const [isCopied, setCopied] = useClipboard(`${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`);
 
-    const ShareUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`
+    const ShareUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`
 
     const { user } = useUser();
     const { openSignIn } = useClerk();
@@ -210,7 +210,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                                 {props.data_last_name !== "" ? `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`}
                             </h2>
                             <p className="mt-2 font-semibold text-zinc-700">
-                            <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`}>{`@${props.data_username}`}</Link>
+                            <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`}>{`@${props.data_username}`}</Link>
                             {props.data_username == 'mashwishi' ? <div className="badge ml-1 text-[#4f2c15] badge-primary">Founder</div> : null }
                             </p>
 

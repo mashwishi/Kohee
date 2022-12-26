@@ -61,9 +61,9 @@ type GetUser_Mobile = {
 const GetUser_Mobile = (props: GetUser_Mobile) => {
 
     const [showShareModal, setShowShareModal] = useState(false);
-    const ShareUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`
+    const ShareUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`
 
-    const [isCopied, setCopied] = useClipboard(`${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`);
+    const [isCopied, setCopied] = useClipboard(`${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`);
 
     const [FacebookShares, setFacebookShares] = useState(0);
     const [RedditShares, setRedditShares] = useState(0);
@@ -299,7 +299,7 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         {/*Profile Username and Main Badge*/}
                         <div className="flex flex-row items-center space-x-1">
                             <p className="font-bold text-xl">
-                                <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/u/${props.username}`}>{props.data_username}</Link>
+                                <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`}>{props.data_username}</Link>
                             </p>
                             {props.data_username == 'mashwishi' ?
                                 <div className="badge text-[#4f2c15] badge-primary">Founder</div>

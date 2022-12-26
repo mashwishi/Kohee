@@ -18,7 +18,7 @@ const GetUser_All = (props: GetUser_All) => {
 
     return (
         <>
-        <Link href={process.env.NEXT_PUBLIC_HOSTNAME+`/u/`+props.username}>
+        <Link href={process.env.NEXT_PUBLIC_HOSTNAME+`/`+props.username}>
             <div className="mx-2 my-2 p-4 lg:w-1/6 md:w-1/3 cursor-pointer rounded-lg bg-gray-200 transition duration-300 ease-in-out transform hover:scale-105 hover:bg-primary hover:shadow-xl">
                 <div className="h-full flex flex-col items-center text-center">
                 <img alt={props.username} className="flex-shrink-0 rounded-lg h-24 w-24 object-cover object-center mb-4" src={props.profile_image_url} />

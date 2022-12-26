@@ -1,6 +1,6 @@
 {
   "name": "Kohee",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -29,7 +29,8 @@
     "react-share": "^4.4.1",
     "react-social-icons": "^5.15.0",
     "react-use-clipboard": "^1.0.9",
-    "svix": "^0.70.0"
+    "svix": "^0.70.0",
+    "theme-change": "^2.2.0"
   },
   "devDependencies": {
     "@types/react": "18.0.15",

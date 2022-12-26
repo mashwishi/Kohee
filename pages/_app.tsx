@@ -14,7 +14,7 @@ ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKING_ID ? process.env.GOOGLE
 
 const publicPages = [
   "/", 
-  "/u/[username]", 
+  "/[username]", 
   "/sign-up",
   "/sign-in",
   "/sample", 
@@ -27,7 +27,7 @@ const publicPages = [
 ];
 
 const DisableNav = [
-  "/u/[username]", 
+  "/[username]", 
   "/preview/[username]", 
   "/sample", 
 ];

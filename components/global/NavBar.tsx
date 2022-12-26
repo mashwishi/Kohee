@@ -1,7 +1,7 @@
 
 import type { NextPage } from "next";
 import { useClerk, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 

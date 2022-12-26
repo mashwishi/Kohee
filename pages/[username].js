@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { BrowserView, MobileView, CustomView } from 'react-device-detect';
 
-import LoadingPage from '../../components/global/LoadingPage';
-import GetUser_Mobile from '../../components/user/getUser_Mobile';
-import GetUser_Desktop from '../../components/user/getUser_Desktop';
-import NavBar from '../../components/global/NavBar';
+import LoadingPage from '../components/global/LoadingPage';
+import GetUser_Mobile from '../components/user/getUser_Mobile';
+import GetUser_Desktop from '../components/user/getUser_Desktop';
+import NavBar from '../components/global/NavBar';
 
 import { browserName, deviceDetect, deviceType} from 'react-device-detect';
 
@@ -56,6 +56,7 @@ const Username = () => {
             const datax = await response.json();
 
             setData(datax.data)
+
 
             setLoading(false)
 

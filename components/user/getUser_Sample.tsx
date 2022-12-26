@@ -61,9 +61,9 @@ type GetUser_Mobile = {
 const GetUser_Mobile = (props: GetUser_Mobile) => {
 
     const [showShareModal, setShowShareModal] = useState(false);
-    const ShareUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}/u/mashwishi`
+    const ShareUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}/mashwishi`
 
-    const [isCopied, setCopied] = useClipboard(`${process.env.NEXT_PUBLIC_HOSTNAME}/u/mashwishi`);
+    const [isCopied, setCopied] = useClipboard(`${process.env.NEXT_PUBLIC_HOSTNAME}/mashwishi`);
 
     const [FacebookShares, setFacebookShares] = useState(0);
     const [RedditShares, setRedditShares] = useState(0);
