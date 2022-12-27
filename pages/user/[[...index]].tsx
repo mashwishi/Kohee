@@ -11,7 +11,8 @@ const UserProfilePage = () => {
 
     const router = useRouter();
     
-    const [stateActiveTab, setStateActiveTab] = useState("")
+    const { tab } = router.query;
+    const [stateActiveTab, setStateActiveTab] = useState(tab)
 
     ReactGA.pageview('Account')
 
@@ -24,7 +25,7 @@ const UserProfilePage = () => {
         <>
             <SignedIn>
                 <div className='p-4'>
-                    <Tab.Group  key={stateActiveTab == 'user-gen' ? 1 : 0} defaultIndex={stateActiveTab == 'user-gen' ? 1 : 0} >
+                    <Tab.Group  key={stateActiveTab == 'links' ? 1 : 0} defaultIndex={stateActiveTab == 'links' ? 1 : 0} >
                         <Tab.List className="flex p-1 ">
                             <Tab className={({ selected }) =>`w-full py-2.5 text-lg leading-5 bg-transparent border-0 border-b-1 border-solid ${selected ? 'font-bold border-b-8' : ''}`}>
                             Account

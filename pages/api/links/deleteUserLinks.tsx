@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { data } = req.body;
 
-    const getUserLinks_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/link/get`
+    const deleteUserLinks_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/link/delete`
 
     const headers = 
     {
@@ -15,13 +15,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     };
 
     try {
-    await axios.get(getUserLinks_api_url,  { data: { user_id: `${data.user_id}` }, headers: headers }) 
+    await axios.delete(deleteUserLinks_api_url,  { data: { id: data.id }, headers: headers }) 
     .then(response => {
         res.json(
         response.status == 200 ? 
         {
-            data: response.data.links,
-            message: 'Successfully got the data!'
+            data: response.data,
+            message: 'Successfully deleted the data!'
         } : 
         {
             message: 'Failed, Something went wrong!'
