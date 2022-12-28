@@ -71,12 +71,19 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
     const [RedditShares, setRedditShares] = useState(0);
     const [VKShares, setVKShares] = useState(0);
 
-    const { user } = useUser();
+    const { user, isSignedIn } = useUser();
     const { openSignIn } = useClerk();
 
     const [userLinks, setUserLinks] = useState<any | null>(null);
     const [userLinksCount, setUserLinksCount] = useState(0)
     const [isLoading, setLoading] = useState(false)
+
+    //Following Status
+    const [userIsFollowing, setIsFollowing] = useState(false)
+    const [userFollowNoData, setUserFollowNoData] = useState(false)
+
+    //Followers
+    const [userFollowers, setUserFollowers] = useState(0)
 
     useEffect(() => {
 
@@ -107,7 +114,142 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
         }
         getLinks()
 
+        async function getFollowers() {
+            const fetchData = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data:{
+                      following_user_id: `${props?.data_user_id}`
+                    }
+                })
+            };
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/getFollowers`, fetchData);
+                const datax = await response.json();
+                setUserFollowers(datax?.data?.follow?.length)
+                setLoading(false)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    
+        getFollowers()
+
+        async function getFollow() {
+            if(isSignedIn){
+                const fetchFollowData = {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({   
+                        data:{
+                            user_id: `${user?.id}`,
+                            following_user_id: `${props.data_user_id}`
+                        } 
+                    })
+                };
+                
+                try {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/isFollow`, fetchFollowData);
+                    const data = await response.json();
+                    if(data.data.follow.length > 0){
+                        //if the exisiting data is following
+                        if(data.data.follow[0].is_follow === 1){
+                            setIsFollowing(true)
+                            setUserFollowNoData(false)
+                        }else{
+                            setIsFollowing(false)
+                        }
+                        setLoading(false)
+                    }else{
+                        setUserFollowNoData(true)
+                        setIsFollowing(false)
+                        setLoading(false)
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+        getFollow()
+
     }, [])
+
+    async function updateFollow(status: Number) {
+
+        //if signed in allow follow
+        if(isSignedIn){
+            //if no data yet create a data with the current status of the follow
+            if(userFollowNoData){
+                const createFollowData = {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({   
+                        data:{
+                            user_id: `${user?.id}`,
+                            following_user_id: `${props.data_user_id}`,
+                            is_follow: status
+                        } 
+                    })
+                };
+
+                
+                try {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/followUser`, createFollowData);
+                    const data = await response.json();
+                    if(data.data.follow.length > 0){
+                        //if the exisiting data is following
+                        if(data.data.follow[0].is_follow === 1){
+                            setIsFollowing(true)
+                        }else{
+                            setIsFollowing(false)
+                        }
+                        setLoading(false)
+                    }else{
+                        setIsFollowing(false)
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            //if already have data update the data with the current status of the follow
+            else{
+
+                const updateFollowData = {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({   
+                        data:{
+                            user_id: `${user?.id}`,
+                            following_user_id: `${props.data_user_id}`,
+                            is_follow: status
+                        } 
+                    })
+                };
+
+                try {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/upFollowUser`, updateFollowData);
+                    const data = await response.json();
+                        if(data.data.update_follow.returning[0].is_follow === 1){
+                            setIsFollowing(true)
+                        }else{
+                            setIsFollowing(false)
+                        }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+    }
 
     return (
         <>
@@ -305,22 +447,32 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                 </div>
                             </div>
                         </div>
+
                         {/*Edit Profile*/}
                         <div className="mt-12 ml-20">
                         <SignedIn>
-                            {user?.username ?
-                                user?.username.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
-                                <button className="rounded-full py-1 px-8 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
-                                    Edit
-                                </button>
-                                :
-                                <button className="rounded-full py-1 px-6 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
-                                Follow
-                                </button>
-                            :
-                            <button className="rounded-full py-1 px-6 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
-                                    Follow
-                            </button>
+                            {
+                                user?.username?.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
+                                    <>
+                                    <Link href="/user?tab=links">
+                                        <button className="rounded-full py-1 px-8 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
+                                            Edit
+                                        </button>
+                                    </Link>
+                                    </>
+                                    :
+                                    userIsFollowing ?
+                                        <>
+                                            <button onClick={() => updateFollow(0)} className="rounded-full py-1 px-4 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
+                                                Following
+                                            </button>
+                                        </>
+                                        :
+                                        <>
+                                            <button onClick={() => updateFollow(1)} className="rounded-full py-1 px-6 text-[#4f2c15] bg-[#E0A82E] btn-sm font-semibold">
+                                                Follow
+                                            </button>
+                                        </>
                             }
                         </SignedIn>
                         <SignedOut>
@@ -399,8 +551,14 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         <div className="flex flex-row items-center">
                             <div className="grid grid-cols-3 mb-2 mt-2 m-auto justify-center">
                                 <div className="flex flex-col items-center mx-4">
-                                <p className="font-bold">{props.followers ? props.followers : 0}</p>
-                                <p className="text-xxsm">Follower{props.followers > 1 ? `s` : ``}</p>
+                                <p className="font-bold">{userFollowers ? userFollowers : 0}</p>
+                                <p className="text-xxsm">Follower                                {
+                                userFollowers ?  
+                                userFollowers > 1 ? 
+                                    `s` : `` 
+                                : ``
+                                }
+                                </p>
                                 </div>
 
                                 <div className="flex flex-col items-center mx-4">

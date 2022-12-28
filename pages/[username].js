@@ -34,9 +34,9 @@ const Username = () => {
     //Browser Name
     const [userBrowser, setUserBrowser] = useState(browserName)
 
-
     useEffect(() => {
       setLoading(true)
+
 
       async function getData() {
         const fetchData = {
@@ -57,11 +57,9 @@ const Username = () => {
 
             setData(datax.data)
 
-
-            setLoading(false)
-
-            if (data.user_id) {
+            if (data?.user_id) {
               ReactGA.pageview('/' + data.user_id)
+              setLoading(false)
             }
 
             async function fetchCountry() {

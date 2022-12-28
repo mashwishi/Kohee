@@ -80,12 +80,19 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
 
     const ShareUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`
 
-    const { user } = useUser();
+    const { user, isSignedIn } = useUser();
     const { openSignIn } = useClerk();
 
     const [userLinks, setUserLinks] = useState<any | null>(null);
     const [userLinksCount, setUserLinksCount] = useState(0)
     const [isLoading, setLoading] = useState(false)
+
+    //Following Status
+    const [userIsFollowing, setIsFollowing] = useState(false)
+    const [userFollowNoData, setUserFollowNoData] = useState(false)
+
+    //Followers
+    const [userFollowers, setUserFollowers] = useState(0)
 
     useEffect(() => {
 
@@ -116,7 +123,141 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
         }
         getLinks()
 
+        async function getFollowers() {
+            const fetchData = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data:{
+                      following_user_id: `${props?.data_user_id}`
+                    }
+                })
+            };
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/getFollowers`, fetchData);
+                const datax = await response.json();
+                setUserFollowers(datax?.data?.follow?.length)
+                setLoading(false)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    
+        getFollowers()
+
+        async function getFollow() {
+            if(isSignedIn){
+                const fetchFollowData = {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({   
+                        data:{
+                            user_id: `${user?.id}`,
+                            following_user_id: `${props.data_user_id}`
+                        } 
+                    })
+                };
+                
+                try {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/isFollow`, fetchFollowData);
+                    const data = await response.json();
+                    if(data.data.follow.length > 0){
+                        //if the exisiting data is following
+                        if(data.data.follow[0].is_follow === 1){
+                            setIsFollowing(true)
+                            setUserFollowNoData(false)
+                        }else{
+                            setIsFollowing(false)
+                        }
+                        setLoading(false)
+                    }else{
+                        setUserFollowNoData(true)
+                        setIsFollowing(false)
+                        setLoading(false)
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+        getFollow()
+
     }, [])
+
+    async function updateFollow(status: Number) {
+        //if signed in allow follow
+        if(isSignedIn){
+            //if no data yet create a data with the current status of the follow
+            if(userFollowNoData){
+                const createFollowData = {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({   
+                        data:{
+                            user_id: `${user?.id}`,
+                            following_user_id: `${props.data_user_id}`,
+                            is_follow: status
+                        } 
+                    })
+                };
+
+                
+                try {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/followUser`, createFollowData);
+                    const data = await response.json();
+                    if(data.data.follow.length > 0){
+                        //if the exisiting data is following
+                        if(data.data.follow[0].is_follow === 1){
+                            setIsFollowing(true)
+                        }else{
+                            setIsFollowing(false)
+                        }
+                        setLoading(false)
+                    }else{
+                        setIsFollowing(false)
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            //if already have data update the data with the current status of the follow
+            else{
+
+                const updateFollowData = {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({   
+                        data:{
+                            user_id: `${user?.id}`,
+                            following_user_id: `${props.data_user_id}`,
+                            is_follow: status
+                        } 
+                    })
+                };
+
+                try {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/upFollowUser`, updateFollowData);
+                    const data = await response.json();
+                        if(data.data.update_follow.returning[0].is_follow === 1){
+                            setIsFollowing(true)
+                        }else{
+                            setIsFollowing(false)
+                        }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+    }
 
     return (
         <>
@@ -295,8 +436,15 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
 
                             <div className="mt-6 grid grid-cols-3 gap-6 text-center lg:text-left">
                             <div>
-                                <p className="font-bold text-zinc-700">{props.followers ? props.followers : 0}</p>
-                                <p className="text-sm font-semibold text-zinc-700">Follower{props.followers > 1 ? `s` : ``}</p>
+                                <p className="font-bold text-zinc-700">{userFollowers ? userFollowers : 0}</p>
+                                <p className="text-sm font-semibold text-zinc-700">Follower
+                                {
+                                userFollowers ?  
+                                userFollowers > 1 ? 
+                                    `s` : `` 
+                                : ``
+                                }
+                                </p>
                             </div>
 
                             <div>
@@ -313,21 +461,26 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                             {/*Edit Profile*/}
                             <div className="mt-6">
                                 <SignedIn>
-                                {user?.username ?
-                                    user?.username.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
+                                {
+                                    user?.username?.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
                                         <Link href="/user?tab=links">
                                             <button className="w-[95%] rounded-xl border-2 border-[#4f2c15] bg-[#4f2c15] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4f2c15]">
                                                 Edit Links
                                             </button>
                                         </Link>
                                         :
-                                        <button className="w-[95%] rounded-xl border-2 border-[#4f2c15] bg-[#4f2c15] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4f2c15]">
-                                        Follow
-                                        </button>
-                                    :
-                                    <button className="w-[95%] rounded-xl border-2 border-[#4f2c15] bg-[#4f2c15] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4f2c15]">
-                                    Follow
-                                    </button>
+                                        userIsFollowing ?
+                                        <>
+                                            <button onClick={() => updateFollow(0)} className="w-[95%] rounded-xl border-2 border-[#4f2c15] bg-[#4f2c15] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4f2c15]">
+                                            Following
+                                            </button>
+                                        </>
+                                        :
+                                        <>
+                                            <button onClick={() => updateFollow(1)} className="w-[95%] rounded-xl border-2 border-[#4f2c15] bg-[#4f2c15] px-3 py-2 font-semibold text-[#E0A82E] hover:bg-[#E0A82E] hover:text-[#4f2c15]">
+                                            Follow
+                                            </button>
+                                        </>
                                 }
                                 </SignedIn>
                                 <SignedOut>
