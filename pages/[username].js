@@ -119,6 +119,8 @@ const Username = () => {
       <HeadMeta 
       title_ext={data.username} 
       description={`Kohee App > ` + data.bio ? data.bio : `Learn more about ${data.username}`}
+      og_image={data.profile_image_url}
+      og_url={`https://kohee.app/${data.username}`}
       />
 
       <BrowserView>

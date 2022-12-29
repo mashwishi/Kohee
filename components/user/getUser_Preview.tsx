@@ -78,6 +78,8 @@ const GetUser_Preview = (props: GetUser_Preview) => {
     const [userLinksCount, setUserLinksCount] = useState(0)
     const [isLoading, setLoading] = useState(false)
 
+    const [userFullname, setuserFullname] = useState(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
+
     useEffect(() => {
 
         setLoading(true)
@@ -331,14 +333,14 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                         {/*Profile Full Name*/}
                         <div className="flex flex-row space-x-1 my-2">
                             <p className=" font-semibold text-sm">
-                                {props.data_last_name !== "" ? `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`} 
+                                {userFullname} 
                             </p>
                         </div>
 
                         {/*Profile Full Name*/}
                         <div className="flex flex-row space-x-1 my-2">
                             <p className=" font-semibold text-xs">
-                            {props.data_bio ? props.data_bio : null} 
+                            {props.data_bio !== 'null' &&  props.data_bio !== null ? props.data_bio : null} 
                             </p>
                         </div>
 
