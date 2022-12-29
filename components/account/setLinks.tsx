@@ -17,12 +17,24 @@ interface OptionsURLType {
 } 
 
 const optionsURLType: OptionsURLType[] = [
+   
    { value: 'custom', label: 'Custom', color_text: '#FFFFFF', color_button: '#010101'  },
    { value: 'facebook', label: 'Facebook', color_text: '#FFFFFF', color_button: '#1877f2' },
    { value: 'tiktok', label: 'Tiktok', color_text: '#FFFFFF', color_button: '#ee1d52'  },
    { value: 'twitter', label: 'Twitter', color_text: '#FFFFFF', color_button: '#1da1f2'  },
    { value: 'instagram', label: 'Instagram', color_text: '#FFFFFF', color_button: '#c32aa3'  },
    { value: 'linkedin', label: 'LinkedIn', color_text: '#FFFFFF', color_button: '#0a66c2'  },
+   { value: 'google', label: 'Google', color_text: '#000000', color_button: '#ffffff' },
+   { value: 'gmail', label: 'Gmail', color_text: '#000000', color_button: '#ffffff' },
+   { value: 'youtube', label: 'YouTube', color_text: '#ffffff', color_button: '#ff0000' },
+   { value: 'reddit', label: 'Reddit', color_text: '#ffffff', color_button: '#ff4500' },
+   { value: 'wikipedia', label: 'Wikipedia', color_text: '#ffffff', color_button: '#000000' },
+   { value: 'quora', label: 'Quora', color_text: '#ffffff', color_button: '#a020f0' },
+   { value: 'twitch', label: 'Twitch', color_text: '#ffffff', color_button: '#6441a5' },
+   { value: 'messenger', label: 'Messenger', color_text: '#ffffff', color_button: '#0084ff' },
+   { value: 'snapchat', label: 'Snapchat', color_text: '#ffffff', color_button: '#fffc00' },
+   { value: 'github', label: 'Github', color_text: '#ffffff', color_button: '#000000' },
+
 ];
 
 const SetLinks: NextPage = () => {
@@ -368,7 +380,7 @@ const SetLinks: NextPage = () => {
                                                                autoComplete="off" 
                                                                required 
                                                                minLength={1} 
-                                                               maxLength={15} 
+                                                               maxLength={30} 
                                                                type="text" 
                                                                value={addLinkBtnTxt}
                                                                onChange={(e) => setAddLinkBtnTxt(e.target.value ? e.target.value : addLinkBtnTxt)}

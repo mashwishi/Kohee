@@ -90,6 +90,8 @@ const People = () => {
           <HeadMeta 
           title_ext="People" 
           description="Kohee App > List of all users in this app, Explore users that are part of kohee." 
+          og_image={''}
+          og_url={''}
           />
 
         <section className="text-gray-600 body-font">

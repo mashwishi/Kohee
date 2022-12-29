@@ -33,6 +33,8 @@ const SignedOutCards = () => {
       <HeadMeta 
       title_ext="Create a better profile!" 
       description="" 
+      og_image={''}
+      og_url={''}
       />
 
         <BrowserView>
@@ -57,6 +59,8 @@ const SignedInCards = () => {
       <HeadMeta 
       title_ext={titleext}
       description="" 
+      og_image={''}
+      og_url={''}
       />
       
         <BrowserView>

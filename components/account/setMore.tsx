@@ -35,8 +35,7 @@ const SetMore: NextPage = () => {
             },
             body: JSON.stringify({
                 data:{
-                    //username: `${username}`
-                    username: `mashwishi`
+                    username: `${username}`
                 }
             })
         };

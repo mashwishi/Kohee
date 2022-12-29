@@ -15,6 +15,8 @@ const TermsAndCondition = () => {
           <HeadMeta 
           title_ext="Terms And Condition" 
           description="Kohee App > Our Terms And Condition" 
+          og_image={''}
+          og_url={''}
           />
 
 <div className="cl-component cl-user-profile">

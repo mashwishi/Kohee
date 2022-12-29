@@ -16,6 +16,8 @@ const PrivacyPolicy = () => {
           <HeadMeta 
           title_ext="Privacy Policy" 
           description="Kohee App > Our Privacy Policy" 
+          og_image={''}
+          og_url={''}
           />
 
         <div className="cl-component cl-user-profile">

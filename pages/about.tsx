@@ -14,6 +14,8 @@ const About = () => {
           <HeadMeta 
           title_ext="About" 
           description="Kohee App > Learn more about Kohee" 
+          og_image={''}
+          og_url={''}
           />
 
         <div className="cl-component cl-user-profile">

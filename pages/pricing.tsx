@@ -15,6 +15,8 @@ const Pricing = () => {
           <HeadMeta 
           title_ext="Pricing" 
           description="Kohee App > List of the pricing plan, Get more feature!" 
+          og_image={''}
+          og_url={''}
           />
 
           <Soon />
