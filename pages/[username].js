@@ -6,11 +6,14 @@ import LoadingPage from '../components/global/LoadingPage';
 import GetUser_Mobile from '../components/user/getUser_Mobile';
 import GetUser_Desktop from '../components/user/getUser_Desktop';
 import NavBar from '../components/global/NavBar';
+import HeadMeta from '../components/global/HeadMeta';
 
 import { browserName, deviceDetect, deviceType} from 'react-device-detect';
 
 import Link from 'next/link';
 import ReactGA from 'react-ga'
+
+
 
 const Username = () => {
   
@@ -112,6 +115,12 @@ const Username = () => {
 
   return (
     <>
+
+      <HeadMeta 
+      title_ext={data.username} 
+      description={`Kohee App > ` + data.bio ? data.bio : `Learn more about ${data.username}`}
+      />
+
       <BrowserView>
         <GetUser_Desktop 
         followers={0}
