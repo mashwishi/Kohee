@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
+import { nanoid } from 'nanoid'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
@@ -30,11 +31,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case 'user.created':
 
       try {
+        const user_ext = nanoid(5);
         await axios.post(create_api_url, {
           object: {
             id: `${data.id}`,
             first_name: `${data.first_name}`,
-            username: `${data.first_name.toLowerCase().replaceAll(' ', '_')}`,
+            username: `${data.first_name.toLowerCase().replaceAll(' ', '_')}_${user_ext}`,
             profile_image_url: `${data.profile_image_url}`,
             updated_at: `${data.updated_at}`,
             created_at: `${data.created_at}`
