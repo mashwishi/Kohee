@@ -14,7 +14,7 @@ type GetUser_All = {
 
 const GetUser_All = (props: GetUser_All) => {
 
-    const [userFullname, setuserFullname] = useState(props.last_name ?  `${props.first_name} ${props.last_name}` : `${props.first_name}`);
+    const [userFullname, setuserFullname] = useState(props.last_name !== 'null' &&  props.last_name !== null ?  `${props.first_name} ${props.last_name}` : `${props.first_name}`);
 
     return (
         <>
@@ -25,7 +25,6 @@ const GetUser_All = (props: GetUser_All) => {
                 <div className="w-32">
                     <h2 className="title-font font-medium text-lg text-gray-900 truncate block">@{props.username}</h2>
                     <h3 className="text-gray-500 mb-3  truncate block">{userFullname}</h3>
-                    <p className="mb-4">{props.bio}</p>
                     {/* <span className="inline-flex">
                     </span> */}
                 </div>

@@ -94,9 +94,12 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
     //Followers
     const [userFollowers, setUserFollowers] = useState(0)
 
+    const [userFullname, setuserFullname] = useState(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
+
     useEffect(() => {
 
         setLoading(true)
+        
 
         async function getLinks() {
             const fetchData = {
@@ -186,6 +189,8 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
             }
         }
         getFollow()
+
+        setuserFullname(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
 
     }, [])
 
@@ -385,7 +390,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                         <div className="col-span-1 lg:col-span-9">
                             <div className="text-center lg:text-left">
                             <h2 className="text-2xl font-bold text-zinc-700">
-                                {props.data_last_name !== "" ? `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`}
+                                {userFullname}
                             </h2>
                             <p className="mt-2 font-semibold text-zinc-700">
                             <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`}>{`@${props.data_username}`}</Link>
@@ -393,7 +398,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                             </p>
 
                             <p className="mt-4 text-zinc-500">
-                                {props.data_bio ? props.data_bio : null} 
+                                {props.data_bio !== 'null' &&  props.data_bio !== null ? props.data_bio : null} 
                             </p>
                             </div>
 
