@@ -1,6 +1,6 @@
 {
   "name": "Kohee",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -16,7 +16,9 @@
     "@headlessui/react": "^1.7.7",
     "@vercel/analytics": "^0.1.6",
     "axios": "^1.2.0",
+    "cookies": "^0.8.0",
     "daisyui": "^2.39.1",
+    "jsonwebtoken": "^9.0.0",
     "micro": "^9.4.1",
     "nanoid": "^4.0.0",
     "next": "12.2.2",
@@ -35,6 +37,7 @@
     "theme-change": "^2.2.0"
   },
   "devDependencies": {
+    "@types/cookies": "^0.7.7",
     "@types/react": "18.0.15",
     "autoprefixer": "^10.4.13",
     "eslint": "8.0.1",

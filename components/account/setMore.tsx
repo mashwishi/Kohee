@@ -44,7 +44,7 @@ const SetMore: NextPage = () => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
             const data = await response.json();
             setUserData(data.data)
-            setValueBio(data.data.bio)
+            setValueBio(data.data.bio !== 'null' &&  data.data.bio !== null ? data.data.bio : '')
             setLoading(false)
         } catch (error) {
             console.error(error);
