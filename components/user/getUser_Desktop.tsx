@@ -97,6 +97,8 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
 
     //Followers
     const [userFollowers, setUserFollowers] = useState(0)
+    //Visitors
+    const [userVisitors, setUserVisitors] = useState(0)
 
     const [userFullname, setuserFullname] = useState(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
 
@@ -138,7 +140,7 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                 },
                 body: JSON.stringify({
                     data:{
-                      following_user_id: `${props?.data_user_id}`
+                        following_user_id: `${props?.data_user_id}`
                     }
                 })
             };
@@ -152,8 +154,31 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                 console.error(error);
             }
         }
-    
         getFollowers()
+
+        async function getVisitors() {
+            const fetchData = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data:{
+                        user_id: `${props?.data_user_id}`
+                    }
+                })
+            };
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/getTotalAnalytics`, fetchData);
+                const datax = await response.json();
+                setUserVisitors(datax?.data?.analytics?.length)
+                setLoading(false)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getVisitors()
 
         async function getFollow() {
             if(isSignedIn){
@@ -194,6 +219,8 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
         }
         getFollow()
 
+        //Analytic Visit
+        const userSignedInID = isSignedIn ? user?.id : null;
         async function generateAnalytic() {
             const analyticData = {
                 method: 'POST',
@@ -221,7 +248,9 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                 console.error(error);
             }
         }
-        generateAnalytic()
+        if(userSignedInID !== props.data_user_id){
+            generateAnalytic() 
+        }
 
         setuserFullname(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
 
@@ -486,8 +515,15 @@ const GetUser_Desktop = (props: GetUser_Desktop) => {
                             </div>
 
                             <div>
-                                <p className="font-bold text-zinc-700">{props.visits ? props.visits : 0}</p>
-                                <p className="text-sm font-semibold text-zinc-700">Visit{props.visits > 1 ? `s` : ``}</p>
+                                <p className="font-bold text-zinc-700">{userVisitors ? userVisitors : 0}</p>
+                                <p className="text-sm font-semibold text-zinc-700">Visit
+                                {
+                                userVisitors ?  
+                                userVisitors > 1 ? 
+                                    `s` : `` 
+                                : ``
+                                }
+                                </p>
                             </div>
 
                             <div>

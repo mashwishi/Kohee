@@ -88,6 +88,8 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
 
     //Followers
     const [userFollowers, setUserFollowers] = useState(0)
+    //Visitors
+    const [userVisitors, setUserVisitors] = useState(0)
 
     const [userFullname, setuserFullname] = useState(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
 
@@ -142,8 +144,31 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                 console.error(error);
             }
         }
-    
         getFollowers()
+
+        async function getVisitors() {
+            const fetchData = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data:{
+                        user_id: `${props?.data_user_id}`
+                    }
+                })
+            };
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/getTotalAnalytics`, fetchData);
+                const datax = await response.json();
+                setUserVisitors(datax?.data?.analytics?.length)
+                setLoading(false)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getVisitors()
 
         async function getFollow() {
             if(isSignedIn){
@@ -184,6 +209,8 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
         }
         getFollow()
 
+        //Analytic Visit
+        const userSignedInID = isSignedIn ? user?.id : null;
         async function generateAnalytic() {
             const analyticData = {
                 method: 'POST',
@@ -211,7 +238,9 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                 console.error(error);
             }
         }
-        generateAnalytic() 
+        if(userSignedInID !== props.data_user_id){
+            generateAnalytic() 
+        }
 
         setuserFullname(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
 
@@ -601,8 +630,15 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                                 </div>
 
                                 <div className="flex flex-col items-center mx-4">
-                                <p className="font-bold">{props.visits ? props.visits : 0}</p>
-                                <p className="text-xxsm">Visit{props.visits > 1 ? `s` : ``}</p>
+                                <p className="font-bold">{userVisitors ? userVisitors : 0}</p>
+                                <p className="text-xxsm">Visit
+                                {
+                                userVisitors ?  
+                                userVisitors > 1 ? 
+                                    `s` : `` 
+                                : ``
+                                }
+                                </p>
                                 </div>
 
                                 <div className="flex flex-col items-center mx-4">
