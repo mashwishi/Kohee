@@ -34,11 +34,32 @@ const DisableNav = [
   "/sample", 
 ];
 
+interface optionsPagesType {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  slug: string; } 
+
+const optionsPagesType: optionsPagesType[] = [   
+  { id: 1, slug: '/sign-up', title: 'Sign Up', description: 'Create an account', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 2, slug: '/sign-in', title: 'Sign In', description: 'Login your kohee account', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 3, slug: '/docs/api', title: 'API Documentation', description: 'Learn more about kohee api', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 4, slug: '/people', title: 'Discover', description: 'List of all users in this app, Explore users that are part of kohee.', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 5, slug: '/pricing', title: 'Pricing', description: 'List of the pricing plan, Get more feature!', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 6, slug: '/terms-and-condition', title: 'Terms and Condition', description: 'Our Terms And Condition', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 7, slug: '/privacy-policy', title: 'Privacy Policy', description: 'Our Privacy Policy', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 8, slug: '/about', title: 'About', description: 'Learn more about Kohee', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 9, slug: '/', title: 'Create a better profile!', description: '', image: 'https://i.imgur.com/WHshbGu.png' },
+];
+
 function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
 
   const userMeta = pageProps.userMeta ? pageProps.userMeta.data : null
+
+  const filteredOptionsPagesType = optionsPagesType.filter((page) => page.slug === router.pathname);
 
   const temp_desc = 'Gather all of the content you produce and share, Put it in one place where it can be easily found.'
 
@@ -62,8 +83,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta property="og:type" content="website"/>
 
             <meta property="og:image" content={userMeta.profile_image_url} />
-            <meta property="og:image:width" content="512" />
-            <meta property="og:image:height" content="512" />
+            <meta property="og:image:width" content="600" />
+            <meta property="og:image:height" content="600" />
 
             <meta property="fb:app_id" content="695286688778792" />
 
@@ -80,27 +101,40 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Head>
         :
           <Head>
-              <meta charSet="utf-8" />
-              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+              {filteredOptionsPagesType.map((data) => (
+                <>
+                  <title>Kohee. {`| ${data.title}`}</title>
 
-              <meta name="description" content={temp_desc} />
-            
-              {/* Facebook Meta Tags */}
-              <meta property="og:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
-              <meta property="og:type" content="website"/>
-              <meta property="og:image" content='https://i.imgur.com/WHshbGu.png' />
-              <meta property="og:image:width" content="512" />
-              <meta property="og:image:height" content="512" />
-              <meta property="fb:app_id" content="695286688778792" />
+                  <meta charSet="utf-8" />
+                  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+                  <meta name="description" content={data.description} />
+
+                  {/* Facebook Meta Tags */}
+                  <meta property="og:title" content={`Kohee. | ${data.title}`} />
+                  <meta property="og:description" content={data.description} />
+
+                  <meta property="og:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${data.title}`} />
+                  <meta property="og:type" content="website"/>
+
+                  <meta property="og:image" content={data.image} />
+                  <meta property="og:image:width" content="1200" />
+                  <meta property="og:image:height" content="630" />
+
+                  <meta property="fb:app_id" content="695286688778792" />
 
 
-              {/* Twitter Meta Tags */}
-              <meta name="twitter:card" content="summary_large_image" />
-              <meta property="twitter:domain" content='kohee.app' />
-              <meta property="twitter:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
-              <meta name="twitter:image" content='https://i.imgur.com/WHshbGu.png' />
+                  {/* Twitter Meta Tags */}
+                  <meta name="twitter:card" content="summary_large_image" />
+                  <meta property="twitter:domain" content='kohee.app' />
+                  <meta property="twitter:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${data.title}`} />
+                  <meta name="twitter:title" content={`Kohee. | ${data.title}`} />
+                  <meta name="twitter:description" content={data.description} />
+                  <meta name="twitter:image" content={data.image} />
 
-              <link rel="icon" type="image/png" href="/bean.png" />
+                  <link rel="icon" type="image/png" href='/bean.png' />
+                </>
+              ))}
           </Head>
       }
       <ClerkProvider {...pageProps}>
