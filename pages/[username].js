@@ -81,12 +81,14 @@ const Username = ({ user_data }) => {
 
   return (
     <>
+      {/* 
       <HeadMeta 
       title_ext={udata.username} 
       description={`Kohee App > ` + udata.bio ? udata.bio : `Learn more about ${udata.username}`}
       og_image={udata.profile_image_url}
       og_url={`https://kohee.app/${udata.username}`}
-      /> 
+      />  
+      */}
 
       <BrowserView>
         <GetUser_Desktop 
@@ -172,7 +174,7 @@ export async function getServerSideProps(context) {
       user_data: data,
     },
   };
-  
+
 }
 
   

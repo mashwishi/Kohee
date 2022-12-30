@@ -10,6 +10,7 @@ import Footer from "../components/global/Footer";
 
 // GOOGLE ANALYTICS
 import ReactGA from 'react-ga';
+import HeadMeta from "../components/global/HeadMeta";
 ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKING_ID ? process.env.GOOGLE_ANALYTICS_TRACKING_ID : '');
 
 const publicPages = [
@@ -36,8 +37,17 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
 
+  const userMeta = pageProps.userMeta.data
+
   return (
     <ClerkProvider {...pageProps}>
+
+      {
+      userMeta.user_id ?
+        <HeadMeta title_ext={userMeta.username} description={userMeta.bio} og_image={userMeta.profile_image_url} og_url={`https://kohee.app/${userMeta.username}`} />
+      :
+        <HeadMeta title_ext={''} description={''} og_image={''} og_url={`https://kohee.app`}/>
+      }
       
       <Analytics />
 
@@ -84,6 +94,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </SignedOut>
 
       </ClerkLoaded>
+
     </ClerkProvider>
   );
 
@@ -92,11 +103,42 @@ function MyApp({ Component, pageProps }: AppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appContext)
-  //const req = appContext.ctx.req
-  //console.log(req)
+
+  //const req = appContext.ctx.req;
+  
+  const { router } = appContext;
+  const { query } = router;
+  const username = query.username;
+
+  async function fetchData() {
+    if(username !== 'favicon.ico'){
+      const fetchData = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            data:{
+                username: `${username?.toString().toLocaleLowerCase()}`
+            }
+        })
+    };
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
+        const datax = await response.json();
+        return datax
+    } catch (error) {
+        console.error(error);
+    }
+    }
+  }
+
+  const userMeta = await fetchData();
+
   return {
     pageProps: {
-      ...appProps.pageProps
+      ...appProps.pageProps,
+      userMeta
     },
   }
 }
