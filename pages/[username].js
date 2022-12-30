@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { BrowserView, MobileView, CustomView } from 'react-device-detect';
@@ -13,13 +14,15 @@ import { browserName, deviceDetect, deviceType} from 'react-device-detect';
 import Link from 'next/link';
 import ReactGA from 'react-ga'
 
-const Username = () => {
+import Head from 'next/head';
+
+const Username = ({ user_data }) => {
   
     const router = useRouter()
 
     const { username } = router.query
 
-    const [data, setData] = useState(null)
+    const [udata, setData] = useState(null)
     const [isLoading, setLoading] = useState(false)
 
     //Country API Free
@@ -36,59 +39,27 @@ const Username = () => {
     const [userBrowser, setUserBrowser] = useState(browserName)
 
     useEffect(() => {
-      setLoading(true)
 
+      setData(user_data.data)
 
-      async function getData() {
-        const fetchData = {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                data:{
-                    username: `${username.toString().toLocaleLowerCase()}`
-                }
-            })
-        };
-        
-        try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
-            const datax = await response.json();
-
-            setData(datax.data)
-
-            if (data?.user_id) {
-              ReactGA.pageview('/' + data.user_id)
-              setLoading(false)
-            }
-
-            async function fetchCountry() {
-              const response = await fetch(process.env.IP_API_URL);
-              const data = await response.json();
-              setUserCountryLoc(data.country_name);
-            }
-  
-            fetchCountry();
-  
-            if(userCountryLoc ){
-              //Run Analytics here
-              //OS: Android, Windows, iOS, etc.. | Type: Desktop/Mobile | Country | Browser
-              //TODO: https://app.clickup.com/t/865bbhg1p
-              //console.log(  userDeviceOS  + '\n' + userDeviceTypeuserDeviceOS  + '\n' + userCountryLoc + '\n' +  userBrowser )
-            }
-
-        } catch (error) {
-            console.error(error);
-        }
+      if (udata?.user_id) {
+        ReactGA.pageview('/' + udata.user_id)
+        setLoading(false)
       }
-      getData()
+
+      async function fetchCountry() {
+        const response = await fetch(process.env.IP_API_URL);
+        const udata = await response.json();
+        setUserCountryLoc(udata.country_name);
+      }
+
+      fetchCountry();
 
     }, [userBrowser, userDeviceOS,  userDeviceTypeuserDeviceOS, userCountryLoc])
 
     if (isLoading) return <LoadingPage/>
     
-    if (!data) return (
+    if (!udata) return (
       <>
         <NavBar/>
         <section className="flex items-center h-full sm:p-16 ">
@@ -108,14 +79,13 @@ const Username = () => {
       </>
     )
 
-
   return (
     <>
       <HeadMeta 
-      title_ext={data.username} 
-      description={`Kohee App > ` + data.bio ? data.bio : `Learn more about ${data.username}`}
-      og_image={data.profile_image_url}
-      og_url={`https://kohee.app/${data.username}`}
+      title_ext={udata.username} 
+      description={`Kohee App > ` + udata.bio ? udata.bio : `Learn more about ${udata.username}`}
+      og_image={udata.profile_image_url}
+      og_url={`https://kohee.app/${udata.username}`}
       /> 
 
       <BrowserView>
@@ -123,17 +93,17 @@ const Username = () => {
         followers={0}
         visits={0}
         ratings={0} 
-        data_banner={data.banner}
-        data_bio={data.bio}
-        data_profile_banner_url={data.profile_banner_url}
-        data_username={data.username}
-        data_user_id={data.user_id}
-        data_updated_at={data.updated_at}
-        data_profile_image_url={data.profile_image_url}
-        data_last_name={data.last_name}
-        data_id={data.id}
-        data_first_name={data.first_name}
-        data_created_at={data.created_at}
+        data_banner={udata.banner}
+        data_bio={udata.bio}
+        data_profile_banner_url={udata.profile_banner_url}
+        data_username={udata.username}
+        data_user_id={udata.user_id}
+        data_updated_at={udata.updated_at}
+        data_profile_image_url={udata.profile_image_url}
+        data_last_name={udata.last_name}
+        data_id={udata.id}
+        data_first_name={udata.first_name}
+        data_created_at={udata.created_at}
         username={username}
         userBrowser={userBrowser}
         userDeviceOS={userDeviceOS}
@@ -148,17 +118,17 @@ const Username = () => {
         followers={0}
         visits={0}
         ratings={0} 
-        data_profile_banner_url={data.profile_banner_url}
-        data_username={data.username}
-        data_banner={data.banner}
-        data_bio={data.bio}
-        data_user_id={data.user_id}
-        data_updated_at={data.updated_at}
-        data_profile_image_url={data.profile_image_url}
-        data_last_name={data.last_name}
-        data_id={data.id}
-        data_first_name={data.first_name}
-        data_created_at={data.created_at}
+        data_profile_banner_url={udata.profile_banner_url}
+        data_username={udata.username}
+        data_banner={udata.banner}
+        data_bio={udata.bio}
+        data_user_id={udata.user_id}
+        data_updated_at={udata.updated_at}
+        data_profile_image_url={udata.profile_image_url}
+        data_last_name={udata.last_name}
+        data_id={udata.id}
+        data_first_name={udata.first_name}
+        data_created_at={udata.created_at}
         username={username}
         userBrowser={userBrowser}
         userDeviceOS={userDeviceOS}
@@ -169,6 +139,41 @@ const Username = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+
+  const { username } = context.query
+
+  async function fetchData() {
+    const fetchData = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            data:{
+                username: `${username.toString().toLocaleLowerCase()}`
+            }
+        })
+    };
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
+        const datax = await response.json();
+        return datax
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
+  const data = await fetchData();
+
+  return {
+    props: {
+      user_data: data,
+    },
+  };
+  
+}
 
   
 export default Username;
