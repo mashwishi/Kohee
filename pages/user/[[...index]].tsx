@@ -7,6 +7,8 @@ import ReactGA from 'react-ga'
 import SetLinks from "../../components/account/setLinks";
 import SetMore from "../../components/account/setMore";
 
+import HeadMeta from "../../components/global/HeadMeta";
+
 const UserProfilePage = () => { 
 
     const router = useRouter();
@@ -23,6 +25,13 @@ const UserProfilePage = () => {
 
     return (
         <>
+            <HeadMeta 
+                title_ext="Account" 
+                description="Kohee App > Profile Settings" 
+                og_image={''}
+                og_url={''}
+            />
+
             <SignedIn>
                 <div className='p-4'>
                     <Tab.Group  key={stateActiveTab == 'links' ? 1 : 0} defaultIndex={stateActiveTab == 'links' ? 1 : 0} >

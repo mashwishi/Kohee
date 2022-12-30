@@ -333,7 +333,7 @@ const SetLinks: NextPage = () => {
                                                                maxLength={7} 
                                                                type="text" 
                                                                value={addLinkColorTxt}
-                                                               onChange={(e) => setAddLinkColorTxt(e.target.value ? e.target.value : addLinkColorTxt)}
+                                                               onChange={(e) => setAddLinkColorTxt(e.target.value)}
                                                                />
                                                       </div>
                                                    </div>
@@ -358,7 +358,7 @@ const SetLinks: NextPage = () => {
                                                                maxLength={7} 
                                                                type="text" 
                                                                value={addLinkColorBtn}
-                                                               onChange={(e) => setAddLinkColorBtn(e.target.value ? e.target.value : addLinkColorBtn)}
+                                                               onChange={(e) => setAddLinkColorBtn(e.target.value)}
                                                                />
                                                       </div>
                                                    </div>
@@ -383,7 +383,7 @@ const SetLinks: NextPage = () => {
                                                                maxLength={30} 
                                                                type="text" 
                                                                value={addLinkBtnTxt}
-                                                               onChange={(e) => setAddLinkBtnTxt(e.target.value ? e.target.value : addLinkBtnTxt)}
+                                                               onChange={(e) => setAddLinkBtnTxt(e.target.value)}
                                                       />
                                                       </div>
                                                    </div>
@@ -408,7 +408,7 @@ const SetLinks: NextPage = () => {
                                                                maxLength={255} 
                                                                type="text" 
                                                                value={addLinkURL}
-                                                               onChange={(e) => setAddLinkURL(e.target.value ? e.target.value : addLinkURL)}
+                                                               onChange={(e) => setAddLinkURL(e.target.value)}
                                                       />
                                                       </div>
                                                    </div>
@@ -453,8 +453,6 @@ const SetLinks: NextPage = () => {
                                           <label className="btn bg-slate-600 text-slate-200 cursor-no-drop">Create</label>
                                        </>
                                        }
-                                       
-
                                        <label htmlFor={`add-link`} className="btn btn-secondary">Cancel</label>
                                     </div>
                                  </div>
@@ -536,7 +534,7 @@ const SetLinks: NextPage = () => {
                                                                               maxLength={7} 
                                                                               type="text" 
                                                                               value={editLinkColorTxt}
-                                                                              onChange={(e) => setEditLinkColorTxt(e.target.value ? e.target.value : i.color_text)}
+                                                                              onChange={(e) => setEditLinkColorTxt(e.target.value)}
                                                                               />
                                                                      </div>
                                                                   </div>
@@ -563,7 +561,7 @@ const SetLinks: NextPage = () => {
                                                                               maxLength={7} 
                                                                               type="text" 
                                                                               value={editLinkColorBtn}
-                                                                              onChange={(e) => setEditLinkColorBtn(e.target.value ? e.target.value : i.color_button)}
+                                                                              onChange={(e) => setEditLinkColorBtn(e.target.value)}
                                                                               />
                                                                      </div>
                                                                   </div>
@@ -590,7 +588,7 @@ const SetLinks: NextPage = () => {
                                                                               maxLength={15} 
                                                                               type="text" 
                                                                               value={editLinkBtnTxt}
-                                                                              onChange={(e) => setEditLinkBtnTxt(e.target.value ? e.target.value : i.button_text)}
+                                                                              onChange={(e) => setEditLinkBtnTxt(e.target.value)}
                                                                      />
                                                                      </div>
                                                                   </div>
@@ -617,7 +615,7 @@ const SetLinks: NextPage = () => {
                                                                               maxLength={255} 
                                                                               type="text" 
                                                                               value={editLinkURL}
-                                                                              onChange={(e) => setEditLinkURL(e.target.value ? e.target.value : i.url)}
+                                                                              onChange={(e) => setEditLinkURL(e.target.value)}
                                                                      />
                                                                      </div>
                                                                   </div>
