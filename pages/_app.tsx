@@ -43,30 +43,56 @@ function MyApp({ Component, pageProps }: AppProps) {
   const temp_desc = 'Gather all of the content you produce and share, Put it in one place where it can be easily found.'
 
   return (
-    <ClerkProvider {...pageProps}>
-      
-      <Analytics />
+    <>
+      {
+        userMeta ?
+          <Head>
+            <title>Kohee. {`| ${userMeta.username}`}</title>
 
-      <ClerkLoaded>
+            <meta charSet="utf-8" />
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-        {
-          userMeta ?
-            <Head>
-              <title>Kohee. {`| ${userMeta.username}`}</title>
+            <meta name="description" content={userMeta.bio} />
+          
+            {/* Facebook Meta Tags */}
+            <meta property="og:title" content={`Kohee. | ${userMeta.username}`} />
+            <meta property="og:description" content={userMeta.bio} />
+            
+            <meta property="og:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${userMeta.username}`} />
+            <meta property="og:type" content="website"/>
 
+            <meta property="og:image" content={userMeta.profile_image_url} />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+
+            <meta property="fb:app_id" content="695286688778792" />
+
+
+            {/* Twitter Meta Tags */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta property="twitter:domain" content='kohee.app' />
+            <meta property="twitter:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${userMeta.username}`} />
+            <meta name="twitter:title" content={`Kohee. | ${userMeta.username}`} />
+            <meta name="twitter:description" content={userMeta.bio} />
+            <meta name="twitter:image" content={userMeta.profile_image_url} />
+
+            <link rel="icon" type="image/png" href={userMeta.profile_image_url} />
+          </Head>
+        :
+          <Head>
               <meta charSet="utf-8" />
               <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-              <meta name="description" content={userMeta.bio} />
+              <meta name="description" content={temp_desc} />
             
               {/* Facebook Meta Tags */}
-              <meta property="og:title" content={`Kohee. | ${userMeta.username}`} />
-              <meta property="og:description" content={userMeta.bio} />
+              <meta property="og:title" content={`Kohee. | Create a better profile!`} />
+              <meta property="og:description" content={temp_desc} />
               
-              <meta property="og:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${userMeta.username}`} />
+              <meta property="og:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
               <meta property="og:type" content="website"/>
 
-              <meta property="og:image" content={userMeta.profile_image_url} />
+              <meta property="og:image" content='https://i.imgur.com/WHshbGu.png' />
               <meta property="og:image:width" content="1200" />
               <meta property="og:image:height" content="630" />
 
@@ -76,89 +102,64 @@ function MyApp({ Component, pageProps }: AppProps) {
               {/* Twitter Meta Tags */}
               <meta name="twitter:card" content="summary_large_image" />
               <meta property="twitter:domain" content='kohee.app' />
-              <meta property="twitter:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${userMeta.username}`} />
-              <meta name="twitter:title" content={`Kohee. | ${userMeta.username}`} />
-              <meta name="twitter:description" content={userMeta.bio} />
-              <meta name="twitter:image" content={userMeta.profile_image_url} />
+              <meta property="twitter:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
+              <meta name="twitter:title" content={`Kohee. | Create a better profile!`} />
+              <meta name="twitter:description" content={temp_desc} />
+              <meta name="twitter:image" content='https://i.imgur.com/WHshbGu.png' />
 
-              <link rel="icon" type="image/png" href={userMeta.profile_image_url} />
-            </Head>
-          :
-            <Head>
-                <meta charSet="utf-8" />
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+              <link rel="icon" type="image/png" href="/bean.png" />
+          </Head>
+      }
+      <ClerkProvider {...pageProps}>
+        
+        <Analytics />
 
-                <meta name="description" content={temp_desc} />
-              
-                {/* Facebook Meta Tags */}
-                <meta property="og:title" content={`Kohee. | Create a better profile!`} />
-                <meta property="og:description" content={temp_desc} />
-                
-                <meta property="og:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
-                <meta property="og:type" content="website"/>
+        <ClerkLoaded>
 
-                <meta property="og:image" content='https://i.imgur.com/WHshbGu.png' />
-                <meta property="og:image:width" content="1200" />
-                <meta property="og:image:height" content="630" />
+          {DisableNav.includes(router.pathname) ? <></> :
+            <>
+                <BrowserView>
+                  <NavBar />
+                </BrowserView>
 
-                <meta property="fb:app_id" content="695286688778792" />
+                <MobileView>
+                  <NavBar />
+                </MobileView>
+            </>
+          }
 
-
-                {/* Twitter Meta Tags */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta property="twitter:domain" content='kohee.app' />
-                <meta property="twitter:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
-                <meta name="twitter:title" content={`Kohee. | Create a better profile!`} />
-                <meta name="twitter:description" content={temp_desc} />
-                <meta name="twitter:image" content='https://i.imgur.com/WHshbGu.png' />
-
-                <link rel="icon" type="image/png" href="/bean.png" />
-            </Head>
-        }
-
-        {DisableNav.includes(router.pathname) ? <></> :
-          <>
-              <BrowserView>
-                <NavBar />
-              </BrowserView>
-
-              <MobileView>
-                <NavBar />
-              </MobileView>
-          </>
-        }
-
-        {publicPages.includes(router.pathname) ? (
-          <main>
-            <Component {...pageProps} />
-          </main>
-        ) : (
-          <>
-            <SignedIn>
+          {publicPages.includes(router.pathname) ? (
+            <main>
               <Component {...pageProps} />
-            </SignedIn>
-            <SignedOut>
-              <div className="protected">
-                <p>You need to be signed in to access this page.</p>
-              </div>
-            </SignedOut>
-          </>
-        )}
+            </main>
+          ) : (
+            <>
+              <SignedIn>
+                <Component {...pageProps} />
+              </SignedIn>
+              <SignedOut>
+                <div className="protected">
+                  <p>You need to be signed in to access this page.</p>
+                </div>
+              </SignedOut>
+            </>
+          )}
 
-        {/* footer */}
-        <SignedOut>
-          {/* <footer>
-            <PopupLink
-              label="Kohee is open-source and non-profit project, You can support us by donating!"
-              repoLink="https://ko-fi.com/koheeapp"
-            />
-          </footer> */}
-          <Footer/>
-        </SignedOut>
+          {/* footer */}
+          <SignedOut>
+            {/* <footer>
+              <PopupLink
+                label="Kohee is open-source and non-profit project, You can support us by donating!"
+                repoLink="https://ko-fi.com/koheeapp"
+              />
+            </footer> */}
+            <Footer/>
+          </SignedOut>
 
-      </ClerkLoaded>
+        </ClerkLoaded>
 
-    </ClerkProvider>
+      </ClerkProvider>
+    </>
   );
 
 }
