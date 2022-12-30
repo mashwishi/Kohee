@@ -58,6 +58,10 @@ type GetUser_Mobile = {
     followers: number;
     visits: number;
     ratings: number;
+    userBrowser: string;
+    userDeviceOS: string;
+    userDeviceTypeuserDeviceOS: string;
+    userCountryLoc: string;
 };
 
 const GetUser_Mobile = (props: GetUser_Mobile) => {
@@ -179,6 +183,35 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
             }
         }
         getFollow()
+
+        async function generateAnalytic() {
+            const analyticData = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data:{
+                        user_id: `${props.data_user_id}`,
+                        visitor_id: `${isSignedIn ? user?.id : null }`, 
+                        type: `visit`, 
+                        os: `${props.userDeviceOS ? props.userDeviceOS : null}`, 
+                        device: `${props.userDeviceTypeuserDeviceOS ? props.userDeviceTypeuserDeviceOS : null}`, 
+                        country: `${props.userCountryLoc ? props.userCountryLoc : null}`, 
+                        browser: `${props.userBrowser ? props.userBrowser : null}`, 
+                    }
+                })
+            };
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/generateAnalytics`, analyticData);
+                const data = await response.json();
+                //console.log(data)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        generateAnalytic() 
 
         setuserFullname(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
 

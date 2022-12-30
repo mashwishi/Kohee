@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { endpoint_key } = req.headers;
 
   if (endpoint_key !== `${process.env.ENDPOINT_KEY_PROD}`) {
-    res.json({ message: `Invalid Key` });
+    res.status(403).json({error: `Invalid Key`});
     return
   }
 

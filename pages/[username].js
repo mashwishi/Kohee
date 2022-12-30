@@ -13,8 +13,6 @@ import { browserName, deviceDetect, deviceType} from 'react-device-detect';
 import Link from 'next/link';
 import ReactGA from 'react-ga'
 
-
-
 const Username = () => {
   
     const router = useRouter()
@@ -73,13 +71,11 @@ const Username = () => {
   
             fetchCountry();
   
-            if(userCountryLoc){
-  
+            if(userCountryLoc ){
               //Run Analytics here
               //OS: Android, Windows, iOS, etc.. | Type: Desktop/Mobile | Country | Browser
               //TODO: https://app.clickup.com/t/865bbhg1p
-              console.log(  userDeviceOS  + '\n' + userDeviceTypeuserDeviceOS  + '\n' + userCountryLoc + '\n' +  userBrowser )
-  
+              //console.log(  userDeviceOS  + '\n' + userDeviceTypeuserDeviceOS  + '\n' + userCountryLoc + '\n' +  userBrowser )
             }
 
         } catch (error) {
@@ -139,7 +135,13 @@ const Username = () => {
         data_id={data.id}
         data_first_name={data.first_name}
         data_created_at={data.created_at}
-        username={username}/>
+        username={username}
+        userBrowser={userBrowser}
+        userDeviceOS={userDeviceOS}
+        userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
+        userCountryLoc={userCountryLoc}
+        />
+
       </BrowserView>
 
       <MobileView>
@@ -158,7 +160,12 @@ const Username = () => {
         data_id={data.id}
         data_first_name={data.first_name}
         data_created_at={data.created_at}
-        username={username}/>
+        username={username}
+        userBrowser={userBrowser}
+        userDeviceOS={userDeviceOS}
+        userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
+        userCountryLoc={userCountryLoc}
+        />
       </MobileView>
     </>
   );
