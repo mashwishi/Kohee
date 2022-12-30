@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
 
-  const userMeta = pageProps.userMeta.data
+  const userMeta = pageProps.userMeta ? pageProps.userMeta.data : null
 
   return (
     <ClerkProvider {...pageProps}>
@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ClerkLoaded>
 
         {
-          userMeta.user_id ?
+          userMeta ?
             <HeadMeta title_ext={userMeta.username} description={userMeta.bio} og_image={userMeta.profile_image_url} og_url={`https://kohee.app/${userMeta.username}`} />
           :
             <HeadMeta title_ext={''} description={''} og_image={''} og_url={`https://kohee.app`}/>
