@@ -50,18 +50,18 @@ const optionsPagesType: optionsPagesType[] = [
   { id: 6, slug: '/terms-and-condition', title: 'Terms and Condition', description: 'Our Terms And Condition', image: 'https://i.imgur.com/WHshbGu.png' },
   { id: 7, slug: '/privacy-policy', title: 'Privacy Policy', description: 'Our Privacy Policy', image: 'https://i.imgur.com/WHshbGu.png' },
   { id: 8, slug: '/about', title: 'About', description: 'Learn more about Kohee', image: 'https://i.imgur.com/WHshbGu.png' },
-  { id: 9, slug: '/', title: 'Create a better profile!', description: '', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 9, slug: '/', title: 'Create a better profile!', description: 'Gather all of the content you produce and share, Put it in one place where it can be easily found.', image: 'https://i.imgur.com/WHshbGu.png' },
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
+console.log(router.pathname)
+
 
   const userMeta = pageProps.userMeta ? pageProps.userMeta.data : null
 
   const filteredOptionsPagesType = optionsPagesType.filter((page) => page.slug === router.pathname);
-
-  const temp_desc = 'Gather all of the content you produce and share, Put it in one place where it can be easily found.'
 
   return (
     <>
@@ -83,8 +83,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta property="og:type" content="website"/>
 
             <meta property="og:image" content={userMeta.profile_image_url} />
-            <meta property="og:image:width" content="600" />
-            <meta property="og:image:height" content="600" />
+            <meta property="og:image:width" content="200" />
+            <meta property="og:image:height" content="200" />
 
             <meta property="fb:app_id" content="695286688778792" />
 
