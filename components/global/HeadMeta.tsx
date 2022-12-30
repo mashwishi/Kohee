@@ -18,23 +18,24 @@ const HeadMeta = (props: HeadMeta) => {
 
           <title>Kohee. {props.title_ext ? `| ${props.title_ext}` : `Create a better profile!`}</title>
         
-          <meta name="description" content={`${props.description ? `${props.description}` : `${temp_desc}`}`} />
+          <meta name="description" content={props.description ? `${props.description}` : `${temp_desc}`} />
         
           {/* Facebook Meta Tags */}
-          <meta property="og:url" content={`${props.og_url ? `${props.og_url}` : `${process.env.NEXT_PUBLIC_HOSTNAME}`}`} />
+          <meta property="og:url" content={props.og_url ? `${props.og_url}` : `${process.env.NEXT_PUBLIC_HOSTNAME}`} />
           <meta property="og:type" content="website"/>
           <meta property="og:title" content={`Kohee. ${props.title_ext ? `| ${props.title_ext}` : `Create a better profile!`}`} />
-          <meta property="og:description" content={`${props.description ? `${props.description}` : `${temp_desc}`}`} />
-          <meta property="og:image" content={`${props.og_image ? `${props.og_image}` : `https://i.imgur.com/WHshbGu.png`}`} />
+          <meta property="og:description" content={props.description ? `${props.description}` : `${temp_desc}`} />
+          <meta property="og:image" content={props.og_image ? `${props.og_image}` : `https://i.imgur.com/WHshbGu.png`} />
 
           {/* Twitter Meta Tags */}
           <meta name="twitter:card" content="summary_large_image" />
           <meta property="twitter:domain" content='kohee.app' />
           <meta property="twitter:url" content={`${props.og_url ? `${props.og_url}` : `${process.env.NEXT_PUBLIC_HOSTNAME}`}`} />
           <meta name="twitter:title" content={`Kohee. ${props.title_ext ? `| ${props.title_ext}` : `Create a better profile!`}`} />
-          <meta name="twitter:description" content={`${props.description ? `${props.description}` : `${temp_desc}`}`} />
-          <meta name="twitter:image" content={`${props.og_image ? `${props.og_image}` : `https://i.imgur.com/WHshbGu.png`}`} />
+          <meta name="twitter:description" content={props.description ? `${props.description}` : `${temp_desc}`} />
+          <meta name="twitter:image" content={props.og_image ? `${props.og_image}` : `https://i.imgur.com/WHshbGu.png`} />
         
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
     </>
   );
