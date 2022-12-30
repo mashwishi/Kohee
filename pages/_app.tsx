@@ -62,8 +62,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta property="og:type" content="website"/>
 
             <meta property="og:image" content={userMeta.profile_image_url} />
-            <meta property="og:image:width" content="1200" />
-            <meta property="og:image:height" content="630" />
+            <meta property="og:image:width" content="512" />
+            <meta property="og:image:height" content="512" />
 
             <meta property="fb:app_id" content="695286688778792" />
 
@@ -86,16 +86,11 @@ function MyApp({ Component, pageProps }: AppProps) {
               <meta name="description" content={temp_desc} />
             
               {/* Facebook Meta Tags */}
-              <meta property="og:title" content={`Kohee. | Create a better profile!`} />
-              <meta property="og:description" content={temp_desc} />
-              
               <meta property="og:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
               <meta property="og:type" content="website"/>
-
               <meta property="og:image" content='https://i.imgur.com/WHshbGu.png' />
-              <meta property="og:image:width" content="1200" />
-              <meta property="og:image:height" content="630" />
-
+              <meta property="og:image:width" content="512" />
+              <meta property="og:image:height" content="512" />
               <meta property="fb:app_id" content="695286688778792" />
 
 
@@ -103,8 +98,6 @@ function MyApp({ Component, pageProps }: AppProps) {
               <meta name="twitter:card" content="summary_large_image" />
               <meta property="twitter:domain" content='kohee.app' />
               <meta property="twitter:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
-              <meta name="twitter:title" content={`Kohee. | Create a better profile!`} />
-              <meta name="twitter:description" content={temp_desc} />
               <meta name="twitter:image" content='https://i.imgur.com/WHshbGu.png' />
 
               <link rel="icon" type="image/png" href="/bean.png" />

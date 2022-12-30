@@ -13,7 +13,7 @@ const About = () => {
       <>
           <HeadMeta 
           title_ext="About" 
-          description="Kohee App > Learn more about Kohee" 
+          description="Learn more about Kohee" 
           og_image={''}
           og_url={''}
           />

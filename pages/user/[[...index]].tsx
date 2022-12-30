@@ -27,7 +27,7 @@ const UserProfilePage = () => {
         <>
             <HeadMeta 
                 title_ext="Account" 
-                description="Kohee App > Profile Settings" 
+                description="Profile Settings" 
                 og_image={''}
                 og_url={''}
             />
