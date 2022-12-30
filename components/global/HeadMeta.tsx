@@ -10,7 +10,7 @@ type HeadMeta = {
 
 const HeadMeta = (props: HeadMeta) => {
 
-  const temp_desc = 'All of you are welcome in Kohee. Gather all of the content you produce, curate, and share online, no matter where it is dispersed, and reassemble it in one place –your Kohee — where it can be easily found.'
+  const temp_desc = 'Gather all of the content you produce and share, Put it in one place where it can be easily found.'
 
   return (
     <>
