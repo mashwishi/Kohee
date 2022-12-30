@@ -41,17 +41,17 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ClerkProvider {...pageProps}>
-
-      {
-      userMeta.user_id ?
-        <HeadMeta title_ext={userMeta.username} description={userMeta.bio} og_image={userMeta.profile_image_url} og_url={`https://kohee.app/${userMeta.username}`} />
-      :
-        <HeadMeta title_ext={''} description={''} og_image={''} og_url={`https://kohee.app`}/>
-      }
       
       <Analytics />
 
       <ClerkLoaded>
+
+        {
+          userMeta.user_id ?
+            <HeadMeta title_ext={userMeta.username} description={userMeta.bio} og_image={userMeta.profile_image_url} og_url={`https://kohee.app/${userMeta.username}`} />
+          :
+            <HeadMeta title_ext={''} description={''} og_image={''} og_url={`https://kohee.app`}/>
+        }
 
         {DisableNav.includes(router.pathname) ? <></> :
           <>
