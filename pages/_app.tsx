@@ -56,9 +56,6 @@ const optionsPagesType: optionsPagesType[] = [
 function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
-console.log(router.pathname)
-
-
   const userMeta = pageProps.userMeta ? pageProps.userMeta.data : null
 
   const filteredOptionsPagesType = optionsPagesType.filter((page) => page.slug === router.pathname);
@@ -114,7 +111,7 @@ console.log(router.pathname)
                   <meta property="og:title" content={`Kohee. | ${data.title}`} />
                   <meta property="og:description" content={data.description} />
 
-                  <meta property="og:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${data.title}`} />
+                  <meta property="og:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}${data.slug}`} />
                   <meta property="og:type" content="website"/>
 
                   <meta property="og:image" content={data.image} />
@@ -123,11 +120,10 @@ console.log(router.pathname)
 
                   <meta property="fb:app_id" content="695286688778792" />
 
-
                   {/* Twitter Meta Tags */}
                   <meta name="twitter:card" content="summary_large_image" />
                   <meta property="twitter:domain" content='kohee.app' />
-                  <meta property="twitter:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${data.title}`} />
+                  <meta property="twitter:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}${data.slug}`} />
                   <meta name="twitter:title" content={`Kohee. | ${data.title}`} />
                   <meta name="twitter:description" content={data.description} />
                   <meta name="twitter:image" content={data.image} />
