@@ -11,6 +11,7 @@ import Footer from "../components/global/Footer";
 // GOOGLE ANALYTICS
 import ReactGA from 'react-ga';
 import HeadMeta from "../components/global/HeadMeta";
+import Head from "next/head";
 ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKING_ID ? process.env.GOOGLE_ANALYTICS_TRACKING_ID : '');
 
 const publicPages = [
@@ -39,6 +40,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const userMeta = pageProps.userMeta ? pageProps.userMeta.data : null
 
+  const temp_desc = 'Gather all of the content you produce and share, Put it in one place where it can be easily found.'
+
   return (
     <ClerkProvider {...pageProps}>
       
@@ -48,9 +51,69 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         {
           userMeta ?
-            <HeadMeta title_ext={userMeta.username} description={userMeta.bio} og_image={userMeta.profile_image_url} og_url={`https://kohee.app/${userMeta.username}`} />
+            <Head>
+              <title>Kohee. {`| ${userMeta.username}`}</title>
+
+              <meta charSet="utf-8" />
+              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+              <meta name="description" content={userMeta.bio} />
+            
+              {/* Facebook Meta Tags */}
+              <meta property="og:title" content={`Kohee. | ${userMeta.username}`} />
+              <meta property="og:description" content={userMeta.bio} />
+              
+              <meta property="og:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${userMeta.username}`} />
+              <meta property="og:type" content="website"/>
+
+              <meta property="og:image" content={userMeta.profile_image_url} />
+              <meta property="og:image:width" content="1200" />
+              <meta property="og:image:height" content="630" />
+
+              <meta property="fb:app_id" content="695286688778792" />
+
+
+              {/* Twitter Meta Tags */}
+              <meta name="twitter:card" content="summary_large_image" />
+              <meta property="twitter:domain" content='kohee.app' />
+              <meta property="twitter:url" content={`${process.env.NEXT_PUBLIC_HOSTNAME}/${userMeta.username}`} />
+              <meta name="twitter:title" content={`Kohee. | ${userMeta.username}`} />
+              <meta name="twitter:description" content={userMeta.bio} />
+              <meta name="twitter:image" content={userMeta.profile_image_url} />
+
+              <link rel="icon" type="image/png" href={userMeta.profile_image_url} />
+            </Head>
           :
-            <HeadMeta title_ext={''} description={''} og_image={''} og_url={`https://kohee.app`}/>
+            <Head>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+                <meta name="description" content={temp_desc} />
+              
+                {/* Facebook Meta Tags */}
+                <meta property="og:title" content={`Kohee. | Create a better profile!`} />
+                <meta property="og:description" content={temp_desc} />
+                
+                <meta property="og:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
+                <meta property="og:type" content="website"/>
+
+                <meta property="og:image" content='https://i.imgur.com/WHshbGu.png' />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+
+                <meta property="fb:app_id" content="695286688778792" />
+
+
+                {/* Twitter Meta Tags */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta property="twitter:domain" content='kohee.app' />
+                <meta property="twitter:url" content={process.env.NEXT_PUBLIC_HOSTNAME} />
+                <meta name="twitter:title" content={`Kohee. | Create a better profile!`} />
+                <meta name="twitter:description" content={temp_desc} />
+                <meta name="twitter:image" content='https://i.imgur.com/WHshbGu.png' />
+
+                <link rel="icon" type="image/png" href="/bean.png" />
+            </Head>
         }
 
         {DisableNav.includes(router.pathname) ? <></> :
