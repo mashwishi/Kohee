@@ -36,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           object: {
             id: `${data.id}`,
             first_name: `${data.first_name}`,
-            username: `${data.first_name.toLowerCase().replaceAll(' ', '_')}_${user_ext}`,
+            username: `${data.username}`,
             profile_image_url: `${data.profile_image_url}`,
             updated_at: `${data.updated_at}`,
             created_at: `${data.created_at}`
@@ -48,7 +48,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             {
               user_id: `${data.id}`,
               first_name: `${data.first_name}`,
-              username: `${data.first_name.toLowerCase().replaceAll(' ', '_')}`,
+              username: `${data.username}`,
               profile_image_url: `${data.profile_image_url}`,
               updated_at: `${data.updated_at}`,
               created_at: `${data.created_at}`,
@@ -82,7 +82,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     id: `${data.id}`,
                     first_name: `${data.first_name}`,
                     last_name: `${data.last_name}`,
-                    username: `${data.username.toLowerCase().replaceAll(' ', '_')}`,
+                    username: `${data.username}`,
                     profile_image_url: `${data.profile_image_url}`,
                     updated_at: `${data.updated_at ? data.updated_at : timestamp}`,
                     bio: `${data.bio ? data.bio : response.data.users[0].bio}`,
@@ -96,7 +96,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                       user_id: `${data.id}`,
                       first_name: `${data.first_name}`,
                       last_name: `${data.last_name}`,
-                      username: `${data.username.toLowerCase().replaceAll(' ', '_')}`,
+                      username: `${data.username}`,
                       profile_image_url: `${data.profile_image_url}`,
                       updated_at: `${data.updated_at ? data.updated_at : timestamp}`,
                       bio: `${data.bio ? data.bio : response.data.users[0].bio}`,
