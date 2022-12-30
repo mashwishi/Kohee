@@ -35,6 +35,7 @@ const HeadMeta = (props: HeadMeta) => {
           <meta name="twitter:description" content={props.description ? `${props.description}` : `${temp_desc}`} />
           <meta name="twitter:image" content={props.og_image ? `${props.og_image}` : `https://i.imgur.com/WHshbGu.png`} />
         
+          <meta charSet="utf-8" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
     </>
