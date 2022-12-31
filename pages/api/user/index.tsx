@@ -37,11 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           object: {
             id: `${data.id}`,
             first_name: `${data.first_name}`,
-            username: `${
-                data.external_accounts[0].username !== 'null' || data.external_accounts[0].username !== null ? 
-                `${data.external_accounts[0].username}` : data.username !== 'null' || data.username !== null ? 
-                `${data.username}` : `${data.first_name}_${nanoid(5)}`
-            }`,
+            username: `${data.first_name}${data.created_at}`,
             profile_image_url: `${data.profile_image_url}`,
             updated_at: `${data.updated_at}`,
             created_at: `${data.created_at}`
@@ -51,12 +47,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           res.json(
             response.status == 200 ? 
             {
-              // user_id: `${data.id}`,
-              // first_name: `${data.first_name}`,
-              // username: `${data.external_accounts[0].username == 'null' || data.external_accounts[0].username == null ? data.external_accounts[0].username : user_ext}`,
-              // profile_image_url: `${data.profile_image_url}`,
-              // updated_at: `${data.updated_at}`,
-              // created_at: `${data.created_at}`,
+              id: `${data.id}`,
+              first_name: `${data.first_name}`,
+              username: `${data.first_name}${data.created_at}`,
+              profile_image_url: `${data.profile_image_url}`,
+              updated_at: `${data.updated_at}`,
+              created_at: `${data.created_at}`,
               message: 'User successfully added to database!'
             } : 
             {
