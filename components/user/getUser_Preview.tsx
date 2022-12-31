@@ -292,7 +292,7 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                     
                     {/*Banner*/}
                     <img 
-                    src={props.data_profile_banner_url ? props.data_profile_banner_url : `/fallback_banner.png`} alt={`banner-${props.data_username}`}  
+                    src={props.data_banner ? props.data_banner : `/fallback_banner.png`} alt={`banner-${props.data_username}`}  
                     className="object-cover rounded-b-[50px] max-h-30 min-h-30"
                     />
                     
@@ -304,7 +304,7 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                         <div>
                             <div className="avatar online">
                                 <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src={props.data_banner ? props.data_banner : `/fallback_avatar.jpg`} alt={`avatar-${props.data_username}`} />
+                                    <img src={props.data_profile_image_url ? props.data_profile_image_url : `/fallback_avatar.jpg`} alt={`avatar-${props.data_username}`} />
                                 </div>
                             </div>
                         </div>
