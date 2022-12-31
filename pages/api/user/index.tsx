@@ -37,7 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           object: {
             id: `${data.id}`,
             first_name: `${data.first_name}`,
-            username: `${data.id}`,
+            username: `${data.id.toString().toLocaleLowerCase()}`,
             profile_image_url: `${data.profile_image_url}`,
             updated_at: `${data.updated_at}`,
             created_at: `${data.created_at}`
