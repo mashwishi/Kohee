@@ -6,6 +6,7 @@ import ReactGA from 'react-ga'
 
 import SetLinks from "../../components/account/setLinks";
 import SetMore from "../../components/account/setMore";
+import SetBanner from "../../components/account/setBanner";
 
 import HeadMeta from "../../components/global/HeadMeta";
 
@@ -50,8 +51,9 @@ const UserProfilePage = () => {
                             <Tab.Panel>
                             {
                                 <>
-                                <UserProfile path="/user" hideNavigation routing="path" only="account" />
-                                <SetMore />
+                                    <UserProfile path="/user" hideNavigation routing="path" only="account" />
+                                    <SetMore />
+                                    <SetBanner />
                                 </>
                             }
                             </Tab.Panel>

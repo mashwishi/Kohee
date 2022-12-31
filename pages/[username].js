@@ -38,6 +38,7 @@ const Username = ({ user_data }) => {
     //Browser Name
     const [userBrowser, setUserBrowser] = useState(browserName)
 
+
     useEffect(() => {
 
       setData(user_data.data)
@@ -52,6 +53,7 @@ const Username = ({ user_data }) => {
         const udata = await response.json();
         setUserCountryLoc(udata.country_name);
       }
+      
 
       fetchCountry();
 

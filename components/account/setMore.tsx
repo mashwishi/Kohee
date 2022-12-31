@@ -71,14 +71,7 @@ const SetMore: NextPage = () => {
                 body: JSON.stringify({
                     data:{
                         user_id: `${userData.user_id}`,
-                        username: `${userData.username.toLowerCase().replaceAll(' ', '_')}`,
-                        first_name: `${userData.first_name}`,
-                        last_name: `${userData.last_name}`,       
-                        profile_image_url: `${userData.profile_image_url}`,
-                        created_at: `${userData.created_at}`,
                         bio: `${valueBio}`,
-                        updated_at: `${timestamp}`,
-                        banner: `${userData.banner}`,
                     }
                 })
             };
@@ -127,9 +120,9 @@ const SetMore: NextPage = () => {
             <div className="Lt2X2CSXDlA17QZxtmZM VND2hwhJfz9GlH7oDnkd cl-themed-card">
                 <div className="Nq0cGRxiCgDlvCMk0zDU">
                     <h1 className="neiTtIc1DzU_PrekjGtm">Bio</h1>
-                    <p className="wfQDsKYZn7R6oAZW0nQL">Tell something about you. 
-                    {isErrorBio ? <span className="text-red-600"> Something went wrong!</span> : null}
-                    {isSuccessBio ? <span className="text-green-600"> Updated!</span> : null}
+                    <p className="wfQDsKYZn7R6oAZW0nQL">Tell something about you.&nbsp; 
+                    {isErrorBio ? <span className="text-red-600">Something went wrong!</span> : null}
+                    {isSuccessBio ? <span className="text-green-600">Updated!</span> : null}
                     </p>
                 </div>
                 <div className="cl-titled-card-list">

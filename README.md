@@ -83,6 +83,9 @@ To get a local copy up and running follow these simple example steps.
     NEXT_PUBLIC_CLERK_FRONTEND_API=''
     NEXT_PUBLIC_HOSTNAME='https://<yourdomainhere>'
 
+    IMGUR_CLIENT_ID=''
+    IMGUR_CLIENT_SECRET=''
+
     GOOGLE_ANALYTICS_TRACKING_ID ='UA-'
 
     IP_API_URL = 'https://ipapi.co/json/'

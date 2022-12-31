@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { data } = req.body;
 
-    const update_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/user/update`
+    const update_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/user/bio`
 
     const headers = 
     {
@@ -46,14 +46,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
     await axios.put(update_api_url, {
         id: `${data.user_id}`,
-        first_name: `${data.first_name}`,
-        last_name: `${data.last_name}`,
-        username: `${data.username}`,
-        profile_image_url: `${data.profile_image_url}`,
-        updated_at: `${data.updated_at}`,
-        created_at: `${data.created_at}`,
         bio: `${data.bio}`,
-        banner: `${data.banner}`,
     },{headers: headers})
     .then(response => {
         res.json(
@@ -61,7 +54,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         {
             data:{
                 id: `${response.data.update_users.returning[0].id}`,
-                updated_at: `${response.data.update_users.returning[0].updated_at}`,
                 bio: `${response.data.update_users.returning[0].bio}`,
             },
             message: 'Successfully update the bio in data!'

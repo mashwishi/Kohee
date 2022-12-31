@@ -496,10 +496,14 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                     {/*End Menu*/}
                     
                     {/*Banner*/}
+                    <div className="h-[300px]">
                     <img 
-                    src={props.data_profile_banner_url ? props.data_profile_banner_url : `/fallback_banner.png`} alt={`banner-${props.data_username}`}  
-                    className="object-cover rounded-b-[50px] max-h-30 min-h-30"
+                    src={props.data_banner ? props.data_banner : `/fallback_banner.png`} alt={`banner-${props.data_username}`}  
+                    //old class max-h-30 min-h-30
+                    className="object-cover rounded-b-[50px] h-[350px]"
                     />
+                    </div>
+
                     
                     {/*Profile Card - shadow-xl */}
                     <div className="mx-4 p-5 -mt-24 rounded-t-[15px] rounded-b-[15px] bg-white relative">
