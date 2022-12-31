@@ -32,7 +32,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case 'user.created':
 
       try {
-        
+
         await axios.post(create_api_url, {
           object: {
             id: `${data.id}`,
@@ -89,8 +89,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     username: `${data.username}`,
                     profile_image_url: `${data.profile_image_url}`,
                     updated_at: `${data.updated_at ? data.updated_at : timestamp}`,
-                    bio: `${data.bio ? data.bio : response.data.users[0].bio}`,
-                    banner: `${data.banner ? data.banner : response.data.users[0].banner}`,
                     created_at: `${data.created_at}`
                 },{headers: headers})
                 .then(response => {
@@ -103,8 +101,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                       username: `${data.username}`,
                       profile_image_url: `${data.profile_image_url}`,
                       updated_at: `${data.updated_at ? data.updated_at : timestamp}`,
-                      bio: `${data.bio ? data.bio : response.data.users[0].bio}`,
-                      banner: `${data.banner ? data.banner : response.data.users[0].banner}`,
                       created_at: `${data.created_at}`,
                       message: 'User successfully updated to database!'
                     } : 
