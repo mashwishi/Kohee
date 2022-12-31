@@ -48,13 +48,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           res.json(
             response.status == 200 ? 
             {
-              data: { response },
-              id: `${response.data.id}`,
-              first_name: `${response.data.first_name}`,
-              username: `${response.data.id}`,
-              profile_image_url: `${response.data.profile_image_url}`,
-              updated_at: `${response.data.updated_at}`,
-              created_at: `${response.data.created_at}`,
+              data: response.data ,
               message: 'User successfully added to database!'
             } : 
             {
