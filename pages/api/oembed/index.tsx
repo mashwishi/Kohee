@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       author_url: `${process.env.NEXT_PUBLIC_HOSTNAME}/${
         username ? username : ''
       }`,
-      provider_name: 'kohee',
+      provider_name: 'Kohee',
       provider_url: process.env.NEXT_PUBLIC_HOSTNAME,
     };
   
