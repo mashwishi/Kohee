@@ -80,8 +80,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta property="og:type" content="website"/>
 
             <meta property="og:image" content={userMeta.profile_image_url} />
-            {/* <meta property="og:image:width" content="1200" />
-            <meta property="og:image:height" content="630" /> */}
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
 
             <meta property="fb:app_id" content="695286688778792" />
 
