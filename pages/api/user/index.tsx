@@ -48,6 +48,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           res.json(
             response.status == 200 ? 
             {
+              data: { response },
               id: `${response.data.id}`,
               first_name: `${response.data.first_name}`,
               username: `${response.data.id}`,
