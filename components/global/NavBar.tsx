@@ -363,7 +363,7 @@ const NavBar: NextPage = () => {
                                             <div className="flex items-center justify-center">
                                                 <SignedIn>
                                                     <UserButton userProfileUrl="/user" afterSignOutUrl="/" />
-                                                    <p className=" text-gray-800 text-base leading-4 ml-2 font-medium">{user?.username ? user?.username!.toString() : user?.fullName!.toString() }</p>
+                                                    <p className=" text-gray-800 text-base leading-4 ml-2 font-medium">{user?.username ? user?.username?.toString() : user?.fullName?.toString() }</p>
                                                 </SignedIn>
                                                 <SignedOut>
                                                     <div className="relative mr-6 cursor-pointer">

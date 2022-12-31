@@ -12,7 +12,7 @@ import LoadingPage from "../global/LoadingPage";
 const SetBanner: NextPage = () => {
     
     const { user } = useUser();
-    const username = `${user?.username!.toString().toLowerCase()}`;
+    const username = `${user?.username?.toString().toLowerCase()}`;
 
     const [userData, setUserData] = useState<any | null>(null);
     const [isLoading, setLoading] = useState(false)

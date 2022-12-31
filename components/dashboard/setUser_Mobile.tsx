@@ -23,12 +23,12 @@ const SetUser_Mobile: NextPage = () => {
           <div className="flex-row items-center space-x-4 card-body">
             <div>
               <div className="avatar">
-                <div className="rounded-full w-14 h-14 shadow"><img src={user?.profileImageUrl!.toString()} alt={user?.username ? user?.username!.toString() : user?.fullName!.toString() }/></div>
+                <div className="rounded-full w-14 h-14 shadow"><img src={user?.profileImageUrl?.toString()} alt={user?.username ? user?.username?.toString() : user?.fullName?.toString() }/></div>
               </div>
             </div>
             <div>
-              <h2 className="card-title">{user?.username ? user?.username!.toString() : user?.fullName!.toString() }</h2>
-              <p className="text-base-content text-opacity-40">{user?.primaryEmailAddress!.toString()}</p>
+              <h2 className="card-title">{user?.username ? user?.username?.toString() : user?.fullName?.toString() }</h2>
+              <p className="text-base-content text-opacity-40">{user?.primaryEmailAddress?.toString()}</p>
             </div>
           </div>
         </div>

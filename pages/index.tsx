@@ -52,7 +52,7 @@ const SignedOutCards = () => {
 const SignedInCards = () => {
 
   const { user } = useUser();
-  const titleext = user?.username ? user?.username!.toString() : user?.fullName!.toString() || ""
+  const titleext = user?.username ? user?.username?.toString() : user?.fullName?.toString() || ""
 
   return (
     <>

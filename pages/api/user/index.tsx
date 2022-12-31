@@ -14,6 +14,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { type, data, object } = req.body;
 
+
+
   const create_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/user/create`
   const update_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/user/update`
   const delete_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/user/delete`
@@ -26,17 +28,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   };
 
 
-
   switch(type) {
     case 'user.created':
 
       try {
-        const user_ext = nanoid(5);
+
+        const user_ext = `${data.first_name}_${nanoid(5)}`;
+
         await axios.post(create_api_url, {
           object: {
             id: `${data.id}`,
             first_name: `${data.first_name}`,
-            username: `${data.username}`,
+            username: `${data.external_accounts[0].username !== 'null' || data.external_accounts[0].username !== null ? data.external_accounts[0].username : user_ext}`,
             profile_image_url: `${data.profile_image_url}`,
             updated_at: `${data.updated_at}`,
             created_at: `${data.created_at}`
@@ -46,16 +49,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           res.json(
             response.status == 200 ? 
             {
-              user_id: `${data.id}`,
-              first_name: `${data.first_name}`,
-              username: `${data.username}`,
-              profile_image_url: `${data.profile_image_url}`,
-              updated_at: `${data.updated_at}`,
-              created_at: `${data.created_at}`,
+              // user_id: `${data.id}`,
+              // first_name: `${data.first_name}`,
+              // username: `${data.external_accounts[0].username == 'null' || data.external_accounts[0].username == null ? data.external_accounts[0].username : user_ext}`,
+              // profile_image_url: `${data.profile_image_url}`,
+              // updated_at: `${data.updated_at}`,
+              // created_at: `${data.created_at}`,
               message: 'User successfully added to database!'
             } : 
             {
-              data: `${data}`,
               message: 'Failed, Something went wrong!'
             }
           );
