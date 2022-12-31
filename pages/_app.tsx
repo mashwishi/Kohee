@@ -25,7 +25,7 @@ const publicPages = [
   "/pricing",
   "/terms-and-condition",
   "/privacy-policy",
-  "/about"
+  "/about",
 ];
 
 const DisableNav = [
@@ -95,6 +95,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta name="twitter:image" content={userMeta.profile_image_url} />
 
             <link rel="icon" type="image/png" href={userMeta.profile_image_url} />
+            <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${userMeta.username}&profile_image_url=${userMeta.profile_image_url}`}/>
+            <meta name="theme-color" content="#E0A82E" />
+            
           </Head>
         :
           <Head>
@@ -129,6 +132,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <meta name="twitter:image" content={data.image} />
 
                   <link rel="icon" type="image/png" href='/bean.png' />
+
+                  <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${data.title}&profile_image_url=${data.image}`}/>
+                  <meta name="theme-color" content="#E0A82E" />
                 </>
               ))}
           </Head>
