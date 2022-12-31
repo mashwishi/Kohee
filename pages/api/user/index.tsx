@@ -32,14 +32,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case 'user.created':
 
       try {
-
-        const user_ext = `${data.first_name}_${nanoid(5)}`;
-
+        
         await axios.post(create_api_url, {
           object: {
             id: `${data.id}`,
             first_name: `${data.first_name}`,
-            username: `${data.external_accounts[0].username !== 'null' || data.external_accounts[0].username !== null ? data.external_accounts[0].username : user_ext}`,
+            username: `${
+                data.external_accounts[0].username !== 'null' || data.external_accounts[0].username !== null ? 
+                `${data.external_accounts[0].username}` : data.username !== 'null' || data.username !== null ? 
+                `${data.username}` : `${data.first_name}_${nanoid(5)}`
+            }`,
             profile_image_url: `${data.profile_image_url}`,
             updated_at: `${data.updated_at}`,
             created_at: `${data.created_at}`
