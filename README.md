@@ -171,7 +171,7 @@ Distributed under the GNU License. See `LICENSE.txt` for more information.
 [issues-shield]: https://img.shields.io/github/issues/mashwishi/kohee.svg?style=for-the-badge
 [issues-url]: https://github.com/mashwishi/kohee/issues
 [license-shield]: https://img.shields.io/github/license/mashwishi/kohee.svg?style=for-the-badge
-[license-url]: https://github.com/mashwishi/kohee/blob/master/LICENSE
+[license-url]: https://github.com/mashwishi/kohee/blob/main/LICENSE
 
 [product-screenshot]: images/screenshot.png
 
