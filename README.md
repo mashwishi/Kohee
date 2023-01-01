@@ -145,10 +145,17 @@ Don't forget to give the project a star! Thanks again!
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
-<!-- Contributors -->
-## Contributors
+<!-- Contributors / Collaborators -->
+## Contributors / Collaborators
 
 [@Mashwishi](https://github.com/Mashwishi), [@Exarus](https://github.com/Exaruss), [@Aspect](https://github.com/aspectdev-ph)
+
+<!-- Partners -->
+## Partners
+
+<!-- Sponsors -->
+## Sponsors
+
 
 
 
