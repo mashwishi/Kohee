@@ -148,7 +148,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- Contributors -->
 ## Contributors
 
-[@Mashwishi](https://github.com/Mashwishi), [@Exarus](https://github.com/Exaruss)
+[@Mashwishi](https://github.com/Mashwishi), [@Exarus](https://github.com/Exaruss), [@Aspect](https://github.com/aspectdev-ph)
 
 
 
