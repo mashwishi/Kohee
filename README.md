@@ -113,14 +113,24 @@ This section list of major frameworks/libraries we used to our your project.
 - [x] Deploy live/staging with vercel
 - [x] Kohee Landing page
 - [x] User Social Media Authentication
-- [x] User Settings
+- [x] User Security Settings
+- [x] User Links Settings
+- [x] User Customizations Settings
 - [x] Sharable profiles
-- [ ] Kohee user dashboard
+- [x] Follow System
+- [x] Kohee user dashboard
+- [X] User Discovery
+- [x] API Webhooks and Endpoints
+- [x] User Followers and Visits
 - [ ] User Analytics
+- [ ] Front-End Enhancement
 - [ ] Ads to support the project
+- [ ] Referral Program to earn more feature
+- [ ] Progressive Website Application Feature
+- [ ] Release on Google Play Store for Android
+- [ ] Release on App Store Store for iOS
 
 See the [open issues](https://github.com/mashwishi/kohee/issues) for a full list of proposed features (and known issues).
-
 
 
 <!-- CONTRIBUTING -->
