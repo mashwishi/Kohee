@@ -37,7 +37,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           object: {
             id: `${data.id}`,
             first_name: `${data.first_name}`,
-            username: `${data.id.toLocaleLowerCase().trim().replace(' ', '_')}`,
+            username: `${
+              data?.username !== undefined ||
+              data?.username !== null ||
+              data?.username !== 'null'?
+                data?.username.trim().replace(' ', '_')
+              :
+                data?.external_accounts[0]?.username !== undefined ||
+                data?.external_accounts[0]?.username !== null ||
+                data?.external_accounts[0]?.username !== 'null' ?
+                  data?.external_accounts[0]?.username.trim().replace(' ', '_')
+                  :
+                  data?.id.toLocaleLowerCase().trim().replace(' ', '_')
+            }`,
             profile_image_url: `${data.profile_image_url}`,
             updated_at: `${data.updated_at}`,
             created_at: `${data.created_at}`
