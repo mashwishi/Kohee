@@ -321,7 +321,11 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                         {/*Profile Username and Main Badge*/}
                         <div className="flex flex-row items-center space-x-1">
                             <p className="font-bold text-xl">
-                                <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`}>{props.data_username}</Link>
+                                <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`}>
+                                    {
+                                    props.data_username !== null || props.data_username !== 'null' ? props.data_username : `No Username`
+                                    }
+                                </Link>
                             </p>
                             {props.data_username == 'mashwishi' ?
                                 <div className="badge text-[#4f2c15] badge-primary">Founder</div>
@@ -336,6 +340,17 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                                 {userFullname} 
                             </p>
                         </div>
+
+                        {/*Username Warning*/}
+                        {  props.data_username !== null || props.data_username !== 'null' ?
+                        <></>
+                        :
+                        <div className="flex flex-row space-x-1 my-2">
+                            <p className="text-xs text-red-500">
+                                Setup your username at account page to make your profile available on public!
+                            </p>
+                        </div>
+                        }
 
                         {/*Profile Full Name*/}
                         <div className="flex flex-row space-x-1 my-2">

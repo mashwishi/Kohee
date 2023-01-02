@@ -37,7 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           object: {
             id: `${data.id}`,
             first_name: `${data.first_name}`,
-            username: `${data.id.toString().toLocaleLowerCase()}`,
+            username: `${data.id.toLocaleLowerCase().trim().replace(' ', '_')}`,
             profile_image_url: `${data.profile_image_url}`,
             updated_at: `${data.updated_at}`,
             created_at: `${data.created_at}`
@@ -78,7 +78,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     id: `${data.id}`,
                     first_name: `${data.first_name}`,
                     last_name: `${data.last_name}`,
-                    username: `${data.username}`,
+                    username: `${data.username.trim().replace(' ', '_')}`,
                     profile_image_url: `${data.profile_image_url}`,
                     updated_at: `${data.updated_at ? data.updated_at : timestamp}`,
                     created_at: `${data.created_at}`

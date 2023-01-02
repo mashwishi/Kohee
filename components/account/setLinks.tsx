@@ -14,26 +14,26 @@ interface OptionsURLType {
    label: string;
    color_button: string;
    color_text: string;
+   url: string;
 } 
 
 const optionsURLType: OptionsURLType[] = [
    
-   { value: 'custom', label: 'Custom', color_text: '#FFFFFF', color_button: '#010101'  },
-   { value: 'facebook', label: 'Facebook', color_text: '#FFFFFF', color_button: '#1877f2' },
-   { value: 'tiktok', label: 'Tiktok', color_text: '#FFFFFF', color_button: '#ee1d52'  },
-   { value: 'twitter', label: 'Twitter', color_text: '#FFFFFF', color_button: '#1da1f2'  },
-   { value: 'instagram', label: 'Instagram', color_text: '#FFFFFF', color_button: '#c32aa3'  },
-   { value: 'linkedin', label: 'LinkedIn', color_text: '#FFFFFF', color_button: '#0a66c2'  },
-   { value: 'google', label: 'Google', color_text: '#000000', color_button: '#ffffff' },
-   { value: 'gmail', label: 'Gmail', color_text: '#000000', color_button: '#ffffff' },
-   { value: 'youtube', label: 'YouTube', color_text: '#ffffff', color_button: '#ff0000' },
-   { value: 'reddit', label: 'Reddit', color_text: '#ffffff', color_button: '#ff4500' },
-   { value: 'wikipedia', label: 'Wikipedia', color_text: '#ffffff', color_button: '#000000' },
-   { value: 'quora', label: 'Quora', color_text: '#ffffff', color_button: '#a020f0' },
-   { value: 'twitch', label: 'Twitch', color_text: '#ffffff', color_button: '#6441a5' },
-   { value: 'messenger', label: 'Messenger', color_text: '#ffffff', color_button: '#0084ff' },
-   { value: 'snapchat', label: 'Snapchat', color_text: '#ffffff', color_button: '#fffc00' },
-   { value: 'github', label: 'Github', color_text: '#ffffff', color_button: '#000000' },
+   { value: 'custom', label: 'Custom', color_text: '#FFFFFF', color_button: '#010101', url: 'https://'  },
+   { value: 'facebook', label: 'Facebook', color_text: '#FFFFFF', color_button: '#1877f2', url: 'https://facebook.com/' },
+   { value: 'tiktok', label: 'Tiktok', color_text: '#FFFFFF', color_button: '#ee1d52', url: 'https://tiktok.com/@'  },
+   { value: 'twitter', label: 'Twitter', color_text: '#FFFFFF', color_button: '#1da1f2', url: 'https://twitter.com/'  },
+   { value: 'instagram', label: 'Instagram', color_text: '#FFFFFF', color_button: '#c32aa3', url: 'https://instagram.com/'  },
+   { value: 'linkedin', label: 'LinkedIn', color_text: '#FFFFFF', color_button: '#0a66c2', url: 'https://www.linkedin.com/in/'  },
+   { value: 'email', label: 'Email', color_text: '#000000', color_button: '#ffffff', url: '' },
+   { value: 'youtube', label: 'YouTube', color_text: '#ffffff', color_button: '#ff0000', url: 'https://youtube.com/@' },
+   { value: 'reddit', label: 'Reddit', color_text: '#ffffff', color_button: '#ff4500', url: 'https://www.reddit.com/user/' },
+   { value: 'wikipedia', label: 'Wikipedia', color_text: '#ffffff', color_button: '#000000', url: 'https://wikipedia.org/wiki/' },
+   { value: 'quora', label: 'Quora', color_text: '#ffffff', color_button: '#a020f0', url: 'https://www.quora.com/profile/' },
+   { value: 'twitch', label: 'Twitch', color_text: '#ffffff', color_button: '#6441a5', url: 'https://www.twitch.tv/' },
+   { value: 'messenger', label: 'Messenger', color_text: '#ffffff', color_button: '#0084ff', url: 'https://m.me/' },
+   { value: 'snapchat', label: 'Snapchat', color_text: '#ffffff', color_button: '#fffc00', url: 'https://snapchat.com/add/' },
+   { value: 'github', label: 'Github', color_text: '#ffffff', color_button: '#000000', url: 'https://github.com/' },
 
 ];
 
@@ -55,11 +55,17 @@ const SetLinks: NextPage = () => {
    const [editLinkColorBtn, setEditLinkColorBtn] = useState('')
    const [editLinkBtnTxt, setEditLinkBtnTxt] = useState('')
 
+   const [validEditLinkColorBtn, setValidEditLinkColorBtn] = useState(true)
+   const [validEditLinkColorTxt, setValidEditLinkColorTxt] = useState(true)
+
    const [addLinkType, setAddLinkType] = useState('custom')
    const [addLinkURL, setAddLinkURL] = useState('https://')
    const [addLinkColorTxt, setAddLinkColorTxt] = useState('#E0A82E')
    const [addLinkColorBtn, setAddLinkColorBtn] = useState('#50402F')
    const [addLinkBtnTxt, setAddLinkBtnTxt] = useState('Custom')
+
+   const [validAddLinkColorBtn, setValidAddLinkColorBtn] = useState(true)
+   const [validAddLinkColorTxt, setValidAddLinkColorTxt] = useState(true)
 
    useEffect(() => {
 
@@ -110,7 +116,6 @@ const SetLinks: NextPage = () => {
       getLinks()
 
    }, [])
-   
 
    async function getLinks() {
       const fetchData = {
@@ -176,6 +181,10 @@ const SetLinks: NextPage = () => {
 
       setEditLinkColorBtn(selectedOption ? selectedOption.color_button : editLinkColorBtn);
       setEditLinkColorTxt(selectedOption ? selectedOption.color_text : editLinkColorTxt);
+      setEditLinkURL(selectedOption ? selectedOption.url : editLinkURL);
+
+      setValidEditLinkColorTxt(true)
+      setValidEditLinkColorBtn(true)
    };
 
    async function editLink(id: Number){
@@ -202,6 +211,17 @@ const SetLinks: NextPage = () => {
          const data = await response.json();
          if(data.status == 200){
             setLoading(true)
+
+            // Reset Edit State
+            setEditLinkType('')
+            setEditLinkURL('')
+            setEditLinkColorTxt('')
+            setEditLinkColorBtn('')
+            setEditLinkBtnTxt('')
+
+            setValidEditLinkColorTxt(true)
+            setValidEditLinkColorBtn(true)
+
             getLinks()
          }
       } catch (error) {
@@ -218,8 +238,12 @@ const SetLinks: NextPage = () => {
          (option) => option.value === event.target.value
       );
 
-      setAddLinkColorBtn(selectedOption ? selectedOption.color_button : editLinkColorBtn);
-      setAddLinkColorTxt(selectedOption ? selectedOption.color_text : editLinkColorTxt);
+      setAddLinkColorBtn(selectedOption ? selectedOption.color_button : addLinkColorBtn);
+      setAddLinkColorTxt(selectedOption ? selectedOption.color_text : addLinkColorTxt);
+      setAddLinkURL(selectedOption ? selectedOption.url : addLinkURL);
+
+      setValidAddLinkColorTxt(true)
+      setValidAddLinkColorBtn(true)
    };
 
    async function addLink(){
@@ -254,6 +278,9 @@ const SetLinks: NextPage = () => {
             setAddLinkColorBtn('')
             setAddLinkBtnTxt('')
 
+            setValidAddLinkColorTxt(true)
+            setValidAddLinkColorBtn(true)
+
             getLinks()
          }
       } catch (error) {
@@ -261,6 +288,68 @@ const SetLinks: NextPage = () => {
          console.error(error);
       }
 
+   }
+
+   async function cancel(){
+      setEditLinkType('')
+      setEditLinkURL('')
+      setEditLinkColorTxt('')
+      setEditLinkColorBtn('')
+      setEditLinkBtnTxt('')
+   
+      setAddLinkType('custom')
+      setAddLinkURL('https://')
+      setAddLinkColorTxt('#E0A82E')
+      setAddLinkColorBtn('#50402F')
+      setAddLinkBtnTxt('Custom')
+
+      setValidAddLinkColorTxt(true)
+      setValidAddLinkColorBtn(true)
+      setValidEditLinkColorTxt(true)
+      setValidEditLinkColorBtn(true)
+   }
+
+   //Hex Validator
+   function validateHexCode(hex: string): boolean {
+      const hexRegEx = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+      return hexRegEx.test(hex);
+   }
+
+   //Edit Color Text
+   const hexEditColorText = (event: any) => {
+      setEditLinkColorTxt(event.target.value)
+      if(validateHexCode(event.target.value)){
+         setValidEditLinkColorTxt(true)
+      }else{
+         setValidEditLinkColorTxt(false)
+      }
+   }
+   //Edit Color Botton
+   const hexEditColorBotton = (event: any) => {
+      setEditLinkColorBtn(event.target.value)
+      if(validateHexCode(event.target.value)){
+         setValidEditLinkColorBtn(true)
+      }else{
+         setValidEditLinkColorBtn(false)
+      }
+   }
+   //Add Color Text
+   const hexAddColorText = (event: any) => {
+      setAddLinkColorTxt(event.target.value)
+      if(validateHexCode(event.target.value)){
+         setValidAddLinkColorTxt(true)
+      }else{
+         setValidAddLinkColorTxt(false)
+      }
+   }
+   //Add Color Botton
+   const hexAddColorBotton = (event: any) => {
+      setAddLinkColorBtn(event.target.value)
+      if(validateHexCode(event.target.value)){
+         setValidAddLinkColorBtn(true)
+      }else{
+         setValidAddLinkColorBtn(false)
+      }
    }
 
    return (
@@ -324,8 +413,9 @@ const SetLinks: NextPage = () => {
                                                 <div className="flex mt-2">
                                                    <div className="flex-initial w-80">
                                                       <div className="relative w-[100%]">
+                                                               {validAddLinkColorTxt ? `` : <span className="text-red-500">&nbsp;Invalid Hex</span>}
                                                                <input
-                                                               className="hXjh5Waxs3XN6zW5pfXs w-[100%] py-2 rounded-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue"
+                                                               className="hXjh5Waxs3XN6zW5pfXs w-[100%] py-2 rounded-sm  leading-tight focus:outline-none focus:shadow-outline-blue"
                                                                placeholder='Hexcolor Code'
                                                                autoComplete="off" 
                                                                required 
@@ -333,7 +423,7 @@ const SetLinks: NextPage = () => {
                                                                maxLength={7} 
                                                                type="text" 
                                                                value={addLinkColorTxt}
-                                                               onChange={(e) => setAddLinkColorTxt(e.target.value)}
+                                                               onChange={hexAddColorText}
                                                                />
                                                       </div>
                                                    </div>
@@ -349,6 +439,7 @@ const SetLinks: NextPage = () => {
                                                 <div className="flex mt-2">
                                                    <div className="flex-initial w-80">
                                                       <div className="relative w-[100%]">
+                                                               {validAddLinkColorBtn ? `` : <span className="text-red-500">&nbsp;Invalid Hex</span>}
                                                                <input
                                                                className="hXjh5Waxs3XN6zW5pfXs w-[100%] py-2 rounded-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue"
                                                                placeholder='Hexcolor Code'
@@ -358,7 +449,7 @@ const SetLinks: NextPage = () => {
                                                                maxLength={7} 
                                                                type="text" 
                                                                value={addLinkColorBtn}
-                                                               onChange={(e) => setAddLinkColorBtn(e.target.value)}
+                                                               onChange={hexAddColorBotton}
                                                                />
                                                       </div>
                                                    </div>
@@ -425,7 +516,7 @@ const SetLinks: NextPage = () => {
                                                    <div className="flex-initial w-80">
                                                       <div className="relative w-[100%]">
 
-                                                      <select value={editLinkType} onChange={handleChangeTypeAdd}
+                                                      <select value={addLinkType} onChange={handleChangeTypeAdd}
                                                       //onChange={(e) => setEditLinkType(e.target.value)}
                                                       className="hXjh5Waxs3XN6zW5pfXs w-[100%] py-2 rounded-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue"
                                                       >
@@ -444,7 +535,7 @@ const SetLinks: NextPage = () => {
                                     </p>
                                     <div className="modal-action">
                                        {
-                                       addLinkURL && addLinkColorTxt && addLinkColorBtn && addLinkBtnTxt ?
+                                       addLinkURL && addLinkColorTxt && addLinkColorBtn && addLinkBtnTxt && validAddLinkColorTxt && validAddLinkColorBtn ?
                                        <>
                                           <label htmlFor={`add-link`} className="btn btn-primary" onClick={() => addLink()}>Create</label>
                                        </>
@@ -453,7 +544,7 @@ const SetLinks: NextPage = () => {
                                           <label className="btn bg-slate-600 text-slate-200 cursor-no-drop">Create</label>
                                        </>
                                        }
-                                       <label htmlFor={`add-link`} className="btn btn-secondary">Cancel</label>
+                                       <label htmlFor={`add-link`} className="btn btn-secondary" onClick={() => cancel()}>Cancel</label>
                                     </div>
                                  </div>
                               </div>
@@ -523,6 +614,7 @@ const SetLinks: NextPage = () => {
                                                                <div className="flex mt-2">
                                                                   <div className="flex-initial w-80">
                                                                      <div className="relative w-[100%]">
+                                                                              {validEditLinkColorTxt ? `` : <span className="text-red-500">&nbsp;Invalid Hex</span>}
                                                                               <input
                                                                               className="hXjh5Waxs3XN6zW5pfXs w-[100%] py-2 rounded-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue"
                                                                               placeholder={editLinkColorTxt}
@@ -534,7 +626,7 @@ const SetLinks: NextPage = () => {
                                                                               maxLength={7} 
                                                                               type="text" 
                                                                               value={editLinkColorTxt}
-                                                                              onChange={(e) => setEditLinkColorTxt(e.target.value)}
+                                                                              onChange={hexEditColorText}
                                                                               />
                                                                      </div>
                                                                   </div>
@@ -550,6 +642,7 @@ const SetLinks: NextPage = () => {
                                                                <div className="flex mt-2">
                                                                   <div className="flex-initial w-80">
                                                                      <div className="relative w-[100%]">
+                                                                              {validEditLinkColorBtn ? `` : <span className="text-red-500">&nbsp;Invalid Hex</span>}
                                                                               <input
                                                                               className="hXjh5Waxs3XN6zW5pfXs w-[100%] py-2 rounded-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue"
                                                                               placeholder={editLinkColorBtn}
@@ -561,7 +654,7 @@ const SetLinks: NextPage = () => {
                                                                               maxLength={7} 
                                                                               type="text" 
                                                                               value={editLinkColorBtn}
-                                                                              onChange={(e) => setEditLinkColorBtn(e.target.value)}
+                                                                              onChange={hexEditColorBotton}
                                                                               />
                                                                      </div>
                                                                   </div>
@@ -651,7 +744,7 @@ const SetLinks: NextPage = () => {
                                                    </p>
                                                    <div className="modal-action">
                                                    {
-                                                   editLinkURL && editLinkColorTxt && editLinkColorBtn && editLinkBtnTxt ?
+                                                   editLinkURL && editLinkColorTxt && editLinkColorBtn && editLinkBtnTxt && validEditLinkColorTxt && validEditLinkColorBtn ?
                                                    <>
                                                       <label htmlFor={`edit-`+i.id} className="btn btn-primary" onClick={() => editLink(i.id)}>Save</label>
                                                    </>
@@ -660,7 +753,7 @@ const SetLinks: NextPage = () => {
                                                       <label className="btn bg-slate-600 text-slate-200 cursor-no-drop">Save</label>
                                                    </>
                                                    }
-                                                      <label htmlFor={`edit-`+i.id} className="btn btn-secondary">Cancel</label>
+                                                      <label htmlFor={`edit-`+i.id} className="btn btn-secondary"  onClick={() => cancel()}>Cancel</label>
                                                    </div>
                                                 </div>
                                              </div>

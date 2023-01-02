@@ -75,7 +75,7 @@ const SetUser_Mobile: NextPage = () => {
                         <div className="display overscroll-x-none">
                             <iframe 
                                 className="w-[375px] h-[667px] pointer-events-none" 
-                                src={process.env.NEXT_PUBLIC_HOSTNAME + `/preview/${user?.username ? user?.username : ''}`}
+                                src={process.env.NEXT_PUBLIC_HOSTNAME + `/preview/${user?.id}`}
                                 title="Kohee App Mobile View" 
                             />
                         </div>

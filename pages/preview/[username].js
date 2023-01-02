@@ -24,13 +24,13 @@ const Username = () => {
             },
             body: JSON.stringify({
                 data:{
-                    username: `${username.toString().toLowerCase()}`
+                    user_id: `${username.toString()}`
                 }
             })
         };
         
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/getById`, fetchData);
             const datax = await response.json();
             
             setData(datax.data)
