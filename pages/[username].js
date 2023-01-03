@@ -27,6 +27,12 @@ const Username = ({ user_data }) => {
 
     //Country API Free
     const [userCountryLoc, setUserCountryLoc] = useState('')
+    //Longitude API Free
+    const [userLocLong, setUserLocLong] = useState('')
+    //Latitude API Free
+    const [userLocLat, setUserLocLat] = useState('')
+    //Country Code API Free
+    const [userCountryCode, setUserCountryCode] = useState('')
 
     //Type: mobile = Mobile | browser = Desktop
     const [userDeviceTypeuserDeviceOS, setUserDeviceTypesetUserDeviceOS] = useState(deviceType === `browser` ? `Desktop` : deviceType == `mobile` ? `Mobile` : `Unknown`)
@@ -52,6 +58,9 @@ const Username = ({ user_data }) => {
         const response = await fetch(process.env.IP_API_URL);
         const udata = await response.json();
         setUserCountryLoc(udata.country_name);
+        setUserLocLong(udata.longitude)
+        setUserLocLat(udata.latitude)
+        setUserCountryCode(udata.country_code)
       }
       
 
@@ -113,6 +122,9 @@ const Username = ({ user_data }) => {
         userDeviceOS={userDeviceOS}
         userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
         userCountryLoc={userCountryLoc}
+        userCountryCode={userCountryCode}
+        userLocLong={userLocLong}
+        userLocLat={userLocLat}
         />
 
       </BrowserView>
@@ -138,6 +150,9 @@ const Username = ({ user_data }) => {
         userDeviceOS={userDeviceOS}
         userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
         userCountryLoc={userCountryLoc}
+        userCountryCode={userCountryCode}
+        userLocLong={userLocLong}
+        userLocLat={userLocLat}
         />
       </MobileView>
     </>

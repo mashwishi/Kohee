@@ -62,6 +62,9 @@ type GetUser_Mobile = {
     userDeviceOS: string;
     userDeviceTypeuserDeviceOS: string;
     userCountryLoc: string;
+    userCountryCode: string;
+    userLocLong: string;
+    userLocLat: string;
 };
 
 const GetUser_Mobile = (props: GetUser_Mobile) => {
@@ -226,6 +229,9 @@ const GetUser_Mobile = (props: GetUser_Mobile) => {
                         device: `${props.userDeviceTypeuserDeviceOS ? props.userDeviceTypeuserDeviceOS : null}`, 
                         country: `${props.userCountryLoc ? props.userCountryLoc : null}`, 
                         browser: `${props.userBrowser ? props.userBrowser : null}`, 
+                        country_code: `${props.userCountryCode ? props.userCountryCode : null}`, 
+                        latitude: `${props.userLocLong ? props.userLocLong : null}`, 
+                        longitude: `${props.userLocLat ? props.userLocLat : null}`, 
                     }
                 })
             };

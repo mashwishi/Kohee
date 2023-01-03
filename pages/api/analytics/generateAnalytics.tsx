@@ -34,6 +34,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             device: data.device, 
             country: data.country, 
             browser: data.browser, 
+            country_code: data.country_code, 
+            latitude: data.latitude, 
+            longitude: data.longitude, 
         }
     },{headers: headers})
     .then(response => {
