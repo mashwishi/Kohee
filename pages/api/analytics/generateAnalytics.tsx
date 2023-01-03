@@ -23,6 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(403).json({ error: 'Forbidden' });
         return;
     }
+    
 
     try {
     await axios.post(createAnalytics_api_url, {

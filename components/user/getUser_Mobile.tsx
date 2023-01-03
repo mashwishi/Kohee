@@ -65,6 +65,8 @@ type GetUser_Mobile = {
     userCountryCode: string;
     userLocLong: string;
     userLocLat: string;
+    userRegionLoc: string;
+    userRegionCode: string;
 };
 
 const GetUser_Mobile = (props: GetUser_Mobile) => {

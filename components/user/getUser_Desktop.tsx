@@ -77,6 +77,8 @@ type GetUser_Desktop = {
     userCountryCode: string;
     userLocLong: string;
     userLocLat: string;
+    userRegionLoc: string;
+    userRegionCode: string;
 };
 
 const GetUser_Desktop = (props: GetUser_Desktop) => {

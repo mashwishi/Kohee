@@ -16,7 +16,7 @@ import ReactGA from 'react-ga'
 
 import Head from 'next/head';
 
-const Username = ({ user_data }) => {
+const Username = ({ user_data, location}) => {
   
     const router = useRouter()
 
@@ -24,15 +24,6 @@ const Username = ({ user_data }) => {
 
     const [udata, setData] = useState(null)
     const [isLoading, setLoading] = useState(false)
-
-    //Country API Free
-    const [userCountryLoc, setUserCountryLoc] = useState('')
-    //Longitude API Free
-    const [userLocLong, setUserLocLong] = useState('')
-    //Latitude API Free
-    const [userLocLat, setUserLocLat] = useState('')
-    //Country Code API Free
-    const [userCountryCode, setUserCountryCode] = useState('')
 
     //Type: mobile = Mobile | browser = Desktop
     const [userDeviceTypeuserDeviceOS, setUserDeviceTypesetUserDeviceOS] = useState(deviceType === `browser` ? `Desktop` : deviceType == `mobile` ? `Mobile` : `Unknown`)
@@ -46,7 +37,6 @@ const Username = ({ user_data }) => {
 
 
     useEffect(() => {
-
       setData(user_data.data)
 
       if (udata?.user_id) {
@@ -54,19 +44,7 @@ const Username = ({ user_data }) => {
         setLoading(false)
       }
 
-      async function fetchCountry() {
-        const response = await fetch(process.env.IP_API_URL);
-        const udata = await response.json();
-        setUserCountryLoc(udata.country_name);
-        setUserLocLong(udata.longitude)
-        setUserLocLat(udata.latitude)
-        setUserCountryCode(udata.country_code)
-      }
-      
-
-      fetchCountry();
-
-    }, [userBrowser, userDeviceOS,  userDeviceTypeuserDeviceOS, userCountryLoc])
+    }, [userBrowser, userDeviceOS,  userDeviceTypeuserDeviceOS])
 
     if (isLoading) return <LoadingPage/>
     
@@ -121,10 +99,12 @@ const Username = ({ user_data }) => {
         userBrowser={userBrowser}
         userDeviceOS={userDeviceOS}
         userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
-        userCountryLoc={userCountryLoc}
-        userCountryCode={userCountryCode}
-        userLocLong={userLocLong}
-        userLocLat={userLocLat}
+        userCountryLoc={location.country_name}
+        userCountryCode={location.country_code}
+        userLocLong={location.longitude}
+        userLocLat={location.latitude}
+        userRegionLoc={location.region}
+        userRegionCode={location.region_code}
         />
 
       </BrowserView>
@@ -149,10 +129,12 @@ const Username = ({ user_data }) => {
         userBrowser={userBrowser}
         userDeviceOS={userDeviceOS}
         userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
-        userCountryLoc={userCountryLoc}
-        userCountryCode={userCountryCode}
-        userLocLong={userLocLong}
-        userLocLat={userLocLat}
+        userCountryLoc={location.country_name}
+        userCountryCode={location.country_code}
+        userLocLong={location.longitude}
+        userLocLat={location.latitude}
+        userRegionLoc={location.region}
+        userRegionCode={location.region_code}
         />
       </MobileView>
     </>
@@ -185,10 +167,13 @@ export async function getServerSideProps(context) {
   }
 
   const data = await fetchData();
+  const loc_response = await fetch(process.env.IP_API_URL);
+  const loc = await loc_response.json();
 
   return {
     props: {
       user_data: data,
+      location: loc
     },
   };
 
