@@ -37,6 +37,7 @@ const Username = ({ user_data, location}) => {
 
 
     useEffect(() => {
+
       setData(user_data.data)
 
       if (udata?.user_id) {
@@ -99,12 +100,12 @@ const Username = ({ user_data, location}) => {
         userBrowser={userBrowser}
         userDeviceOS={userDeviceOS}
         userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
-        userCountryLoc={location.country_name}
+        userCountryLoc={location.country}
         userCountryCode={location.country_code}
         userLocLong={location.longitude}
         userLocLat={location.latitude}
-        userRegionLoc={location.region}
-        userRegionCode={location.region_code}
+        userContinentLoc={location.continent}
+        userContinentCode={location.continent_code}
         />
 
       </BrowserView>
@@ -129,12 +130,12 @@ const Username = ({ user_data, location}) => {
         userBrowser={userBrowser}
         userDeviceOS={userDeviceOS}
         userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
-        userCountryLoc={location.country_name}
+        userCountryLoc={location.country}
         userCountryCode={location.country_code}
         userLocLong={location.longitude}
-        userLocLat={location.latitude}
-        userRegionLoc={location.region}
-        userRegionCode={location.region_code}
+        userLocLat={location.latitude }
+        userContinentLoc={location.continent}
+        userContinentCode={location.continent_code}
         />
       </MobileView>
     </>
@@ -166,9 +167,29 @@ export async function getServerSideProps(context) {
     }
   }
 
+  async function fetchLoc() {
+    const fetchData = {
+        method: 'GET',
+    };
+    try {
+        const response = await fetch("https://api.geoapify.com/v1/ipinfo?&apiKey=87d4d2f10a1140efa2bf982eedeb43b5", fetchData);
+        const datax = await response.json();
+        return datax
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
   const data = await fetchData();
-  const loc_response = await fetch(process.env.IP_API_URL);
-  const loc = await loc_response.json();
+  const loc_response = await fetchLoc();
+  const loc = {
+    continent: loc_response.continent.name,
+    continent_code: loc_response.continent.code,
+    country: loc_response.country.name,
+    country_code: loc_response.country.iso_code,
+    latitude:  loc_response.location.latitude,
+    longitude: loc_response.location.longitude
+  }
 
   return {
     props: {

@@ -88,7 +88,8 @@ To get a local copy up and running follow these simple example steps.
 
     GOOGLE_ANALYTICS_TRACKING_ID ='UA-'
 
-    IP_API_URL = 'https://ipapi.co/json/'
+    GEOAPIFY_URL = ''
+    GEOAPIFY_KEY = '' 
     ```
     Universal Analytics will no longer process new data in standard properties beginning July 1, 2023.
     The `react-ga` is now deprecated (12/18/2022) since it is still not July 1, 2023 I will keep this configuration and wait for `react-ga` updates while waiting for an alternative solution.
