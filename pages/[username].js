@@ -6,6 +6,7 @@ import { BrowserView, MobileView, CustomView } from 'react-device-detect';
 import LoadingPage from '../components/global/LoadingPage';
 import GetUser_Mobile from '../components/user/getUser_Mobile';
 import GetUser_Desktop from '../components/user/getUser_Desktop';
+import GetUser from '../components/user/getUser';
 import NavBar from '../components/global/NavBar';
 import HeadMeta from '../components/global/HeadMeta';
 
@@ -71,16 +72,12 @@ const Username = ({ user_data, location}) => {
 
   return (
     <>
-      {/* 
-      <HeadMeta 
-      title_ext={udata.username} 
-      description={`` + udata.bio ? udata.bio : `Learn more about ${udata.username}`}
-      og_image={udata.profile_image_url}
-      og_url={`https://kohee.app/${udata.username}`}
-      />  
-      */}
 
-      <BrowserView>
+
+      {/* 
+        Temporary removing this feature
+        
+        <BrowserView>
         <GetUser_Desktop 
         followers={0}
         visits={0}
@@ -135,9 +132,32 @@ const Username = ({ user_data, location}) => {
         userLocLong={location.longitude}
         userLocLat={location.latitude }
         userContinentLoc={location.continent}
+        userContinentCode={location.continent_code}/>
+      </MobileView> */}
+
+        <GetUser
+        data_username={udata.username}
+        data_banner={udata.banner}
+        data_bio={udata.bio}
+        data_user_id={udata.user_id}
+        data_updated_at={udata.updated_at}
+        data_profile_image_url={udata.profile_image_url}
+        data_last_name={udata.last_name}
+        data_id={udata.id}
+        data_first_name={udata.first_name}
+        data_created_at={udata.created_at}
+        username={username}
+        userBrowser={userBrowser}
+        userDeviceOS={userDeviceOS}
+        userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
+        userCountryLoc={location.country}
+        userCountryCode={location.country_code}
+        userLocLong={location.longitude}
+        userLocLat={location.latitude }
+        userContinentLoc={location.continent}
         userContinentCode={location.continent_code}
         />
-      </MobileView>
+
     </>
   );
 };
@@ -189,6 +209,12 @@ export async function getServerSideProps(context) {
     country_code: loc_response.country.iso_code,
     latitude:  loc_response.location.latitude,
     longitude: loc_response.location.longitude
+    // continent: 'Asia',
+    // continent_code: 'AS',
+    // country: 'Philippines',
+    // country_code: 'PH',
+    // latitude:  14.5749,
+    // longitude: 121.043
   }
 
   return {
