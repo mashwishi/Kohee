@@ -179,6 +179,8 @@ export async function getServerSideProps(context) {
         })
     };
     try {
+        //Update for 2.0
+        //api/rest/user/getData/:user_id
         const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
         const datax = await response.json();
         return datax
@@ -209,12 +211,6 @@ export async function getServerSideProps(context) {
     country_code: loc_response.country.iso_code,
     latitude:  loc_response.location.latitude,
     longitude: loc_response.location.longitude
-    // continent: 'Asia',
-    // continent_code: 'AS',
-    // country: 'Philippines',
-    // country_code: 'PH',
-    // latitude:  14.5749,
-    // longitude: 121.043
   }
 
   return {

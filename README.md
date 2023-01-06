@@ -18,7 +18,9 @@
     <a href="https://kohee.app/"><strong>View Demo »</strong></a>
     <br />
     <br />
-    <a href="https://staging.kohee.app/">Staging</a>
+    <a href="https://kohee.app/">Production</a>
+    ·
+    <a href="https://dev.kohee.app/">Staging</a>
     ·
     <a href="https://github.com/mashwishi/kohee/issues">Report Bug</a>
     ·
