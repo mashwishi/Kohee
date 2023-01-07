@@ -1,23 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { BrowserView, MobileView, CustomView } from 'react-device-detect';
-
 import LoadingPage from '../components/global/LoadingPage';
-import GetUser_Mobile from '../components/user/getUser_Mobile';
-import GetUser_Desktop from '../components/user/getUser_Desktop';
 import GetUser from '../components/user/getUser';
 import NavBar from '../components/global/NavBar';
-import HeadMeta from '../components/global/HeadMeta';
-
 import { browserName, deviceDetect, deviceType} from 'react-device-detect';
-
 import Link from 'next/link';
 import ReactGA from 'react-ga'
 
-import Head from 'next/head';
-
-const Username = ({ user_data, location}) => {
+const Username = ({ user_data, location }) => {
   
     const router = useRouter()
 
@@ -28,7 +19,7 @@ const Username = ({ user_data, location}) => {
 
     //Type: mobile = Mobile | browser = Desktop
     const [userDeviceTypeuserDeviceOS, setUserDeviceTypesetUserDeviceOS] = useState(deviceType === `browser` ? `Desktop` : deviceType == `mobile` ? `Mobile` : `Unknown`)
-
+    
     //OS and Version
     const [userDetect, setUserDetect] = useState(deviceDetect)
     const [userDeviceOS, setUserDeviceOS] = useState(userDetect.isBrowser ? `${userDetect.osName + ' ' + userDetect.osVersion}` : userDetect.isMobile ? `${userDetect.os + ' ' + userDetect.osVersion}` : `Unknown`)
@@ -36,17 +27,18 @@ const Username = ({ user_data, location}) => {
     //Browser Name
     const [userBrowser, setUserBrowser] = useState(browserName)
 
+    //Anti-double run
+    const effectRan = useRef(false)
 
     useEffect(() => {
+      if(effectRan.current === false){
 
-      setData(user_data.data)
-
-      if (udata?.user_id) {
-        ReactGA.pageview('/' + udata.user_id)
-        setLoading(false)
+        setData(user_data.data)
+        if (udata?.user_id) {
+          setLoading(false)
+        }
       }
-
-    }, [userBrowser, userDeviceOS,  userDeviceTypeuserDeviceOS])
+    }, [])
 
     if (isLoading) return <LoadingPage/>
     
@@ -72,69 +64,7 @@ const Username = ({ user_data, location}) => {
 
   return (
     <>
-
-
-      {/* 
-        Temporary removing this feature
-        
-        <BrowserView>
-        <GetUser_Desktop 
-        followers={0}
-        visits={0}
-        ratings={0} 
-        data_banner={udata.banner}
-        data_bio={udata.bio}
-        data_profile_banner_url={udata.profile_banner_url}
-        data_username={udata.username}
-        data_user_id={udata.user_id}
-        data_updated_at={udata.updated_at}
-        data_profile_image_url={udata.profile_image_url}
-        data_last_name={udata.last_name}
-        data_id={udata.id}
-        data_first_name={udata.first_name}
-        data_created_at={udata.created_at}
-        username={username}
-        userBrowser={userBrowser}
-        userDeviceOS={userDeviceOS}
-        userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
-        userCountryLoc={location.country}
-        userCountryCode={location.country_code}
-        userLocLong={location.longitude}
-        userLocLat={location.latitude}
-        userContinentLoc={location.continent}
-        userContinentCode={location.continent_code}
-        />
-
-      </BrowserView>
-
-      <MobileView>
-        <GetUser_Mobile 
-        followers={0}
-        visits={0}
-        ratings={0} 
-        data_profile_banner_url={udata.profile_banner_url}
-        data_username={udata.username}
-        data_banner={udata.banner}
-        data_bio={udata.bio}
-        data_user_id={udata.user_id}
-        data_updated_at={udata.updated_at}
-        data_profile_image_url={udata.profile_image_url}
-        data_last_name={udata.last_name}
-        data_id={udata.id}
-        data_first_name={udata.first_name}
-        data_created_at={udata.created_at}
-        username={username}
-        userBrowser={userBrowser}
-        userDeviceOS={userDeviceOS}
-        userDeviceTypeuserDeviceOS={userDeviceTypeuserDeviceOS}
-        userCountryLoc={location.country}
-        userCountryCode={location.country_code}
-        userLocLong={location.longitude}
-        userLocLat={location.latitude }
-        userContinentLoc={location.continent}
-        userContinentCode={location.continent_code}/>
-      </MobileView> */}
-
+        {effectRan.current = true}
         <GetUser
         data_username={udata.username}
         data_banner={udata.banner}
@@ -193,8 +123,9 @@ export async function getServerSideProps(context) {
     const fetchData = {
         method: 'GET',
     };
+    const geo_api = process.env.GEOAPIFY_URL + process.env.GEOAPIFY_KEY
     try {
-        const response = await fetch("https://api.geoapify.com/v1/ipinfo?&apiKey=87d4d2f10a1140efa2bf982eedeb43b5", fetchData);
+        const response = await fetch(geo_api, fetchData);
         const datax = await response.json();
         return datax
     } catch (error) {
@@ -203,6 +134,10 @@ export async function getServerSideProps(context) {
   }
 
   const data = await fetchData();
+  if(data.data.user_id){
+    ReactGA.pageview('/' + data.user_id)
+  }
+
   const loc_response = await fetchLoc();
   const loc = {
     continent: loc_response.continent.name,

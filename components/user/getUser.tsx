@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState, useEffect } from 'react'
 import Link from "next/link";
 import Image from "next/image";
@@ -8,50 +8,8 @@ import useClipboard from "react-use-clipboard";
 import LoadingPage from '../global/LoadingPage';
 import Social_Icons from "../global/Social_Icons";
 
-import {
-    useClerk, 
-    ClerkLoaded, 
-    ClerkProvider, 
-    SignedIn, 
-    SignedOut, 
-    UserButton, 
-    useUser
-} from "@clerk/nextjs";
-
-
-import {
-    //Share Platform
-    EmailShareButton,
-    FacebookShareButton,
-    LineShareButton,
-    LinkedinShareButton,
-    RedditShareButton,
-    TelegramShareButton,
-    TwitterShareButton,
-    ViberShareButton,
-    VKShareButton,
-    WhatsappShareButton,
-    //Share Icons
-    EmailIcon,
-    FacebookIcon,
-    LineIcon,
-    LinkedinIcon,
-    RedditIcon,
-    TelegramIcon,
-    TumblrIcon,
-    TwitterIcon,
-    ViberIcon,
-    WhatsappIcon,
-    VKIcon,
-    //Share Count
-    FacebookShareCount,
-    HatenaShareCount,
-    OKShareCount,
-    PinterestShareCount,
-    RedditShareCount,
-    TumblrShareCount,
-    VKShareCount
-} from "react-share";
+import { useClerk,SignedIn, SignedOut, UserButton,useUser } from "@clerk/nextjs";
+import { EmailShareButton,FacebookShareButton,LineShareButton,LinkedinShareButton,RedditShareButton,TelegramShareButton,TwitterShareButton,ViberShareButton,VKShareButton,WhatsappShareButton,EmailIcon,FacebookIcon,LineIcon,LinkedinIcon,RedditIcon,TelegramIcon,TwitterIcon,ViberIcon,WhatsappIcon,VKIcon } from "react-share";
 
 type GetUser = {
     data_username: string;
@@ -99,171 +57,156 @@ const GetUser = (props: GetUser) => {
     const [userFollowers, setUserFollowers] = useState(0)
     //Visitors
     const [userVisitors, setUserVisitors] = useState(0)
+    //isVisitorSginein
+    const [userSignedInID, setUserSignedInID] = useState(isSignedIn ? user?.id : null)
 
     const [userFullname, setuserFullname] = useState(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
 
-    useEffect(() => {
+    //Anti-double run
+    const effectRan = useRef(false)
 
-        setLoading(true)
+    async function getLinks() {
+        const fetchData = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({   
+                data:{
+                user_id: `${props.data_user_id}`
+                } 
+            })
+        };
         
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/links/getUserLinks`, fetchData);
+            const data = await response.json();
+            setUserLinks(data.data)
+            setUserLinksCount(data?.data?.length > 0 ? data?.data?.length : 0) 
+            setLoading(false)
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
-        async function getLinks() {
-            const fetchData = {
+    async function getFollowers() {
+        const fetchData = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data:{
+                    following_user_id: `${props?.data_user_id}`
+                }
+            })
+        };
+        
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/getFollowers`, fetchData);
+            const datax = await response.json();
+            setUserFollowers(datax?.data?.follow?.length)
+            setLoading(false)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async function getVisitors() {
+        const fetchData = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data:{
+                    user_id: `${props?.data_user_id}`
+                }
+            })
+        };
+        
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/getTotalAnalytics`, fetchData);
+            const datax = await response.json();
+            setUserVisitors(datax?.data?.analytics?.length)
+            setLoading(false)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async function getFollow() {
+        setLoading(true)
+        if(isSignedIn){
+            const fetchFollowData = {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({   
                     data:{
-                    user_id: `${props.data_user_id}`
+                        user_id: `${user?.id}`,
+                        following_user_id: `${props.data_user_id}`
                     } 
                 })
             };
             
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/links/getUserLinks`, fetchData);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/isFollow`, fetchFollowData);
                 const data = await response.json();
-                setUserLinks(data.data)
-                setUserLinksCount(data?.data?.length > 0 ? data?.data?.length : 0) 
-                setLoading(false)
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        getLinks()
 
-        async function getFollowers() {
-            const fetchData = {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data:{
-                        following_user_id: `${props?.data_user_id}`
-                    }
-                })
-            };
-            
-            try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/getFollowers`, fetchData);
-                const datax = await response.json();
-                setUserFollowers(datax?.data?.follow?.length)
-                setLoading(false)
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        getFollowers()
-
-        async function getVisitors() {
-            const fetchData = {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data:{
-                        user_id: `${props?.data_user_id}`
-                    }
-                })
-            };
-            
-            try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/getTotalAnalytics`, fetchData);
-                const datax = await response.json();
-                setUserVisitors(datax?.data?.analytics?.length)
-                setLoading(false)
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        getVisitors()
-
-        async function getFollow() {
-            if(isSignedIn){
-                const fetchFollowData = {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({   
-                        data:{
-                            user_id: `${user?.id}`,
-                            following_user_id: `${props.data_user_id}`
-                        } 
-                    })
-                };
-                
-                try {
-                    const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/isFollow`, fetchFollowData);
-                    const data = await response.json();
-                    if(data.data.follow.length > 0){
-                        //if the exisiting data is following
-                        if(data.data.follow[0].is_follow === 1){
-                            setIsFollowing(true)
-                            setUserFollowNoData(false)
-                        }else{
-                            setIsFollowing(false)
-                        }
-                        setLoading(false)
-                    }else{
-                        setUserFollowNoData(true)
-                        setIsFollowing(false)
-                        setLoading(false)
-                    }
-                } catch (error) {
-                    console.error(error);
+                if(data.data?.follow?.length > 0){
+                    setIsFollowing(true)
+                    setUserFollowNoData(false)
+                    setLoading(false)
+                }else{
+                    setIsFollowing(false)
+                    setUserFollowNoData(true)
+                    setLoading(false)
                 }
-            }
-        }
-        getFollow()
-
-        //Analytic Visit
-        const userSignedInID = isSignedIn ? user?.id : null;
-        async function generateAnalytic() {
-            const analyticData = {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data:{
-                        user_id: `${props.data_user_id}`,
-                        visitor_id: `${isSignedIn ? user?.id : null }`, 
-                        type: `visit`, 
-                        os: `${props.userDeviceOS ? props.userDeviceOS : null}`, 
-                        device: `${props.userDeviceTypeuserDeviceOS ? props.userDeviceTypeuserDeviceOS : null}`, 
-                        country: `${props.userCountryLoc ? props.userCountryLoc : null}`, 
-                        browser: `${props.userBrowser ? props.userBrowser : null}`, 
-                        country_code: `${props.userCountryCode ? props.userCountryCode : null}`, 
-                        latitude: `${props.userLocLong ? props.userLocLong : null}`, 
-                        longitude: `${props.userLocLat ? props.userLocLat : null}`, 
-                    }
-                }) 
-            };
-            
-            try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/generateAnalytics`, analyticData);
-                const data = await response.json();
-                //console.log(data)
             } catch (error) {
                 console.error(error);
             }
         }
-        if(userSignedInID !== props.data_user_id){
-            generateAnalytic() 
+    }
+
+    async function generateAnalytic(userSignedInID: any) {
+        const analyticData = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data:{
+                    user_id: `${props.data_user_id}`,
+                    visitor_id: `${isSignedIn ? user?.id : null }`, 
+                    type: `visit`, 
+                    os: `${props.userDeviceOS ? props.userDeviceOS : null}`, 
+                    device: `${props.userDeviceTypeuserDeviceOS ? props.userDeviceTypeuserDeviceOS : null}`, 
+                    country: `${props.userCountryLoc ? props.userCountryLoc : null}`, 
+                    browser: `${props.userBrowser ? props.userBrowser : null}`, 
+                    country_code: `${props.userCountryCode ? props.userCountryCode : null}`, 
+                    latitude: `${props.userLocLong ? props.userLocLong : null}`, 
+                    longitude: `${props.userLocLat ? props.userLocLat : null}`, 
+                }
+            }) 
+        };
+        
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/generateAnalytics`, analyticData);
+            const data = await response.json();
+            //console.log(data)
+        } catch (error) {
+            console.error(error);
         }
+    }
 
-        setuserFullname(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
-
-    }, [])
-
-    async function updateFollow(status: Number) {
+    async function updateFollow() {
         //if signed in allow follow
         if(isSignedIn){
             //if no data yet create a data with the current status of the follow
             if(userFollowNoData){
+
                 const createFollowData = {
                     method: 'POST',
                     headers: {
@@ -273,31 +216,26 @@ const GetUser = (props: GetUser) => {
                         data:{
                             user_id: `${user?.id}`,
                             following_user_id: `${props.data_user_id}`,
-                            is_follow: status
+                            is_follow: 1
                         } 
                     })
                 };
-
                 
                 try {
                     const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/followUser`, createFollowData);
                     const data = await response.json();
-                    if(data.data.follow.length > 0){
-                        //if the exisiting data is following
-                        if(data.data.follow[0].is_follow === 1){
-                            setIsFollowing(true)
-                        }else{
-                            setIsFollowing(false)
-                        }
-                        setLoading(false)
+                    if(data.status === 200){
+                        getFollow()
+                        getFollowers()
                     }else{
-                        setIsFollowing(false)
+                        getFollow()
+                        getFollowers()
                     }
                 } catch (error) {
                     console.error(error);
                 }
             }
-            //if already have data update the data with the current status of the follow
+            //if already have data update and delete data to unfollow
             else{
 
                 const updateFollowData = {
@@ -309,7 +247,6 @@ const GetUser = (props: GetUser) => {
                         data:{
                             user_id: `${user?.id}`,
                             following_user_id: `${props.data_user_id}`,
-                            is_follow: status
                         } 
                     })
                 };
@@ -317,10 +254,12 @@ const GetUser = (props: GetUser) => {
                 try {
                     const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/upFollowUser`, updateFollowData);
                     const data = await response.json();
-                        if(data.data.update_follow.returning[0].is_follow === 1){
-                            setIsFollowing(true)
+                        if(data.status === 200){
+                            getFollow()
+                            getFollowers()
                         }else{
-                            setIsFollowing(false)
+                            getFollow()
+                            getFollowers()
                         }
                 } catch (error) {
                     console.error(error);
@@ -328,6 +267,34 @@ const GetUser = (props: GetUser) => {
             }
         }
     }
+
+    useEffect(() => {
+
+    setLoading(true)
+
+    if(effectRan.current === false){
+
+        setUserSignedInID(isSignedIn ? user?.id : null)
+        setuserFullname(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
+        
+        getFollow()
+        getLinks()
+        getFollowers()
+        getVisitors()
+
+
+        //Analytic Visit (Avoid self recording visits when same user logged in)
+        if(userSignedInID !== props.data_user_id){
+            generateAnalytic(userSignedInID)
+        }
+
+    }
+
+    return () => {
+        effectRan.current = true
+    }
+
+    }, [])
 
     return (
         <>
@@ -423,15 +390,13 @@ const GetUser = (props: GetUser) => {
                                             :
                                             userIsFollowing ?
                                             <>
-                                                {/* onClick={() => updateFollow(0)} */}
-                                                <button className="rounded-xl px-3 py-1 font-semibold bg-primary pointer-events-none cursor-not-allowed">
+                                                <button onClick={() => updateFollow()} className="rounded-xl px-3 py-1 font-semibold bg-primary">
                                                 Following
                                                 </button>
                                             </>
                                             :
                                             <>
-                                                {/* onClick={() => updateFollow(1)} */}
-                                                <button className="rounded-xl px-3 py-1 font-semibold bg-secondary pointer-events-none cursor-not-allowed">
+                                                <button onClick={() => updateFollow()} className="rounded-xl px-3 py-1 font-semibold bg-secondary">
                                                 Follow
                                                 </button>
                                             </>

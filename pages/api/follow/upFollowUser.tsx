@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { type, data, object } = req.body;
 
-    const getupFollow_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/follow/update`
+    const getupFollow_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/follow/unfollow`
 
     const headers = 
     {
@@ -44,17 +44,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     //res.status(200).json({ sessToken: decoded });
 
     try {
-    await axios.put(getupFollow_api_url, {
+    await axios.delete(getupFollow_api_url,  
+    { 
+    data: { 
         user_id: `${data.user_id}`,
         following_user_id: `${data.following_user_id}`,
-        is_follow: data.is_follow
-    },{headers: headers})
+        }, 
+    headers: headers 
+    }) 
     .then(response => {
         res.json(
         response.status == 200 ? 
         {
+            status: 200,
             data: response.data,
-            message: 'Successfully got the data!'
+            message: 'Successfully removed follow data!'
         } : 
         {
             message: 'Failed, Something went wrong!'
