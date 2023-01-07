@@ -47,7 +47,7 @@ const GetUser = (props: GetUser) => {
 
     const [userLinks, setUserLinks] = useState<any | null>(null);
     const [userLinksCount, setUserLinksCount] = useState(0)
-    const [isLoading, setLoading] = useState(false)
+    const [isLoading, setLoading] = useState(true)
 
     //Following Status
     const [userIsFollowing, setIsFollowing] = useState(false)
@@ -106,7 +106,6 @@ const GetUser = (props: GetUser) => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/getFollowers`, fetchData);
             const datax = await response.json();
             setUserFollowers(datax?.data?.follow?.length)
-            setLoading(false)
         } catch (error) {
             console.error(error);
         }
@@ -204,6 +203,7 @@ const GetUser = (props: GetUser) => {
     async function updateFollow() {
         //if signed in allow follow
         if(isSignedIn){
+            setLoading(true)
             //if no data yet create a data with the current status of the follow
             if(userFollowNoData){
 
@@ -388,18 +388,25 @@ const GetUser = (props: GetUser) => {
                                                 </button>
                                             </Link>
                                             :
-                                            userIsFollowing ?
+                                            isLoading ? 
                                             <>
-                                                <button onClick={() => updateFollow()} className="rounded-xl px-3 py-1 font-semibold bg-primary">
-                                                Following
+                                                <button className="rounded-xl px-3 py-1 font-semibold bg-gray-500 text-slate-900 cursor-wait" disabled>
+                                                Processing
                                                 </button>
                                             </>
                                             :
-                                            <>
-                                                <button onClick={() => updateFollow()} className="rounded-xl px-3 py-1 font-semibold bg-secondary">
-                                                Follow
-                                                </button>
-                                            </>
+                                                userIsFollowing ?
+                                                <>
+                                                    <button onClick={() => updateFollow()} className="rounded-xl px-3 py-1 font-semibold bg-primary">
+                                                    Following
+                                                    </button>
+                                                </>
+                                                :
+                                                <>
+                                                    <button onClick={() => updateFollow()} className="rounded-xl px-3 py-1 font-semibold bg-secondary">
+                                                    Follow
+                                                    </button>
+                                                </>
                                     }
                                     </SignedIn>
                                     <SignedOut>
