@@ -55,6 +55,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.json(
         response.status == 200 ? 
         {
+            status: 200,
             data: response.data,
             message: 'Successfully got the data!'
         } : 
