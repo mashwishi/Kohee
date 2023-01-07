@@ -10,6 +10,9 @@ type GetUser_All = {
     last_name: string;
     bio: string;
     created_at: string;
+    followers: number;
+    visits: number;
+    shares: number;
 };
 
 const GetUser_All = (props: GetUser_All) => {
@@ -18,19 +21,43 @@ const GetUser_All = (props: GetUser_All) => {
 
     return (
         <>
-        <Link href={process.env.NEXT_PUBLIC_HOSTNAME+`/`+props.username}>
-            <div className="mx-2 my-2 p-4 lg:w-1/6 md:w-1/3 cursor-pointer rounded-lg bg-gray-200 transition duration-300 ease-in-out transform hover:scale-105 hover:bg-primary hover:shadow-xl">
-                <div className="h-full flex flex-col items-center text-center">
-                <img alt={props.username} className="flex-shrink-0 rounded-lg h-24 w-24 object-cover object-center mb-4" src={props.profile_image_url} />
-                <div className="w-32">
-                    <h2 className="title-font font-medium text-lg text-gray-900 truncate block">@{props.username}</h2>
-                    <h3 className="text-gray-500 mb-3  truncate block">{userFullname}</h3>
-                    {/* <span className="inline-flex">
-                    </span> */}
-                </div>
+            <div className="p-6">
+                <div className="rounded bg-white p-4 shadow w-full border">
+
+                    <div className="mt-4 text-center">
+                        <p className="font-bold text-gray-600">@{props.username}</p>
+                        <p className="font-hairline mt-1 text-sm text-gray-600">{userFullname}</p>
+                    </div>
+
+                    <div className="mt-4 flex justify-center">
+                        <img className="h-28 w-28 rounded-full bg-gray-100 shadow sm:h-28 sm:w-28" src={props.profile_image_url} alt={props.username} />
+                    </div>
+
+                    <div className="mt-6 flex justify-between text-center">
+                        <div>
+                            <p className="font-bold text-gray-700">{props.followers}</p>
+                            <p className="font-hairline mt-2 text-xs text-gray-600">Follower{props.followers > 1 ? `s` : ``}</p>
+                        </div>
+
+                        <div>
+                            <p className="font-bold text-gray-700">{props.visits}</p>
+                            <p className="font-hairline mt-2 text-xs text-gray-600">Visit{props.visits > 1 ? `s` : ``}</p>
+                        </div>
+
+                        <div>
+                            <p className="font-bold text-gray-700">{props.shares}</p>
+                            <p className="font-hairline mt-2 text-xs text-gray-700">Share{props.shares > 1 ? `s` : ``}</p>
+                        </div>
+                    </div>
+
+                    <div className="mt-6">
+                        <Link href={process.env.NEXT_PUBLIC_HOSTNAME+`/`+props.username}>
+                            <button className="w-full items-center rounded bg-primary px-4 py-2 text-white shadow-md hover:bg-secondary hover:text-amber-900">Visit</button>
+                        </Link>
+                    </div>
+                    
                 </div>
             </div>
-        </Link>
         </>
     );
 
