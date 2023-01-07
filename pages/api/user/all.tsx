@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { type, data, object } = req.body;
 
-    const getall_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/users/all`
+    const getall_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/people/getAllUsers`
 
     const headers = 
     {
