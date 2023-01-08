@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { type, data, object } = req.body;
 
-    const getTotalAnalytics_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/analytics/getAll`
+    const getTotalStats_api_url = `${process.env.NEXT_PUBLIC_HASURA_REST_API}/stats/getAll`
 
     const headers = 
     {
@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     "x-hasura-admin-secret": `${process.env.HASURA_ADMIN_SECRET}`
     };
     try {
-    await axios.get(getTotalAnalytics_api_url,  { data: { user_id: `${data.user_id}` }, headers: headers }) 
+    await axios.get(getTotalStats_api_url,  { data: { user_id: `${data.user_id}` }, headers: headers }) 
     .then(response => {
         res.json(
         response.status == 200 ? 

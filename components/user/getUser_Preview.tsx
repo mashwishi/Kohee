@@ -99,7 +99,8 @@ const GetUser_Preview = (props: GetUser_Preview) => {
     const [userFollowers, setUserFollowers] = useState(0)
     //Visitors
     const [userVisitors, setUserVisitors] = useState(0)
-
+    //Shares
+    const [userShares, setUserShares] = useState(0)
     const [userFullname, setuserFullname] = useState(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
 
     useEffect(() => {
@@ -170,9 +171,10 @@ const GetUser_Preview = (props: GetUser_Preview) => {
             };
             
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/getTotalAnalytics`, fetchData);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/getTotalStats`, fetchData);
                 const datax = await response.json();
-                setUserVisitors(datax?.data?.analytics?.length)
+                setUserVisitors(datax?.data?.visits?.aggregate?.count)
+                setUserShares(datax?.data?.shares?.aggregate?.count)
                 setLoading(false)
             } catch (error) {
                 console.error(error);
@@ -562,10 +564,12 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                             </div>
                             <div className="flex flex-col">
                                 <div className="mb-1 h-5 w-20">
-                                <p className="font-bold text-zinc-700">0</p>
+                                <p className="font-bold text-zinc-700">{userShares ? userShares : 0}</p>
                                 </div>
                                 <div className="mb-1 h-5 w-20">
-                                <p className="text-sm font-semibold text-zinc-700">Share</p>
+                                <p className="text-sm font-semibold text-zinc-700">
+                                    Share{userShares ? userShares > 1 ? `s`:``:``}
+                                </p>
                                 </div>
                             </div>
                         </div>
