@@ -50,6 +50,7 @@ const Sample = () => {
   return (
     <>
         <GetUser_Sample 
+        is_verified={udata.is_verified}
         followers={4968}
         visits={2458}
         ratings={5} 

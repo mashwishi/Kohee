@@ -74,6 +74,7 @@ type GetUser_Preview = {
     userLocLat: string;
     userContinentLoc: string;
     userContinentCode: string;
+    is_verified: number;
 };
 
 const GetUser_Preview = (props: GetUser_Preview) => {
@@ -366,7 +367,7 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                                             {
                                                 isCopied ?
                                                 <>
-                                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-copied" data-tip="Copied">
+                                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-copied" data-tip="Copied">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#37CDBE" className="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
                                                             <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
                                                             <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
@@ -375,7 +376,7 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                                                 </>
                                                 :
                                                 <>
-                                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
+                                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" className="bi bi-clipboard-fill" viewBox="0 0 16 16">
                                                             <path  d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
                                                         </svg>
@@ -394,7 +395,7 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                         </div>
                         {/*Avatar*/}
                         <div className="absolute -mt-20 ml-5">
-                            <div className="avatar online">
+                            <div className="avatar">
                                 <div className="rounded-full  h-36 w-36  ring ring-white ring-offset-base-100 ring-offset-2 bg-gray-200" >
                                     <img src={props.data_profile_image_url ? props.data_profile_image_url : `/fallback_avatar.jpg`} alt={`avatar-${props.data_username}`} width="100%" />
                                 </div>
@@ -478,12 +479,22 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                     <div className="p-5 pt-8 flex flex-col">
 
                         {/*Username*/}
-                        <div className="mb-1 h-5 w-40">
-                            <p className="font-semibold text-zinc-700">
-                                <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`}>
-                                        {`@${props.data_username}`}
-                                </Link>
-                            </p>
+                        <div className="mb-1 h-5 w-50">
+                            <div className="inline-flex items-center">
+                                <span className="font-semibold text-zinc-700 mr-1">
+                                    <Link href={`${process.env.NEXT_PUBLIC_HOSTNAME}/${props.username}`}>
+                                                {`@${props.data_username}`}
+                                    </Link>
+                                </span>
+                                {
+                                props.is_verified ?
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#E0A82E" className="bi bi-patch-check-fill" viewBox="0 0 16 16">
+                                    <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+                                </svg>
+                                :
+                                <></>
+                                }
+                            </div>
                         </div>
 
                         {/*FullName*/}
@@ -505,34 +516,34 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                                     {/* User Badge - Temporary set all to mashwishi for preview */}
                                     {props.username.toLowerCase() == 'mashwishi' ? 
                                     <div className="flex flex-row items-center mt-4">
-                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-admin" data-tip="Admin">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-admin" data-tip="Admin">
                                     <img className="mr-1" src="/badge/others/admin.png" alt="admin-badge" width="24px" height="28px"/>
                                     </div>
-                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-mod" data-tip="Moderator">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-mod" data-tip="Moderator">
                                     <img className="mr-1" src="/badge/others/moderator.png" alt="mod-badge" width="24px" height="28px"/>
                                     </div>
-                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-vip" data-tip="VIP">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-vip" data-tip="VIP">
                                     <img className="mr-1" src="/badge/others/vip.png" alt="vip-badge" width="24px" height="28px"/>
                                     </div>
-                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-partner" data-tip="Partner">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-partner" data-tip="Partner">
                                     <img className="mr-1" src="/badge/others/partner.png" alt="partner-badge" width="24px" height="28px"/>
                                     </div>
-                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-contributor" data-tip="Contributor">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-contributor" data-tip="Contributor">
                                     <img className="mr-1" src="/badge/others/contributor.png" alt="contributor-badge" width="24px" height="28px"/>
                                     </div>
-                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-sponsor" data-tip="Sponsor">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-sponsor" data-tip="Sponsor">
                                     <img className="mr-1" src="/badge/others/sponsor.png" alt="sponsor-badge" width="24px" height="28px"/>
                                     </div>
-                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-supporter" data-tip="Supporter">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-supporter" data-tip="Supporter">
                                     <img className="mr-1" src="/badge/others/supporter.png" alt="supporter-badge" width="24px" height="28px"/>
                                     </div>
-                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-business" data-tip="Business">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-business" data-tip="Business">
                                     <img className="mr-1" src="/badge/others/business.png" alt="business-badge" width="24px" height="28px"/>
                                     </div>
                                     </div>
                                     :
                                     <div className="flex flex-row items-center mt-4">
-                                    <div className=" hover:text-primary tooltip hover:tooltip-open tooltip-empty" data-tip="Empty">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-empty" data-tip="Empty">
                                     <img className="mr-1" src="/badge/empty.png" alt="empty-badge" width="24px" height="28px"/>
                                     </div>
                                     </div>

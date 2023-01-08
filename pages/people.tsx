@@ -181,6 +181,7 @@ const People = () => {
                                     followers={i.followers.aggregate.count}
                                     shares={i.shares.aggregate.count}
                                     visits={i.visits.aggregate.count}
+                                    is_verified={i.is_verified}
                                     />
                               )
                             })
@@ -238,6 +239,7 @@ const People = () => {
                                   followers={i.followers.aggregate.count}
                                   shares={i.shares.aggregate.count}
                                   visits={i.visits.aggregate.count}
+                                  is_verified={i.is_verified}
                                   />
                             )
                           })
@@ -295,6 +297,7 @@ const People = () => {
                                   followers={i.followers.aggregate.count}
                                   shares={i.shares.aggregate.count}
                                   visits={i.visits.aggregate.count}
+                                  is_verified={i.is_verified}
                                   />
                             )
                           })
