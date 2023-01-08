@@ -15,9 +15,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     };
 
     try {
-        console.log(get_api_url)
     await axios.get(get_api_url, {headers: headers})
     .then(response => {
+
+        console.log(response.data)
         res.json(
         response.status == 200 ? 
         {
@@ -31,6 +32,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 created_at: `${response.data.users[0].created_at}`,
                 bio: `${response.data.users[0].bio}`,
                 banner: `${response.data.users[0].banner}`,
+                is_verified: response.data.users[0].is_verified,
             },
             message: 'Successfully got the data!'
         } : 
