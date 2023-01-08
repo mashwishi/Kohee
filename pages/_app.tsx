@@ -175,15 +175,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           )}
 
           {/* footer */}
-          <SignedOut>
-            {/* <footer>
-              <PopupLink
-                label="Kohee is open-source and non-profit project, You can support us by donating!"
-                repoLink="https://ko-fi.com/koheeapp"
-              />
-            </footer> */}
-            <Footer/>
-          </SignedOut>
+          <Footer/>
+
 
         </ClerkLoaded>
 
