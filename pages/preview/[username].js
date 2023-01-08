@@ -50,7 +50,7 @@ const Username = () => {
   return (
     <>
         <GetUser_Preview 
-        is_verified={udata.is_verified}
+        is_verified={data.is_verified}
         followers={0}
         visits={0}
         ratings={0} 
