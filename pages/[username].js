@@ -110,7 +110,7 @@ export async function getServerSideProps(context) {
     };
     try {
         //Update for 2.0
-        //api/rest/user/getData/:user_id
+        //api/rest/user/getData/ > body = user_id
         const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
         const datax = await response.json();
         return datax
