@@ -74,7 +74,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             }
         })
     } catch (e) {
-        console.log(`Error catch from try`)
         res.status(400).json({ error: (e as Error).message });
     }
 

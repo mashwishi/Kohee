@@ -198,7 +198,6 @@ const GetUser = (props: GetUser) => {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/generateAnalytics`, analyticData);
             const data = await response.json();
-            //console.log(data)
         } catch (error) {
             console.error(error);
         }
