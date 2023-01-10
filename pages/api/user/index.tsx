@@ -56,7 +56,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           }
         },{headers: headers})
         .then(response => {
-          console.log(response.data)
           res.json(
             response.status == 200 ? 
             {

@@ -3,6 +3,8 @@ import { useClerk, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextj
 import Link from "next/link";
 import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
 
+import GetTypeNumber from "../analytics/getTypeNumber";
+
 import ReactGA from 'react-ga'
 
 const SetUser_Desktop: NextPage = () => {
@@ -37,14 +39,18 @@ const SetUser_Desktop: NextPage = () => {
         <div className="card shadow-md compact side bg-base-100">
           <div className="flex-row items-center space-x-4 card-body">
             <div className="flex-1">
-              <h2 className="card-title text-primary">~</h2>
+              <h2 className="card-title text-primary">
+
+                <GetTypeNumber user_id={user?.id ? user?.id : ''} days={30} type='visit'/>
+
+              </h2>
               <p className="text-base-content text-opacity-40">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  className="inline-block w-6 h-6 stroke-current">
                   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                   <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                 </svg>
                 &nbsp;
-                Total Page views
+                Total Visits (30 Days)
               </p>
             </div>
             <div className="flex space-x-2 flex-0">
