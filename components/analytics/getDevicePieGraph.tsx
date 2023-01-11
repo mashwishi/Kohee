@@ -92,7 +92,7 @@ const GetDevicePieGraph = (props: GetDevicePieGraph) => {
         }
     }, [props.user_id, props.days]);
 
-    if (isLoading) { return <LoadingGraph/>; } 
+    if (isLoading) { return (<><div className='h-[400px] w-[350px]'><LoadingGraph/></div></>);} 
     if (error) { 
         <>
             <div className="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
