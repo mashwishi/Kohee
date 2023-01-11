@@ -126,8 +126,8 @@ This section list of major frameworks/libraries we used to our your project.
 - [x] API Webhooks and Endpoints
 - [x] User Followers and Visits
 - [x] Front-End Enhancement
-- [x] Ads to support the project
-- [⌛] User Analytics
+- [ ] Ads to support the project
+- [ ] User Analytics
 - [ ] Progressive Website Application Feature
 - [ ] Referral Program to earn more feature
 - [ ] Release on Google Play Store for Android
