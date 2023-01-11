@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
 import GetTypeNumber from "../analytics/getTypeNumber";
+import GetDevicePieGraph from "../analytics/getDevicePieGraph";
 
 import ReactGA from 'react-ga'
 
@@ -101,7 +102,7 @@ const SetUser: NextPage = () => {
                         </svg>
                     </div>
                     <div>
-                        <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={30} type='share'/></span>
+                        <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='share'/></span>
                         <span className="block text-gray-500">Shares (Soon)</span>
                     </div>
                     </div>
@@ -112,7 +113,7 @@ const SetUser: NextPage = () => {
                         </svg>
                     </div>
                     <div>
-                        <span className="inline-block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={30} type='click'/></span>
+                        <span className="inline-block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='click'/></span>
                         <span className="block text-gray-500">Clicks (Soon)</span>
                     </div>
                     </div>
@@ -123,7 +124,7 @@ const SetUser: NextPage = () => {
                         </svg>
                     </div>
                     <div>
-                        <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={30} type='follow'/></span>
+                        <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='follow'/></span>
                         <span className="block text-gray-500">Followers (Soon)</span>
                     </div>
                     </div>
@@ -186,7 +187,7 @@ const SetUser: NextPage = () => {
                     <div className="flex flex-col row-span-3 bg-white shadow rounded-lg">
                         <div className="px-6 py-5 font-semibold border-b border-gray-100">Device</div>
                         <div className="p-4 flex-grow">
-                            <div className="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart (Soon)</div>
+                            <GetDevicePieGraph user_id={user?.id ? user?.id : ''} days={Days} />
                         </div>
                     </div>
                     {/* End - User Devices */}
