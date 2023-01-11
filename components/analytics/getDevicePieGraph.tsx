@@ -103,7 +103,7 @@ const GetDevicePieGraph = (props: GetDevicePieGraph) => {
 
     return (
         <>
-            <div className="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+            <div className="flex items-center justify-center h-full px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
                 {
                     processedChartData.datasets[0].data.length > 0 ?
                     <ReactChartJs type="pie" data={processedChartData} />
