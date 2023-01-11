@@ -1,29 +1,20 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import React, { useState, useEffect, useRef } from 'react';
 import LoadingGraph from '../global/LoadingGraph';
-import { Chart as ChartJS } from 'chart.js/auto'
-import { Pie } from 'react-chartjs-2';
+import { Chart, registerables } from 'chart.js';
+import { Chart as ReactChartJs } from 'react-chartjs-2';
 
 type GetDevicePieGraph = {
     user_id: string;
     days: number;
 };
 
+Chart.register(...registerables);
+
 const GetDevicePieGraph = (props: GetDevicePieGraph) => {
 
     const [error, setError] = useState<any | null>(null);
     const [isLoading, setLoading] = useState(true);
-
-    // Used for static data testing only
-    // const datax = {
-    //     labels: ['Desktop', 'Mobile', 'null'],
-    //     datasets: [{
-    //         data: [28, 36, 11],
-    //         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-    //         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-    //     }]
-    // };
-    // const [chartData, setChartData] = useState(datax);
 
     const [processedChartData, setProcessedChartData] = useState<any | null>(null);
 
@@ -64,20 +55,19 @@ const GetDevicePieGraph = (props: GetDevicePieGraph) => {
                 return counts;
             }, {})
 
-            //Sample output of 'device_counts' is:
-            //{
-            //   "Desktop": 28,
-            //   "Mobile": 36,
-            //   "null": 11
-            //}
+            const object_count = Array(Object.keys(device_counts).length)?.length;
+            const colors = ['#E4BF07', '#E0A82E', '#F9D72F', '#BA881C', '#F87272', '#36D399', '#3ABFF8'];
+            const reducedColors = colors.slice(0, object_count);
 
             const processedData = {
-                labels: Object.keys(device_counts),
-                datasets: [{
-                    data: Object.values(device_counts),
-                    backgroundColor: Array(Object.keys(device_counts).length).fill('#FF6384'),
-                    hoverBackgroundColor: Array(Object.keys(device_counts).length).fill('#36A2EB')
-                }]
+                labels: Object.keys(device_counts).map(key => key === "null" ? "Unknown" : key),
+                datasets: [
+                    {
+                        data: Object.values(device_counts),
+                        backgroundColor: reducedColors,
+                        hoverBackgroundColor: Array(Object.keys(device_counts).length).fill('#18182F')
+                    },
+                ]
             };
 
             setProcessedChartData(processedData)
@@ -93,8 +83,9 @@ const GetDevicePieGraph = (props: GetDevicePieGraph) => {
 
     useEffect(() => {
         setLoading(true)
+        fetchData();
         if(effectRan.current === false){
-            fetchData();
+            
         }
         return () => {
             effectRan.current = true
@@ -113,10 +104,14 @@ const GetDevicePieGraph = (props: GetDevicePieGraph) => {
     return (
         <>
             <div className="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
-                {/* Used for static data testing only
-                <Pie data={chartData} /> */}
-                {/* <Pie data={processedChartData} /> */}
-                Soon
+                {
+                    processedChartData.datasets[0].data.length > 0 ?
+                    <ReactChartJs type="pie" data={processedChartData} />
+                    :
+                    <>
+                        No Aavaialble Data
+                    </>
+                }
             </div>
         </>
     );
