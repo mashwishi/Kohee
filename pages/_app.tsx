@@ -135,6 +135,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
                   <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${data.title}&profile_image_url=${data.image}`}/>
                   <meta name="theme-color" content="#E0A82E" />
+
+                  <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT}`} crossOrigin="anonymous"></script>
                 </>
               ))}
           </Head>
