@@ -9,6 +9,7 @@ import GetTypeNumber from "../analytics/getTypeNumber";
 import GetDevicePieGraph from "../analytics/getDevicePieGraph";
 
 import ReactGA from 'react-ga'
+import GoogleAdsense from "next-google-ads";
 
 interface OptionsDays {
     value: number;
@@ -142,18 +143,9 @@ const SetUser: NextPage = () => {
                         {/* Google Ads */}
                         <div className="px-6 font-semibold border-b border-gray-100">Google Ads</div>
                         <div className="p-4 flex-grow">
-                            <div className="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
-                            
-                                <ins className="adsbygoogle"
-                                    data-ad-client={process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT}
-                                    data-ad-slot="4627562024"
-                                    data-ad-format="auto"
-                                    data-full-width-responsive="true">
-                                </ins>
-                                <script>
-                                    (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
-
+                            <div className="flex items-center justify-center h-full">      
+                            {/* <div className="flex items-center justify-center h-full text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">                                         */}
+                                <GoogleAdsense client={process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT ? process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT : 'ca-pub-1971863279565387'} slot="4627562024" responsive="true" />
                             </div>
                         </div>
                         {/* End - Google Ads */}
