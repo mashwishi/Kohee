@@ -51,13 +51,14 @@ const GetTypeNumber = (props: GetTypeNumber) => {
     }
 
     useEffect(() => {
-
+        
     setLoading(true)
 
-    if(effectRan.current === false){
-        fetchData();
-    }
+    fetchData();
 
+    if(effectRan.current === false){
+        //
+    }
     return () => {
         effectRan.current = true
     }
