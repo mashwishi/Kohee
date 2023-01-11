@@ -1,8 +1,7 @@
 import { useUser, SignedOut, SignedIn } from "@clerk/nextjs";
 import React from "react";
 
-import SetUser_Desktop from "../components/dashboard/setUser_Desktop";
-import SetUser_Mobile from "../components/dashboard/setUser_Mobile";
+import SetUser from "../components/dashboard/setUser";
 
 import Interact_Landing from "../components/home/Interact_Landing";
 import Landing from "../components/home/Landing";
@@ -63,13 +62,13 @@ const SignedInCards = () => {
       og_url={''}
       />
       
-        <BrowserView>
-          <SetUser_Desktop />
-        </BrowserView>
+      <BrowserView>
+        <SetUser />
+      </BrowserView>
 
-        <MobileView>
-          <SetUser_Mobile />
-        </MobileView>
+      <MobileView>
+        <SetUser />
+      </MobileView>
     </>
   );
 };
