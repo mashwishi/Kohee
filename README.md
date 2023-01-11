@@ -85,6 +85,8 @@ To get a local copy up and running follow these simple example steps.
     NEXT_PUBLIC_CLERK_FRONTEND_API=''
     NEXT_PUBLIC_HOSTNAME='https://<yourdomainhere>'
 
+    NEXT_PUBLIC_GOOGLEADS_CLIENT=
+
     IMGUR_CLIENT_ID=''
     IMGUR_CLIENT_SECRET=''
 
