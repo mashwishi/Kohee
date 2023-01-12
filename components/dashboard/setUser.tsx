@@ -142,15 +142,16 @@ const SetUser: NextPage = () => {
                             <div className="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart (Soon)</div>
                         </div>
 
-                        {/* Google Ads */}
+                        {/* Ads */}
                         <div className="px-6 font-semibold border-b border-gray-100">Google Ads</div>
                         <div className="p-4 flex-grow">
                             <div className="flex items-center justify-center h-full">      
                             {/* <div className="flex items-center justify-center h-full text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">                                         */}
                                 <GoogleAdsense client={process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT ? process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT : 'ca-pub-1971863279565387'} slot="4627562024" responsive="true" />
+                                <div id="ezoic-pub-ad-placeholder-102"> </div>
                             </div>
                         </div>
-                        {/* End - Google Ads */}
+                        {/* End - Ads */}
                     </div>
                     {/* End - Geo Graph with Ads */}
 
