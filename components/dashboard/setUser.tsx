@@ -7,6 +7,7 @@ import Link from "next/link";
 import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
 import GetTypeNumber from "../analytics/getTypeNumber";
 import GetDevicePieGraph from "../analytics/getDevicePieGraph";
+import GetFollowerStats from "../analytics/getFollowerStats";
 
 import ReactGA from 'react-ga'
 import GoogleAdsense from "next-google-ads";
@@ -125,7 +126,8 @@ const SetUser: NextPage = () => {
                         </svg>
                     </div>
                     <div>
-                        <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='follow'/></span>
+                        {/* <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='follow'/></span> */}
+                        <GetFollowerStats user_id={user?.id ? user?.id : ''} days={Days} />
                         <span className="block text-gray-500">Followers</span>
                     </div>
                     </div>
