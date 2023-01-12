@@ -1,6 +1,13 @@
-import Soon from "../../../components/Soon";
+import { useEffect } from "react";
+import ReactGA from 'react-ga'
+import Soon from "../../../components/global/Soon";
 
 const Api = () => {
+
+  useEffect(() => {
+    ReactGA.pageview('API Docs')
+  }, [])
+
 
     return (
       <>

@@ -1,13 +1,14 @@
 import { useUser, SignedOut, SignedIn } from "@clerk/nextjs";
 import React from "react";
 
-import SetUser_Desktop from "../components/dashboard/setUser_Desktop";
-import SetUser_Mobile from "../components/dashboard/setUser_Mobile";
+import SetUser from "../components/dashboard/setUser";
 
-import Interact_Landing from "../components/Interact_Landing";
-import Landing from "../components/Landing";
+import Interact_Landing from "../components/home/Interact_Landing";
+import Landing from "../components/home/Landing";
 
-import HeadMeta from "../components/HeadMeta";
+import HeadMeta from "../components/global/HeadMeta";
+
+
 
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
@@ -31,6 +32,8 @@ const SignedOutCards = () => {
       <HeadMeta 
       title_ext="Create a better profile!" 
       description="" 
+      og_image={''}
+      og_url={''}
       />
 
         <BrowserView>
@@ -48,22 +51,24 @@ const SignedOutCards = () => {
 const SignedInCards = () => {
 
   const { user } = useUser();
-  const titleext = user?.username ? user?.username!.toString() : user?.fullName!.toString() || ""
+  const titleext = user?.username ? user?.username?.toString() : user?.fullName?.toString() || ""
 
   return (
     <>
       <HeadMeta 
       title_ext={titleext}
       description="" 
+      og_image={''}
+      og_url={''}
       />
       
-        <BrowserView>
-          <SetUser_Desktop />
-        </BrowserView>
+      <BrowserView>
+        <SetUser />
+      </BrowserView>
 
-        <MobileView>
-          <SetUser_Mobile />
-        </MobileView>
+      <MobileView>
+        <SetUser />
+      </MobileView>
     </>
   );
 };

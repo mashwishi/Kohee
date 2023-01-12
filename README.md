@@ -18,7 +18,9 @@
     <a href="https://kohee.app/"><strong>View Demo »</strong></a>
     <br />
     <br />
-    <a href="https://staging.kohee.app/">Staging</a>
+    <a href="https://kohee.app/">Production</a>
+    ·
+    <a href="https://dev.kohee.app/">Staging</a>
     ·
     <a href="https://github.com/mashwishi/kohee/issues">Report Bug</a>
     ·
@@ -75,12 +77,23 @@ To get a local copy up and running follow these simple example steps.
     CLERK_API_KEY=''
     HASURA_ADMIN_SECRET=''
 
+    ENDPOINT_KEY_PROD=''
+    ENDPOINT_KEY_LOCAL=''
+
     NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT=''
     NEXT_PUBLIC_HASURA_REST_API=''
     NEXT_PUBLIC_CLERK_FRONTEND_API=''
-    NEXT_PUBLIC_HOSTNAME=''
+    NEXT_PUBLIC_HOSTNAME='https://<yourdomainhere>'
+
+    NEXT_PUBLIC_GOOGLEADS_CLIENT=
+
+    IMGUR_CLIENT_ID=''
+    IMGUR_CLIENT_SECRET=''
 
     GOOGLE_ANALYTICS_TRACKING_ID ='UA-'
+
+    GEOAPIFY_URL = ''
+    GEOAPIFY_KEY = '' 
     ```
     Universal Analytics will no longer process new data in standard properties beginning July 1, 2023.
     The `react-ga` is now deprecated (12/18/2022) since it is still not July 1, 2023 I will keep this configuration and wait for `react-ga` updates while waiting for an alternative solution.
@@ -105,14 +118,24 @@ This section list of major frameworks/libraries we used to our your project.
 - [x] Deploy live/staging with vercel
 - [x] Kohee Landing page
 - [x] User Social Media Authentication
-- [x] User Settings
+- [x] User Security Settings
+- [x] User Links Settings
+- [x] User Customizations Settings
 - [x] Sharable profiles
-- [ ] Kohee user dashboard
-- [ ] User Analytics
+- [x] Follow System
+- [x] Kohee user dashboard
+- [X] User Discovery
+- [x] API Webhooks and Endpoints
+- [x] User Followers and Visits
+- [x] Front-End Enhancement
 - [ ] Ads to support the project
+- [ ] User Analytics
+- [ ] Progressive Website Application Feature
+- [ ] Referral Program to earn more feature
+- [ ] Release on Google Play Store for Android
+- [ ] Release on App Store Store for iOS
 
 See the [open issues](https://github.com/mashwishi/kohee/issues) for a full list of proposed features (and known issues).
-
 
 
 <!-- CONTRIBUTING -->
@@ -134,13 +157,20 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the GNU License. See `LICENSE.txt` for more information.
 
 
-<!-- Contributors -->
-## Contributors
+<!-- Contributors / Collaborators -->
+## Contributors / Collaborators
 
-[@Mashwishi](https://github.com/Mashwishi), [@Exarus](https://github.com/Exaruss)
+[@Mashwishi](https://github.com/Mashwishi), [@Exarus](https://github.com/Exaruss), [@Aspect](https://github.com/aspectdev-ph)
+
+<!-- Partners -->
+## Partners
+
+<!-- Sponsors -->
+## Sponsors
+
 
 
 
@@ -156,7 +186,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [issues-shield]: https://img.shields.io/github/issues/mashwishi/kohee.svg?style=for-the-badge
 [issues-url]: https://github.com/mashwishi/kohee/issues
 [license-shield]: https://img.shields.io/github/license/mashwishi/kohee.svg?style=for-the-badge
-[license-url]: https://github.com/mashwishi/kohee/blob/master/LICENSE.txt
+[license-url]: https://github.com/mashwishi/kohee/blob/main/LICENSE
 
 [product-screenshot]: images/screenshot.png
 

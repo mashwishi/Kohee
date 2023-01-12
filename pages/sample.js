@@ -1,32 +1,47 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import LoadingPage from  "../components/LoadingPage"
-import GetUser_Sample from '../components/template/getUser_Sample'
+import GetUser_Sample from '../components/user/getUser_Sample'
+import LoadingPage from '../components/global/LoadingPage'
 
 
 const Sample = () => {
   
     const router = useRouter()
 
-    const { username } = 'Mashwishi'
+    const username = 'Mashwishi'
 
       const [data, setData] = useState(null)
       const [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
       setLoading(true)
-      fetch(`${process.env.NEXT_PUBLIC_HASURA_REST_API}/user/get/mashwishi`, {
-        method: 'GET',
-        headers: {
-        'Content-Type': 'application/json',
-        'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data.users[0])
-          setLoading(false)
-      })
+
+      async function getData() {
+        const fetchData = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data:{
+                    username: `${username.toString().toLowerCase()}`
+                }
+            })
+        };
+        
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/user/get`, fetchData);
+            const data = await response.json();
+
+            setData(data.data)
+  
+            setLoading(false)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    getData()
+    
     }, [])
 
     if (isLoading) return <LoadingPage/>
@@ -35,9 +50,12 @@ const Sample = () => {
   return (
     <>
         <GetUser_Sample 
+        is_verified={data.is_verified}
         followers={4968}
         visits={2458}
         ratings={5} 
+        data_banner={data.banner}
+        data_bio={data.bio}
         data_profile_banner_url={data.profile_banner_url}
         data_username={data.username}
         data_user_id={data.user_id}
