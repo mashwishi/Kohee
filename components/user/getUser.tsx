@@ -8,6 +8,8 @@ import useClipboard from "react-use-clipboard";
 import LoadingPage from '../global/LoadingPage';
 import Social_Icons from "../global/Social_Icons";
 
+import Adsense_User from '../google/Adsense_User';
+
 import { useClerk,SignedIn, SignedOut, UserButton,useUser } from "@clerk/nextjs";
 import { EmailShareButton,FacebookShareButton,LineShareButton,LinkedinShareButton,RedditShareButton,TelegramShareButton,TwitterShareButton,ViberShareButton,VKShareButton,WhatsappShareButton,EmailIcon,FacebookIcon,LineIcon,LinkedinIcon,RedditIcon,TelegramIcon,TwitterIcon,ViberIcon,WhatsappIcon,VKIcon } from "react-share";
 import generateAnalytics from '../../pages/api/analytics/generateAnalytics';
@@ -814,6 +816,10 @@ const GetUser = (props: GetUser) => {
 
                         </div>
                         {/*End User Links*/}
+
+                        <div className="mt-4">
+                            <Adsense_User/>
+                        </div>
 
                     </div>
                 </div>

@@ -91,8 +91,6 @@ const PrivacyPolicy = () => {
                         By using our website, you hereby consent to our <Link href="/privacy-policy"><strong className="cursor-pointer">Privacy Policy</strong></Link> and agree to its <Link href="/terms-and-condition"><strong className="cursor-pointer">Terms and Conditions</strong></Link>.
                     </p>
                     </div>
-
-                    <span id="ezoic-privacy-policy-embed"></span>
                   </div>
               </div>
           </div>
