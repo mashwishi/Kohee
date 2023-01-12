@@ -10,6 +10,7 @@ import Social_Icons from "../global/Social_Icons";
 
 import { useClerk,SignedIn, SignedOut, UserButton,useUser } from "@clerk/nextjs";
 import { EmailShareButton,FacebookShareButton,LineShareButton,LinkedinShareButton,RedditShareButton,TelegramShareButton,TwitterShareButton,ViberShareButton,VKShareButton,WhatsappShareButton,EmailIcon,FacebookIcon,LineIcon,LinkedinIcon,RedditIcon,TelegramIcon,TwitterIcon,ViberIcon,WhatsappIcon,VKIcon } from "react-share";
+import generateAnalytics from '../../pages/api/analytics/generateAnalytics';
 
 type GetUser = {
     data_username: string;
@@ -203,6 +204,138 @@ const GetUser = (props: GetUser) => {
         }
     }
 
+    async function generateAnalyticShare(userSignedIn: any) {
+        //Analytic Visit (Avoid self recording share when same user logged in)
+        if(userSignedInID !== props.data_user_id){
+            const analyticData = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data:{
+                        user_id: `${props.data_user_id}`,
+                        visitor_id: `${isSignedIn ? user?.id : null }`, 
+                        type: `share`, 
+                        os: `${props.userDeviceOS ? props.userDeviceOS : null}`, 
+                        device: `${props.userDeviceTypeuserDeviceOS ? props.userDeviceTypeuserDeviceOS : null}`, 
+                        country: `${props.userCountryLoc ? props.userCountryLoc : null}`, 
+                        browser: `${props.userBrowser ? props.userBrowser : null}`, 
+                        country_code: `${props.userCountryCode ? props.userCountryCode : null}`, 
+                        latitude: `${props.userLocLong ? props.userLocLong : null}`, 
+                        longitude: `${props.userLocLat ? props.userLocLat : null}`, 
+                    }
+                }) 
+            };
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/generateAnalytics`, analyticData);
+                const data = await response.json();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
+    async function generateAnalyticClick(userSignedIn: any) {
+        //Analytic Visit (Avoid self recording click when same user logged in)
+        if(userSignedInID !== props.data_user_id){
+            const analyticData = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data:{
+                        user_id: `${props.data_user_id}`,
+                        visitor_id: `${isSignedIn ? user?.id : null }`, 
+                        type: `click`, 
+                        os: `${props.userDeviceOS ? props.userDeviceOS : null}`, 
+                        device: `${props.userDeviceTypeuserDeviceOS ? props.userDeviceTypeuserDeviceOS : null}`, 
+                        country: `${props.userCountryLoc ? props.userCountryLoc : null}`, 
+                        browser: `${props.userBrowser ? props.userBrowser : null}`, 
+                        country_code: `${props.userCountryCode ? props.userCountryCode : null}`, 
+                        latitude: `${props.userLocLong ? props.userLocLong : null}`, 
+                        longitude: `${props.userLocLat ? props.userLocLat : null}`, 
+                    }
+                }) 
+            };
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/generateAnalytics`, analyticData);
+                const data = await response.json();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
+    async function generateAnalyticFollow(userSignedIn: any) {
+        //Analytic Visit (Avoid self recording follow when same user logged in)
+        if(userSignedInID !== props.data_user_id){
+            const analyticData = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data:{
+                        user_id: `${props.data_user_id}`,
+                        visitor_id: `${isSignedIn ? user?.id : null }`, 
+                        type: `follow`, 
+                        os: `${props.userDeviceOS ? props.userDeviceOS : null}`, 
+                        device: `${props.userDeviceTypeuserDeviceOS ? props.userDeviceTypeuserDeviceOS : null}`, 
+                        country: `${props.userCountryLoc ? props.userCountryLoc : null}`, 
+                        browser: `${props.userBrowser ? props.userBrowser : null}`, 
+                        country_code: `${props.userCountryCode ? props.userCountryCode : null}`, 
+                        latitude: `${props.userLocLong ? props.userLocLong : null}`, 
+                        longitude: `${props.userLocLat ? props.userLocLat : null}`, 
+                    }
+                }) 
+            };
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/generateAnalytics`, analyticData);
+                const data = await response.json();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
+    async function generateAnalyticUnFollow(userSignedIn: any) {
+        //Analytic Visit (Avoid self recording unfollow when same user logged in)
+        if(userSignedInID !== props.data_user_id){
+            const analyticData = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data:{
+                        user_id: `${props.data_user_id}`,
+                        visitor_id: `${isSignedIn ? user?.id : null }`, 
+                        type: `unfollow`, 
+                        os: `${props.userDeviceOS ? props.userDeviceOS : null}`, 
+                        device: `${props.userDeviceTypeuserDeviceOS ? props.userDeviceTypeuserDeviceOS : null}`, 
+                        country: `${props.userCountryLoc ? props.userCountryLoc : null}`, 
+                        browser: `${props.userBrowser ? props.userBrowser : null}`, 
+                        country_code: `${props.userCountryCode ? props.userCountryCode : null}`, 
+                        latitude: `${props.userLocLong ? props.userLocLong : null}`, 
+                        longitude: `${props.userLocLat ? props.userLocLat : null}`, 
+                    }
+                }) 
+            };
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/generateAnalytics`, analyticData);
+                const data = await response.json();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
     async function updateFollow() {
         //if signed in allow follow
         if(isSignedIn){
@@ -228,6 +361,7 @@ const GetUser = (props: GetUser) => {
                     const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/followUser`, createFollowData);
                     const data = await response.json();
                     if(data.status === 200){
+                        generateAnalyticFollow(userSignedInID)
                         getFollow()
                         getFollowers()
                     }else{
@@ -258,6 +392,7 @@ const GetUser = (props: GetUser) => {
                     const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/follow/upFollowUser`, updateFollowData);
                     const data = await response.json();
                         if(data.status === 200){
+                            generateAnalyticUnFollow(userSignedInID)
                             getFollow()
                             getFollowers()
                         }else{
@@ -350,7 +485,7 @@ const GetUser = (props: GetUser) => {
                                                 </>
                                                 :
                                                 <>
-                                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
+                                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-copy" data-tip="Copy" onClick={() => generateAnalyticShare(userSignedInID)}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" className="bi bi-clipboard-fill" viewBox="0 0 16 16">
                                                             <path  d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
                                                         </svg>
@@ -442,34 +577,34 @@ const GetUser = (props: GetUser) => {
                                     </div>
                                     {/*modal share - body <FacebookShareCount url={`${ShareUrl}`} />*/}
                                         <div className="relative p-6 flex-auto">
-                                                <FacebookShareButton url={`${ShareUrl}`} hashtag={"#hashtag"} className='mr-2'>
+                                                <FacebookShareButton url={`${ShareUrl}`} hashtag={"#hashtag"} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <FacebookIcon size={32} />
                                                 </FacebookShareButton>
-                                                <TwitterShareButton url={`${ShareUrl}`} hashtags={["kohee", "koheeapp"]} className='mr-2'>
+                                                <TwitterShareButton url={`${ShareUrl}`} hashtags={["kohee", "koheeapp"]} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <TwitterIcon size={32} />
                                                 </TwitterShareButton>
-                                                <RedditShareButton url={`${ShareUrl}`} className='mr-2'>
+                                                <RedditShareButton url={`${ShareUrl}`} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <RedditIcon size={32} />
                                                 </RedditShareButton>
-                                                <LineShareButton url={`${ShareUrl}`} className='mr-2'>
+                                                <LineShareButton url={`${ShareUrl}`} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <LineIcon size={32} />
                                                 </LineShareButton>
-                                                <WhatsappShareButton url={`${ShareUrl}`} className='mr-2'>
+                                                <WhatsappShareButton url={`${ShareUrl}`} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <WhatsappIcon size={32} />
                                                 </WhatsappShareButton>
-                                                <ViberShareButton url={`${ShareUrl}`} className='mr-2'>
+                                                <ViberShareButton url={`${ShareUrl}`} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <ViberIcon size={32} />
                                                 </ViberShareButton>
-                                                <TelegramShareButton url={`${ShareUrl}`} className='mr-2'>
+                                                <TelegramShareButton url={`${ShareUrl}`} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <TelegramIcon size={32} />
                                                 </TelegramShareButton>
-                                                <VKShareButton url={`${ShareUrl}`} className='mr-2'>
+                                                <VKShareButton url={`${ShareUrl}`} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <VKIcon size={32} />
                                                 </VKShareButton>
-                                                <LinkedinShareButton url={`${ShareUrl}`} className='mr-2'>
+                                                <LinkedinShareButton url={`${ShareUrl}`} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <LinkedinIcon size={32} />
                                                 </LinkedinShareButton>
-                                                <EmailShareButton url={`${ShareUrl}`} className='mr-2'>
+                                                <EmailShareButton url={`${ShareUrl}`} className='mr-2' onClick={() => generateAnalyticShare(userSignedInID)}>
                                                     <EmailIcon size={32} />
                                                 </EmailShareButton>
                                         </div>
@@ -657,7 +792,7 @@ const GetUser = (props: GetUser) => {
                                         (userLinks as any[]).map((i) => {
                                         return (
                                             <>
-                                                <a target="_blank" rel="noreferrer" href={i.url}>
+                                                <a target="_blank" rel="noreferrer" href={i.url} onClick={() => generateAnalyticClick(userSignedInID)} >
                                                     <div className="w-full mt-2 py-2 px-2 rounded-t-[15px] rounded-b-[15px] relative cursor-pointer" style={{ color: i.color_text, backgroundColor: i.color_button }}>
                                                         <div className="flex flex-row items-center">
                                                             <Social_Icons url={i.url} color={i.color_text} type={i.type}/>
