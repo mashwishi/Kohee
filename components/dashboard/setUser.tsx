@@ -104,7 +104,7 @@ const SetUser: NextPage = () => {
                     </div>
                     <div>
                         <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='share'/></span>
-                        <span className="block text-gray-500">Shares (Soon)</span>
+                        <span className="block text-gray-500">Shares</span>
                     </div>
                     </div>
                     <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -115,7 +115,7 @@ const SetUser: NextPage = () => {
                     </div>
                     <div>
                         <span className="inline-block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='click'/></span>
-                        <span className="block text-gray-500">Clicks (Soon)</span>
+                        <span className="block text-gray-500">Clicks</span>
                     </div>
                     </div>
                     <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -126,7 +126,7 @@ const SetUser: NextPage = () => {
                     </div>
                     <div>
                         <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='follow'/></span>
-                        <span className="block text-gray-500">Followers (Soon)</span>
+                        <span className="block text-gray-500">Followers</span>
                     </div>
                     </div>
                 </section>
@@ -152,10 +152,10 @@ const SetUser: NextPage = () => {
                     </div>
                     {/* End - Geo Graph with Ads */}
 
-                    {/* Top Country and Browser */}
+                    {/* Top Country and Browser and Visits*/}
                     <div className="row-span-3 bg-white rounded-lg">
                     <div className="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span>Top Country and Browser</span>
+                        <span>Additional Info</span>
                     </div>
                     <div className="overflow-y-auto max-h-[24rem]">
                         <ul className="">
@@ -186,10 +186,24 @@ const SetUser: NextPage = () => {
                                     </div>
                                 </div>
                             </li>
+                            <li className="flex items-center">
+                                <div className="flex items-center p-8 bg-white shadow rounded-lg">
+                                    <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+                                        <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="h-6 w-6">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span className="block text-2xl font-bold">-</span>
+                                        <span className="block text-gray-500">Signed In / Guests</span>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     </div>
-                    {/* End - Top Country and Browser */}
+                    {/* End - Top Country and Browser and Visits*/}
 
                     {/* Browsers */}
                     <div className="row-span-3 bg-white rounded-lg">
