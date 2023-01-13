@@ -3,6 +3,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { useUser } from "@clerk/nextjs";
 
 import Link from "next/link";
+import Script from "next/script";
+
+import dynamic from 'next/dynamic';
+const Adsense_Dashboard = dynamic(() => import('../google/Adsense_Dashboard'), {ssr: false});
 
 import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
 import GetTypeNumber from "../analytics/getTypeNumber";
@@ -10,7 +14,6 @@ import GetDevicePieGraph from "../analytics/getDevicePieGraph";
 import GetFollowerStats from "../analytics/getFollowerStats";
 
 import ReactGA from 'react-ga'
-import GoogleAdsense from "next-google-ads";
 
 interface OptionsDays {
     value: number;
@@ -144,10 +147,11 @@ const SetUser: NextPage = () => {
 
                         {/* Google Ads */}
                         <div className="px-6 font-semibold border-b border-gray-100">Google Ads</div>
-                        <div className="p-4 flex-grow">
+                        <div className="p-4 flex-grow max-w-20">
                             <div className="flex items-center justify-center h-full">      
-                            {/* <div className="flex items-center justify-center h-full text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">                                         */}
-                                <GoogleAdsense client={process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT ? process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT : 'ca-pub-1971863279565387'} slot="4627562024" responsive="true" />
+                            {/* <div className="flex items-center justify-center h-full text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">*/}
+                            {/* <GoogleAdsense client={process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT ? process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT : 'ca-pub-1971863279565387'} slot="4627562024" responsive="true" />                        */}
+                            <Adsense_Dashboard />
                             </div>
                         </div>
                         {/* End - Google Ads */}
