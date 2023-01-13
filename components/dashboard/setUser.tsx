@@ -12,6 +12,7 @@ import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
 import GetTypeNumber from "../analytics/getTypeNumber";
 import GetDevicePieGraph from "../analytics/getDevicePieGraph";
 import GetFollowerStats from "../analytics/getFollowerStats";
+import GetBrowsers from "../analytics/getBrowsers";
 
 import ReactGA from 'react-ga'
 
@@ -218,10 +219,7 @@ const SetUser: NextPage = () => {
                     </div>
                     <div className="overflow-y-auto max-h-[24rem]">
                         <ul className="p-6 space-y-6">
-                            <li className="flex items-center">
-                                <span className="text-gray-600">Soon</span>
-                                <span className="ml-auto font-semibold">0</span>
-                            </li>
+                        <GetBrowsers user_id={user?.id ? user?.id : ''} days={Days} />
                         </ul>
                     </div>
                     </div>
