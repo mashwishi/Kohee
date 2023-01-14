@@ -1,7 +1,13 @@
 import type { NextPage } from "next";
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+
 import { Chart, registerables } from 'chart.js';
 import { Chart as ReactChartJs } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
+
+Chart.register(...registerables);
+
 
 import { useUser } from "@clerk/nextjs";
 
@@ -16,7 +22,10 @@ import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
 import LoadingGraph from "../global/LoadingGraph";
 import LoadingText from "../global/LoadingText";
 
+import NumberFormatter from "../global/NumberFormatter";
+
 import ReactGA from 'react-ga'
+import moment from "moment";
 
 interface OptionsDays {
     value: number;
@@ -29,7 +38,19 @@ const optionsDays: OptionsDays[] = [
     { value: 30, label: '30 Days ago' },
 ];
 
-Chart.register(...registerables);
+const country_options = {
+    scales: {
+      yAxes: [
+        {
+          type: 'linear',
+          position: 'left',
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+};
 
 const SetUser: NextPage = () => {
 
@@ -44,6 +65,7 @@ const SetUser: NextPage = () => {
 
     const [processedDeviceData, setProcessedDeviceData] = useState<any | null>(null);
     const [processedBrowserData, setProcessedBrowserData] = useState<any | null>(null);
+    const [processedCountryData, setProcessedCountryData] = useState<any | null>(null);
 
     const [followData, setFollowData] = useState(0)
     const [unfollowData, setUnFollowData] = useState(0)
@@ -54,8 +76,22 @@ const SetUser: NextPage = () => {
     const [shareData, setShareData] = useState(0)
     const [clickData, setClickData] = useState(0)
 
+    const [topCountry, setTopCountry] = useState('')
+    const [topBrowser, setTopBrowser] = useState('')
+    const [topDevice, setTopDevice] = useState('')
+
     //Anti-double run
     const effectRan = useRef(false)
+
+    const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
 
     async function fetchData(NumberOfDays: number) {
 
@@ -147,6 +183,93 @@ const SetUser: NextPage = () => {
             const newBrowserFormat = Object.entries(browsers_counts).map(([name, count]) => ({ name, count }));
             setProcessedBrowserData(newBrowserFormat)
             //End - Browsers List
+
+            //Tops Country
+            const countryFrequency = analytics.filter((item: { country: string; }) => item.country !== 'x')
+            .map((item: { country: any; }) => item.country)
+            .reduce((counts: { [x: string]: any; }, country: string | number) => {
+                counts[country] = (counts[country] || 0) + 1;
+                return counts;
+            }, {});
+            const topCountry = Object.keys(countryFrequency).reduce((a, b) => countryFrequency[a] > countryFrequency[b] ? a : b);
+            setTopCountry(topCountry);
+            //End - Tops Country
+
+            //Tops Device
+            const deviceFrequency = analytics.filter((item: { device: string; }) => item.device !== 'x')
+            .map((item: { device: any; }) => item.device)
+            .reduce((counts: { [x: string]: any; }, device: string | number) => {
+                counts[device] = (counts[device] || 0) + 1;
+                return counts;
+            }, {});
+            const topDevice = Object.keys(deviceFrequency).reduce((a, b) => deviceFrequency[a] > deviceFrequency[b] ? a : b);
+            setTopDevice(topDevice);
+            //End - Tops Device
+
+            //Tops Browser
+            const browserFrequency = analytics.filter((item: { browser: string; }) => item.browser !== 'x')
+            .map((item: { browser: any; }) => item.browser)
+            .reduce((counts: { [x: string]: any; }, browser: string | number) => {
+                counts[browser] = (counts[browser] || 0) + 1;
+                return counts;
+            }, {});
+            const topBrowser = Object.keys(browserFrequency).reduce((a, b) => browserFrequency[a] > browserFrequency[b] ? a : b);
+            setTopBrowser(topBrowser);
+            //End - Tops Browser
+
+            
+            //Country List
+            // const country_counts = await analytics.reduce((counts: { [x: string]: any; }, item: { country: string | number; }) => {
+            //     counts[item.country] = (counts[item.country] || 0) + 1;
+            //     return counts;
+            // }, {})
+            // const newCountryFormat = Object.entries(country_counts).map(([name, count]) => ({ name, count }));
+            // const country_object_count = Array(Object.keys(country_counts).length)?.length;
+            // const country_colors = ['#E4BF07', '#E0A82E', '#F9D72F', '#BA881C', '#F87272', '#36D399', '#3ABFF8'];
+            // const country_reducedColors = country_colors.slice(0, country_object_count);
+            // const CountryData = {
+            //     labels: Object.keys(country_counts).map(key => key === "null" ? "Unknown" : key),
+            //     datasets: [
+            //         {
+            //             data: Object.values(country_counts),
+            //             backgroundColor: country_reducedColors,
+            //             hoverBackgroundColor: Array(Object.keys(country_counts).length).fill('#18182F')
+            //         },
+            //     ]
+            // };
+
+            const processedData = analytics.map((item: { created_at: string | number | Date; country: null; }) => {
+            return {
+                date: moment(item.created_at).format('YYYY-MM-DD'),
+                country: item.country === null ? "Unknown" : item.country,
+                visits: 1
+            }
+            });
+        
+            const groupedData = processedData.reduce((acc: { [x: string]: { [x: string]: any; }; }, curr: { country: string | number; date: string | number; visits: any; }) => {
+            acc[curr.country] = acc[curr.country] || {};
+            acc[curr.country][curr.date] = (acc[curr.country][curr.date] || 0) + curr.visits;
+            return acc;
+            }, {});
+
+            const datasets = Object.keys(groupedData).map((country) => {
+                return {
+                label: country,
+                data: Object.values(groupedData[country]),
+                borderColor: getRandomColor(),
+                backgroundColor: getRandomColor(),
+                pointRadius: 5,
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 1,
+                borderWidth: 1,
+                }
+            });
+        
+            setProcessedCountryData({
+                labels: Object.keys(groupedData[Object.keys(groupedData)[0]]),
+                datasets: datasets,
+            });
+            //End - Country List
             
             //After process turn off the loading
             setLoading(false)
@@ -217,7 +340,7 @@ const SetUser: NextPage = () => {
                         isLoading ? 
                         <LoadingText/>
                         :
-                        <><span className="block text-2xl font-bold">{visitData}</span></>
+                        <><span className="block text-2xl font-bold"><NumberFormatter input_number={visitData}/></span></>
                         }   
                         <span className="block text-gray-500">Visit{visitData > 1 ? `s` : ``}</span>
                     </div>
@@ -234,7 +357,7 @@ const SetUser: NextPage = () => {
                         isLoading ? 
                         <LoadingText/>
                         :
-                        <><span className="block text-2xl font-bold">{shareData}</span></>
+                        <><span className="block text-2xl font-bold"><NumberFormatter input_number={shareData}/></span></>
                         }   
                         <span className="block text-gray-500">Share{shareData > 1 ? `s` : ``}</span>
                     </div>
@@ -250,7 +373,7 @@ const SetUser: NextPage = () => {
                         isLoading ? 
                         <LoadingText/>
                         :
-                        <><span className="block text-2xl font-bold">{shareData}</span></>
+                        <><span className="block text-2xl font-bold"><NumberFormatter input_number={shareData}/></span></>
                         }   
                         <span className="block text-gray-500">Click{clickData > 1 ? `s` : ``}</span>
                     </div>
@@ -268,9 +391,9 @@ const SetUser: NextPage = () => {
                         <LoadingText/>
                         :
                         <>
-                            <span className="inline-block text-2xl font-bold mr-1">{followData}</span>
+                            <span className="inline-block text-2xl font-bold mr-1"><NumberFormatter input_number={followData}/></span>
                             <span className={`inline-block text-x font-semibold ${followStatus == 'normal' ? `text-gray-500` : followStatus == 'negative' ? `text-red-500` : followStatus == 'positive' ? `text-green-500` : `text-gray-500`}`}>
-                            { followStatusAmount == 0 ? `` : followStatusAmount < 0 ? `(${followStatusAmount} loss)` :  followStatusAmount > 0 ? `(${followStatusAmount} gain)` : `` }
+                            { followStatusAmount == 0 ? `` : followStatusAmount < 0 ? `(${<NumberFormatter input_number={followStatusAmount}/>} loss)` :  followStatusAmount > 0 ? `(${<NumberFormatter input_number={followStatusAmount}/>} gain)` : `` }
                             </span>
                         </>
                         }
@@ -285,7 +408,16 @@ const SetUser: NextPage = () => {
                     <div className="flex flex-col md:col-span-2 md:row-span-2 bg-white rounded-lg">
                         <div className="px-6 py-5 font-semibold border-b border-gray-100">Country</div>
                         <div className="p-4 flex-grow">
-                            <div className="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart (Soon)</div>
+                            <div className="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+                            
+                            { 
+                            isLoading ? <LoadingGraph/> : 
+                            <>
+                                <Line data={processedCountryData} />
+                            </>
+                            }
+
+                            </div>
                         </div>
 
                         {/* Google Ads */}
@@ -315,7 +447,9 @@ const SetUser: NextPage = () => {
                                         </svg>
                                     </div>
                                     <div>
-                                        <span className="block text-2xl font-bold">-</span>
+                                        <span className="block text-2xl font-bold">
+                                        { isLoading ? <LoadingText/> : topCountry === 'null' ? 'Unknown' : topCountry}
+                                        </span>
                                         <span className="block text-gray-500">Top Country</span>
                                     </div>
                                 </div>
@@ -328,7 +462,9 @@ const SetUser: NextPage = () => {
                                         </svg>
                                     </div>
                                     <div>
-                                        <span className="block text-2xl font-bold">-</span>
+                                        <span className="block text-2xl font-bold">
+                                        { isLoading ? <LoadingText/> : topBrowser === 'null' ? 'Unknown' : topBrowser}
+                                        </span>
                                         <span className="block text-gray-500">Top Browser</span>
                                     </div>
                                 </div>
@@ -342,8 +478,10 @@ const SetUser: NextPage = () => {
                                         </svg>
                                     </div>
                                     <div>
-                                        <span className="block text-2xl font-bold">-</span>
-                                        <span className="block text-gray-500">Signed In / Guests</span>
+                                        <span className="block text-2xl font-bold">
+                                        { isLoading ? <LoadingText/> : topDevice === 'null' ? 'Unknown' : topDevice}
+                                        </span>
+                                        <span className="block text-gray-500">Top Device</span>
                                     </div>
                                 </div>
                             </li>
@@ -370,7 +508,7 @@ const SetUser: NextPage = () => {
                                                 <>
                                                     <li className="flex items-center">
                                                         <span className="text-gray-600">{i.name === 'null' ? 'Unknown' : i.name}</span>
-                                                        <span className="ml-auto font-semibold">{i.count}</span>
+                                                        <span className="ml-auto font-semibold"><NumberFormatter input_number={i.count}/></span>
                                                     </li>
                                                 </>
                                             )
@@ -418,6 +556,7 @@ const SetUser: NextPage = () => {
             </div>
         </>
     );
+
 };
 
 export default SetUser;
