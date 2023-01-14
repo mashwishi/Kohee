@@ -191,7 +191,7 @@ const SetUser: NextPage = () => {
                 counts[country] = (counts[country] || 0) + 1;
                 return counts;
             }, {});
-            const topCountry = Object.keys(countryFrequency).reduce((a, b) => countryFrequency[a] > countryFrequency[b] ? a : b);
+            const topCountry = countryFrequency.length > 0 ? Object.keys(countryFrequency).reduce((a, b) => countryFrequency[a] > countryFrequency[b] ? a : b) : 'N/A';
             setTopCountry(topCountry);
             //End - Tops Country
 
@@ -202,7 +202,7 @@ const SetUser: NextPage = () => {
                 counts[device] = (counts[device] || 0) + 1;
                 return counts;
             }, {});
-            const topDevice = Object.keys(deviceFrequency).reduce((a, b) => deviceFrequency[a] > deviceFrequency[b] ? a : b);
+            const topDevice = deviceFrequency.length > 0 ?  Object.keys(deviceFrequency).reduce((a, b) => deviceFrequency[a] > deviceFrequency[b] ? a : b) : 'N/A';
             setTopDevice(topDevice);
             //End - Tops Device
 
@@ -213,30 +213,9 @@ const SetUser: NextPage = () => {
                 counts[browser] = (counts[browser] || 0) + 1;
                 return counts;
             }, {});
-            const topBrowser = Object.keys(browserFrequency).reduce((a, b) => browserFrequency[a] > browserFrequency[b] ? a : b);
+            const topBrowser = browserFrequency.length > 0 ? Object.keys(browserFrequency).reduce((a, b) => browserFrequency[a] > browserFrequency[b] ? a : b) : 'N/A';
             setTopBrowser(topBrowser);
             //End - Tops Browser
-
-            
-            //Country List
-            // const country_counts = await analytics.reduce((counts: { [x: string]: any; }, item: { country: string | number; }) => {
-            //     counts[item.country] = (counts[item.country] || 0) + 1;
-            //     return counts;
-            // }, {})
-            // const newCountryFormat = Object.entries(country_counts).map(([name, count]) => ({ name, count }));
-            // const country_object_count = Array(Object.keys(country_counts).length)?.length;
-            // const country_colors = ['#E4BF07', '#E0A82E', '#F9D72F', '#BA881C', '#F87272', '#36D399', '#3ABFF8'];
-            // const country_reducedColors = country_colors.slice(0, country_object_count);
-            // const CountryData = {
-            //     labels: Object.keys(country_counts).map(key => key === "null" ? "Unknown" : key),
-            //     datasets: [
-            //         {
-            //             data: Object.values(country_counts),
-            //             backgroundColor: country_reducedColors,
-            //             hoverBackgroundColor: Array(Object.keys(country_counts).length).fill('#18182F')
-            //         },
-            //     ]
-            // };
 
             const processedData = analytics.map((item: { created_at: string | number | Date; country: null; }) => {
             return {
@@ -257,7 +236,7 @@ const SetUser: NextPage = () => {
                 label: country,
                 data: Object.values(groupedData[country]),
                 borderColor: getRandomColor(),
-                backgroundColor: getRandomColor(),
+                //backgroundColor: getRandomColor(),
                 pointRadius: 5,
                 pointBackgroundColor: '#fff',
                 pointBorderWidth: 1,
@@ -266,7 +245,7 @@ const SetUser: NextPage = () => {
             });
         
             setProcessedCountryData({
-                labels: Object.keys(groupedData[Object.keys(groupedData)[0]]),
+                labels: groupedData.length > 0 ? Object.keys(groupedData[Object.keys(groupedData)[0]]) : {},
                 datasets: datasets,
             });
             //End - Country List
@@ -413,7 +392,9 @@ const SetUser: NextPage = () => {
                             { 
                             isLoading ? <LoadingGraph/> : 
                             <>
-                                <Line data={processedCountryData} />
+                                {
+                                    processedCountryData?.labels > 0 ? <Line data={processedCountryData} /> : <> No Aavaialble Data </>
+                                }  
                             </>
                             }
 
@@ -472,10 +453,41 @@ const SetUser: NextPage = () => {
                             <li className="flex items-center">
                                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                                     <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
-                                        <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="h-6 w-6">
-                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                                        </svg>
+                                        { isLoading ?
+                                        <>
+                                            <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="h-6 w-6">
+                                                <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+                                            </svg>
+                                        </>
+                                        :
+                                            topDevice === 'null' ? 
+                                                <>
+                                                    <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="h-6 w-6">
+                                                        <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+                                                    </svg>
+                                                </>
+                                            :
+                                                topDevice === 'Desktop' ? 
+                                                    <>
+                                                        <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="h-6 w-6">
+                                                            <path d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75c.167-.333.25-.833.25-1.5H2s-2 0-2-2V4zm1.398-.855a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3H2c-.325 0-.502.078-.602.145z"/>
+                                                        </svg>
+                                                    </>
+                                                    :
+                                                        topDevice === 'Mobile' ? 
+                                                            <>
+                                                                <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="h-6 w-6">
+                                                                    <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+                                                                    <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                                                </svg>
+                                                            </>
+                                                            :
+                                                            <>
+                                                                <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="h-6 w-6">
+                                                                <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+                                                                </svg>
+                                                            </>
+                                        }
                                     </div>
                                     <div>
                                         <span className="block text-2xl font-bold">
