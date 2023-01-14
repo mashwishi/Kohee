@@ -1,5 +1,8 @@
 import type { NextPage } from "next";
 import React, { useState, useEffect, useRef } from "react";
+import { Chart, registerables } from 'chart.js';
+import { Chart as ReactChartJs } from 'react-chartjs-2';
+
 import { useUser } from "@clerk/nextjs";
 
 import Link from "next/link";
@@ -9,10 +12,9 @@ import dynamic from 'next/dynamic';
 const Adsense_Dashboard = dynamic(() => import('../google/Adsense_Dashboard'), {ssr: false});
 
 import useAnalyticsEventTracker from "../global/useAnalyticsEventTracker";
-import GetTypeNumber from "../analytics/getTypeNumber";
-import GetDevicePieGraph from "../analytics/getDevicePieGraph";
-import GetFollowerStats from "../analytics/getFollowerStats";
-import GetBrowsers from "../analytics/getBrowsers";
+
+import LoadingGraph from "../global/LoadingGraph";
+import LoadingText from "../global/LoadingText";
 
 import ReactGA from 'react-ga'
 
@@ -27,31 +29,146 @@ const optionsDays: OptionsDays[] = [
     { value: 30, label: '30 Days ago' },
 ];
 
+Chart.register(...registerables);
+
 const SetUser: NextPage = () => {
 
     const { user } = useUser();
     const gaEventTracker = useAnalyticsEventTracker('Dashboard');
     ReactGA.pageview('Dashboard')
 
-    const [Days, setDate] = useState(0);
+    const [Days, setDate] = useState(1);
+
+    const [error, setError] = useState<any | null>(null);
+    const [isLoading, setLoading] = useState(true);
+
+    const [processedDeviceData, setProcessedDeviceData] = useState<any | null>(null);
+    const [processedBrowserData, setProcessedBrowserData] = useState<any | null>(null);
+
+    const [followData, setFollowData] = useState(0)
+    const [unfollowData, setUnFollowData] = useState(0)
+    const [followStatus, setfollowStatus] = useState('normal')
+    const [followStatusAmount, setfollowStatusAmount] = useState(0)
+
+    const [visitData, setVisitData] = useState(0)
+    const [shareData, setShareData] = useState(0)
+    const [clickData, setClickData] = useState(0)
 
     //Anti-double run
     const effectRan = useRef(false)
 
-    useEffect(() => {
+    async function fetchData(NumberOfDays: number) {
 
-        if(effectRan.current === false){
-            setDate(1);
+        //Get day today
+        const date = new Date();
+        //This can be 1, 7, 30
+        const daysAgo = new Date(date.getTime() - (NumberOfDays*24*60*60*1000));
+
+        const fetchData = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({   
+                data:{
+                    user_id: `${user?.id}`,
+                    to: date.toISOString(),
+                    from: daysAgo.toISOString(),
+                } 
+            })
+        };
+
+        try {
+
+            setLoading(true)
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/analytics/getAnalyticsByDateNoType`, fetchData);
+            const response_data = await response.json();
+            
+            //Entire Selected Analytics
+            const analytics = await response_data.data.users[0].analytics;
+            
+            //Other Stats
+            const visitCount = analytics.filter((event: { type: string; }) => event.type === 'visit')?.length || 0;
+            setVisitData(visitCount)
+
+            const shareCount = analytics.filter((event: { type: string; }) => event.type === 'share')?.length || 0;
+            setShareData(shareCount)
+            
+            const clickCount = analytics.filter((event: { type: string; }) => event.type === 'click')?.length || 0;
+            setClickData(clickCount)
+            //End - Other Stats
+
+            //Follow and Unfollows Stats
+            const followCount = analytics.filter((event: { type: string; }) => event.type === 'follow')?.length || 0;
+            const unfollowCount = analytics.filter((event: { type: string; }) => event.type === 'unfollow')?.length || 0;
+
+            setfollowStatusAmount(followCount - unfollowCount)
+            setFollowData(followCount)
+            setUnFollowData(unfollowCount)
+
+            if((followCount - unfollowCount) == 0){
+                setfollowStatus('normal')
+            }
+            if((followCount - unfollowCount) < 0){
+                setfollowStatus('negative')
+            }
+            if((followCount - unfollowCount) > 0){
+                setfollowStatus('positive')
+            }
+            //End - Follow and Unfollows Stats
+
+            //Devices Pie Graph
+            const device_counts = await analytics.reduce((counts: { [x: string]: any; }, item: { device: string | number; }) => {
+                counts[item.device] = (counts[item.device] || 0) + 1;
+                return counts;
+            }, {})
+            const device_object_count = Array(Object.keys(device_counts).length)?.length;
+            const device_colors = ['#E4BF07', '#E0A82E', '#F9D72F', '#BA881C', '#F87272', '#36D399', '#3ABFF8'];
+            const device_reducedColors = device_colors.slice(0, device_object_count);
+            const DeviceData = {
+                labels: Object.keys(device_counts).map(key => key === "null" ? "Unknown" : key),
+                datasets: [
+                    {
+                        data: Object.values(device_counts),
+                        backgroundColor: device_reducedColors,
+                        hoverBackgroundColor: Array(Object.keys(device_counts).length).fill('#18182F')
+                    },
+                ]
+            };
+            setProcessedDeviceData(DeviceData)
+            //End - Devices Pie Graph
+
+            //Browsers List
+            const browsers_counts = await analytics.reduce((counts: { [x: string]: any; }, item: { browser: string | number; }) => {
+                counts[item.browser] = (counts[item.browser] || 0) + 1;
+                return counts;
+            }, {})
+            const newBrowserFormat = Object.entries(browsers_counts).map(([name, count]) => ({ name, count }));
+            setProcessedBrowserData(newBrowserFormat)
+            //End - Browsers List
+            
+            //After process turn off the loading
+            setLoading(false)
+        } catch (error) {
+            setError(error)
+            console.error(error)
         }
-    
+    }
+
+    useEffect(() => {
+        if(effectRan.current === false){
+            fetchData(1);
+        }
         return () => {
             effectRan.current = true
         }
-
     }, [])
 
+    //Change Days
     const handleChangeDays = (event: any) => {
         setDate(parseInt(event.target.value));
+        fetchData(parseInt(event.target.value));
     };
 
     return (
@@ -96,8 +213,13 @@ const SetUser: NextPage = () => {
                         </svg>
                     </div>
                     <div>
-                        <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='visit'/></span>
-                        <span className="block text-gray-500">Visits</span>
+                        {
+                        isLoading ? 
+                        <LoadingText/>
+                        :
+                        <><span className="block text-2xl font-bold">{visitData}</span></>
+                        }   
+                        <span className="block text-gray-500">Visit{visitData > 1 ? `s` : ``}</span>
                     </div>
                     </div>
                     <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -108,8 +230,13 @@ const SetUser: NextPage = () => {
                         </svg>
                     </div>
                     <div>
-                        <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='share'/></span>
-                        <span className="block text-gray-500">Shares</span>
+                        {
+                        isLoading ? 
+                        <LoadingText/>
+                        :
+                        <><span className="block text-2xl font-bold">{shareData}</span></>
+                        }   
+                        <span className="block text-gray-500">Share{shareData > 1 ? `s` : ``}</span>
                     </div>
                     </div>
                     <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -119,8 +246,13 @@ const SetUser: NextPage = () => {
                         </svg>
                     </div>
                     <div>
-                        <span className="inline-block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='click'/></span>
-                        <span className="block text-gray-500">Clicks</span>
+                        {
+                        isLoading ? 
+                        <LoadingText/>
+                        :
+                        <><span className="block text-2xl font-bold">{shareData}</span></>
+                        }   
+                        <span className="block text-gray-500">Click{clickData > 1 ? `s` : ``}</span>
                     </div>
                     </div>
                     <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -130,9 +262,19 @@ const SetUser: NextPage = () => {
                         </svg>
                     </div>
                     <div>
-                        {/* <span className="block text-2xl font-bold"><GetTypeNumber user_id={user?.id ? user?.id : ''} days={Days} type='follow'/></span> */}
-                        <GetFollowerStats user_id={user?.id ? user?.id : ''} days={Days} />
-                        <span className="block text-gray-500">Followers</span>
+
+                        {
+                        isLoading ? 
+                        <LoadingText/>
+                        :
+                        <>
+                            <span className="inline-block text-2xl font-bold mr-1">{followData}</span>
+                            <span className={`inline-block text-x font-semibold ${followStatus == 'normal' ? `text-gray-500` : followStatus == 'negative' ? `text-red-500` : followStatus == 'positive' ? `text-green-500` : `text-gray-500`}`}>
+                            { followStatusAmount == 0 ? `` : followStatusAmount < 0 ? `(${followStatusAmount} loss)` :  followStatusAmount > 0 ? `(${followStatusAmount} gain)` : `` }
+                            </span>
+                        </>
+                        }
+                        <span className="block text-gray-500">Follower{followData > 1 ? `s` : ``}</span>
                     </div>
                     </div>
                 </section>
@@ -150,8 +292,6 @@ const SetUser: NextPage = () => {
                         <div className="px-6 font-semibold border-b border-gray-100">Google Ads</div>
                         <div className="p-4 flex-grow max-w-20">
                             <div className="flex items-center justify-center h-full">      
-                            {/* <div className="flex items-center justify-center h-full text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">*/}
-                            {/* <GoogleAdsense client={process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT ? process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT : 'ca-pub-1971863279565387'} slot="4627562024" responsive="true" />                        */}
                             <Adsense_Dashboard />
                             </div>
                         </div>
@@ -219,7 +359,31 @@ const SetUser: NextPage = () => {
                     </div>
                     <div className="overflow-y-auto max-h-[24rem]">
                         <ul className="p-6 space-y-6">
-                        <GetBrowsers user_id={user?.id ? user?.id : ''} days={Days} />
+                            {
+                                isLoading ? 
+                                <LoadingText/> : 
+                                processedBrowserData?.length > 0 ?
+                                <>
+                                    {
+                                        (processedBrowserData as any[]).map((i) => {
+                                            return (
+                                                <>
+                                                    <li className="flex items-center">
+                                                        <span className="text-gray-600">{i.name === 'null' ? 'Unknown' : i.name}</span>
+                                                        <span className="ml-auto font-semibold">{i.count}</span>
+                                                    </li>
+                                                </>
+                                            )
+                                        })
+                                    }
+                                </>
+                                :
+                                <>
+                                    <li className="flex items-center">
+                                        <span className="text-gray-600">No Available Data</span>
+                                    </li>
+                                </>
+                            }
                         </ul>
                     </div>
                     </div>
@@ -229,7 +393,20 @@ const SetUser: NextPage = () => {
                     <div className="flex flex-col row-span-3 bg-white rounded-lg">
                         <div className="px-6 py-5 font-semibold border-b border-gray-100">Device</div>
                         <div className="p-4 flex-grow">
-                            <GetDevicePieGraph user_id={user?.id ? user?.id : ''} days={Days} />
+                                { isLoading ? <><div className='h-[400px] w-[350px]'><LoadingGraph/></div></> :
+                                    <>
+                                        <div className="flex items-center justify-center h-full px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+                                            {
+                                            processedDeviceData.datasets[0].data.length > 0 ?
+                                            <ReactChartJs type="pie" data={processedDeviceData} />
+                                            :
+                                            <>
+                                                No Aavaialble Data
+                                            </>
+                                            }
+                                        </div>
+                                    </>
+                                }
                         </div>
                     </div>
                     {/* End - User Devices */}
