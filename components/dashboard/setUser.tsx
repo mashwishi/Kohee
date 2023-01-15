@@ -154,6 +154,48 @@ const SetUser: NextPage = () => {
             }
             //End - Follow and Unfollows Stats
 
+            //Browsers List
+            const browsers_counts = await analytics.reduce((counts: { [x: string]: any; }, item: { browser: string | number; }) => {
+                counts[item.browser] = (counts[item.browser] || 0) + 1;
+                return counts;
+            }, {})
+            const newBrowserFormat = Object.entries(browsers_counts).map(([name, count]) => ({ name, count }));
+            setProcessedBrowserData(newBrowserFormat)
+            //End - Browsers List
+
+            //Tops Country
+            const countryFrequency = analytics.filter((item: { country: string; }) => item.country !== 'x')
+            .map((item: { country: any; }) => item.country)
+            .reduce((counts: { [x: string]: any; }, country: string | number) => {
+                counts[country] = (counts[country] || 0) + 1;
+                return counts;
+            }, {});
+            const topCountry =  Object.keys(countryFrequency)?.length >  0 ? Object.keys(countryFrequency).reduce((a, b) => countryFrequency[a] > countryFrequency[b] ? a : b) : 'N/A';
+            setTopCountry(topCountry);
+            //End - Tops Country
+
+            //Tops Device
+            const deviceFrequency = analytics.filter((item: { device: string; }) => item.device !== 'x')
+            .map((item: { device: any; }) => item.device)
+            .reduce((counts: { [x: string]: any; }, device: string | number) => {
+                counts[device] = (counts[device] || 0) + 1;
+                return counts;
+            }, {});
+            const topDevice = Object.keys(deviceFrequency)?.length > 0 ?  Object.keys(deviceFrequency).reduce((a, b) => deviceFrequency[a] > deviceFrequency[b] ? a : b) : 'N/A';
+            setTopDevice(topDevice);
+            //End - Tops Device
+
+            //Tops Browser
+            const browserFrequency = analytics.filter((item: { browser: string; }) => item.browser !== 'x')
+            .map((item: { browser: any; }) => item.browser)
+            .reduce((counts: { [x: string]: any; }, browser: string | number) => {
+                counts[browser] = (counts[browser] || 0) + 1;
+                return counts;
+            }, {});
+            const topBrowser = Object.keys(browserFrequency)?.length > 0 ? Object.keys(browserFrequency).reduce((a, b) => browserFrequency[a] > browserFrequency[b] ? a : b) : 'N/A';
+            setTopBrowser(topBrowser);
+            //End - Tops Browser
+
             //Devices Pie Graph
             const device_counts = await analytics.reduce((counts: { [x: string]: any; }, item: { device: string | number; }) => {
                 counts[item.device] = (counts[item.device] || 0) + 1;
@@ -175,48 +217,7 @@ const SetUser: NextPage = () => {
             setProcessedDeviceData(DeviceData)
             //End - Devices Pie Graph
 
-            //Browsers List
-            const browsers_counts = await analytics.reduce((counts: { [x: string]: any; }, item: { browser: string | number; }) => {
-                counts[item.browser] = (counts[item.browser] || 0) + 1;
-                return counts;
-            }, {})
-            const newBrowserFormat = Object.entries(browsers_counts).map(([name, count]) => ({ name, count }));
-            setProcessedBrowserData(newBrowserFormat)
-            //End - Browsers List
-
-            //Tops Country
-            const countryFrequency = analytics.filter((item: { country: string; }) => item.country !== 'x')
-            .map((item: { country: any; }) => item.country)
-            .reduce((counts: { [x: string]: any; }, country: string | number) => {
-                counts[country] = (counts[country] || 0) + 1;
-                return counts;
-            }, {});
-            const topCountry = countryFrequency.length > 0 ? Object.keys(countryFrequency).reduce((a, b) => countryFrequency[a] > countryFrequency[b] ? a : b) : 'N/A';
-            setTopCountry(topCountry);
-            //End - Tops Country
-
-            //Tops Device
-            const deviceFrequency = analytics.filter((item: { device: string; }) => item.device !== 'x')
-            .map((item: { device: any; }) => item.device)
-            .reduce((counts: { [x: string]: any; }, device: string | number) => {
-                counts[device] = (counts[device] || 0) + 1;
-                return counts;
-            }, {});
-            const topDevice = deviceFrequency.length > 0 ?  Object.keys(deviceFrequency).reduce((a, b) => deviceFrequency[a] > deviceFrequency[b] ? a : b) : 'N/A';
-            setTopDevice(topDevice);
-            //End - Tops Device
-
-            //Tops Browser
-            const browserFrequency = analytics.filter((item: { browser: string; }) => item.browser !== 'x')
-            .map((item: { browser: any; }) => item.browser)
-            .reduce((counts: { [x: string]: any; }, browser: string | number) => {
-                counts[browser] = (counts[browser] || 0) + 1;
-                return counts;
-            }, {});
-            const topBrowser = browserFrequency.length > 0 ? Object.keys(browserFrequency).reduce((a, b) => browserFrequency[a] > browserFrequency[b] ? a : b) : 'N/A';
-            setTopBrowser(topBrowser);
-            //End - Tops Browser
-
+            //Country Line Graph
             const processedData = analytics.map((item: { created_at: string | number | Date; country: null; }) => {
             return {
                 date: moment(item.created_at).format('YYYY-MM-DD'),
@@ -233,7 +234,7 @@ const SetUser: NextPage = () => {
 
             const datasets = Object.keys(groupedData).map((country) => {
                 return {
-                label: country,
+                label: country === 'null' ? 'Unknown' : country,
                 data: Object.values(groupedData[country]),
                 borderColor: getRandomColor(),
                 //backgroundColor: getRandomColor(),
@@ -245,10 +246,10 @@ const SetUser: NextPage = () => {
             });
         
             setProcessedCountryData({
-                labels: groupedData.length > 0 ? Object.keys(groupedData[Object.keys(groupedData)[0]]) : {},
+                labels: Object.keys(groupedData)?.length > 0 ? Object.keys(groupedData[Object.keys(groupedData)[0]]).map((label) => label === 'null' ? 'Unknown' : label) : {},
                 datasets: datasets,
             });
-            //End - Country List
+            //End - Country Line Graph
             
             //After process turn off the loading
             setLoading(false)
@@ -387,13 +388,13 @@ const SetUser: NextPage = () => {
                     <div className="flex flex-col md:col-span-2 md:row-span-2 bg-white rounded-lg">
                         <div className="px-6 py-5 font-semibold border-b border-gray-100">Country</div>
                         <div className="p-4 flex-grow">
-                            <div className="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+                            <div className="flex items-center justify-center h-[400px] w-[100%] px-1 py-4 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
                             
                             { 
                             isLoading ? <LoadingGraph/> : 
                             <>
                                 {
-                                    processedCountryData?.labels > 0 ? <Line data={processedCountryData} /> : <> No Aavaialble Data </>
+                                    processedCountryData?.labels?.length > 0 ? <Line data={processedCountryData}/> : <> No Aavaialble Data </>
                                 }  
                             </>
                             }
@@ -515,7 +516,7 @@ const SetUser: NextPage = () => {
                                 processedBrowserData?.length > 0 ?
                                 <>
                                     {
-                                        (processedBrowserData as any[]).map((i) => {
+                                        (processedBrowserData as any[]).sort((a, b) => b.count - a.count).map((i) => {
                                             return (
                                                 <>
                                                     <li className="flex items-center">
@@ -545,7 +546,7 @@ const SetUser: NextPage = () => {
                         <div className="p-4 flex-grow">
                                 { isLoading ? <><div className='h-[400px] w-[350px]'><LoadingGraph/></div></> :
                                     <>
-                                        <div className="flex items-center justify-center h-full px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+                                        <div className="flex items-center justify-center h-full  w-[100%] px-4 py-4 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
                                             {
                                             processedDeviceData.datasets[0].data.length > 0 ?
                                             <ReactChartJs type="pie" data={processedDeviceData} />
