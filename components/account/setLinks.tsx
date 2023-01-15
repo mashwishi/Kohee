@@ -5,7 +5,7 @@ import { HexColorPicker } from "react-colorful";
 import ReactGA from 'react-ga'
 import { SocialIcon } from 'react-social-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faCopy, faArrowUpRightFromSquare, faPencil, faPaintBrush, faCube, faSortAlphaAsc, faSortAlphaUp, faCubes } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faCopy, faArrowUpRightFromSquare, faPencil, faPaintBrush, faCube, faSortAlphaAsc, faSortAlphaUp, faCubes, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from "react";
 import LoadingPage from "../global/LoadingPage";
 
@@ -352,6 +352,42 @@ const SetLinks: NextPage = () => {
       }
    }
 
+   
+   //TODO - Create a timestamp algorithm - Mashwishi
+   async function sortLink(id: Number){
+
+      const sortData = {
+         method: 'POST',
+         headers: {
+         'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({   
+            data:{
+               id: id,
+               updated_at: ``, 
+            } 
+         })
+      };
+      
+      try {
+         const response = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/api/links/sortUserLinks`, sortData);
+         const data = await response.json();
+         if(data.status == 200){
+            setLoading(true)
+            getLinks()
+         }
+      } catch (error) {
+         setLoading(false)
+         console.error(error);
+      }
+
+   }
+
+   async function sortLinkWIP(){
+      alert('Error: Sorting feature not yet available!')
+   }
+
+
    return (
    <>
    {isLoading ? 
@@ -574,7 +610,7 @@ const SetLinks: NextPage = () => {
                               userLinksCount > 0 ?
                               <>
                                  {
-                                    (userLinks as any[]).map((i) => {
+                                    (userLinks as any[]).map((i, index) => {
                                     return (
                                        <>
                                           <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
@@ -776,6 +812,24 @@ const SetLinks: NextPage = () => {
                                              </div>
                                              {/* End Delete Modal */}
 
+                                             {/* TODO - Create a conditional sorting - Mashwishi */}
+                                             <div className="ml-2">
+                                                {
+                                                   index == 0 ? 
+                                                   <></> :
+                                                   <span onClick={sortLinkWIP}>
+                                                   <FontAwesomeIcon icon={faArrowUp} className="text-gray-500 hover:text-primary cursor-pointer mr-2" />
+                                                   </span>
+                                                }
+                                                {
+                                                   (userLinksCount - 1) == index ? 
+                                                   <></> :
+                                                   <span onClick={sortLinkWIP}>
+                                                   <FontAwesomeIcon icon={faArrowDown} className="text-gray-500 hover:text-primary cursor-pointer mr-2" />
+                                                   </span>
+                                                }
+                                             </div>
+
                                              </div>
                                              <div className="flex-grow">
                                                 <div className="inline-block w-[200px] cursor-pointer">
@@ -784,6 +838,7 @@ const SetLinks: NextPage = () => {
                                                    </span>
                                              </div>
                                              </div>
+
                                              <div className="flex-grow">
                                              
                                              <div className="inline-block w-[100%] badge badge-primary cursor-pointer">
@@ -797,6 +852,8 @@ const SetLinks: NextPage = () => {
                                                 </div>
                                              </div>
                                              </div>
+                                             
+
                                              </div>
                                           </div>
                                        </>
