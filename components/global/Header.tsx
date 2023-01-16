@@ -19,8 +19,8 @@ const Header: NextPage = () => {
               </Link>
             </li>
             <li>
-              <Link href="/pricing">
-                <p className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">Pricing</p>
+              <Link href="/referral">
+                <p className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">Referral</p>
               </Link>
             </li>
             <li>

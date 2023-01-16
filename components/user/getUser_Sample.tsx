@@ -417,9 +417,9 @@ const GetUser_Sample = (props: GetUser_Sample) => {
                                     <SignedIn>
                                     {
                                         user?.username?.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
-                                            <Link href="/user">
+                                            <Link href="/">
                                                 <button className="rounded-xl px-3 py-1 font-semibold bg-ghost">
-                                                    Settings
+                                                    Dashboard
                                                 </button>
                                             </Link>
                                             :
@@ -635,8 +635,8 @@ const GetUser_Sample = (props: GetUser_Sample) => {
                                         </div>
 
                                         <div className="flex flex-row mt-2">
-                                            <Link href="/dashboard">
-                                                <button className="btn btn-sm  btn-secondary">Edit Account</button>
+                                            <Link href="/user?tab=links">
+                                                <button className="btn btn-sm  btn-secondary">Edit Links</button>
                                             </Link>
                                         </div>
                                     </div>
