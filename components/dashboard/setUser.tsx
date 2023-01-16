@@ -26,6 +26,7 @@ import NumberFormatter from "../global/NumberFormatter";
 
 import ReactGA from 'react-ga'
 import moment from "moment";
+import useClipboard from "react-use-clipboard";
 
 interface OptionsDays {
     value: number;
@@ -55,6 +56,7 @@ const country_options = {
 const SetUser: NextPage = () => {
 
     const { user } = useUser();
+
     const gaEventTracker = useAnalyticsEventTracker('Dashboard');
     ReactGA.pageview('Dashboard')
 
@@ -79,6 +81,8 @@ const SetUser: NextPage = () => {
     const [topCountry, setTopCountry] = useState('')
     const [topBrowser, setTopBrowser] = useState('')
     const [topDevice, setTopDevice] = useState('')
+        
+    const [isCopied, setCopied] = useClipboard(`${process.env.NEXT_PUBLIC_HOSTNAME}/${user?.username ? user?.username : ''}`)
 
     //Anti-double run
     const effectRan = useRef(false)
@@ -301,8 +305,42 @@ const SetUser: NextPage = () => {
                                     <path fillRule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
                                     <path fillRule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
                                 </svg>
-                                View Profile
+                                Profile
                             </a>
+
+                            <Link href="/user?tab=links">
+                                <div className="inline-flex px-4 py-3 bg-primary hover:bg-secondary rounded-md ml-1 mb-3">
+                                    <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
+                                        <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                                    </svg>
+                                    Links
+                                </div>
+                            </Link>
+
+                            <div onClick={setCopied} className="inline-flex px-4 py-3 bg-primary hover:bg-secondary rounded-md ml-1 mb-3">
+                                {
+                                    isCopied ?
+                                    <>
+                                        <div className="tooltip-primary tooltip hover:tooltip-open tooltip-copied" data-tip="Copied">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#54361D" className="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+                                                <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+                                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+                                            </svg>
+                                        </div>
+                                    </>
+                                    :
+                                    <>
+                                        <div className="tooltip-primary tooltip hover:tooltip-open tooltip-copy" data-tip="Copy">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1E2933" className="bi bi-clipboard-fill" viewBox="0 0 16 16">
+                                                <path  d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
+                                            </svg>
+                                        </div>
+                                    </>
+                                }
+                            </div>
+
+                            {/* /user?tab=links */}
                     </div>
                 </div>
                 
@@ -418,10 +456,10 @@ const SetUser: NextPage = () => {
                     <div className="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span>Additional Info</span>
                     </div>
-                    <div className="overflow-y-auto max-h-[24rem]">
+                    <div className="w-auto max-h-[24rem]">
                         <ul className="">
                             <li className="flex items-center">
-                                <div className="flex items-center p-8 bg-white shadow rounded-lg">
+                                <div className="flex items-center p-4 bg-white rounded-lg">
                                     <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-yellow-600 bg-yellow-100 rounded-full mr-6">
                                         <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="h-6 w-6">
                                             <path d="m10.495 6.92 1.278-.619a.483.483 0 0 0 .126-.782c-.252-.244-.682-.139-.932.107-.23.226-.513.373-.816.53l-.102.054c-.338.178-.264.626.1.736a.476.476 0 0 0 .346-.027ZM7.741 9.808V9.78a.413.413 0 1 1 .783.183l-.22.443a.602.602 0 0 1-.12.167l-.193.185a.36.36 0 1 1-.5-.516l.112-.108a.453.453 0 0 0 .138-.326ZM5.672 12.5l.482.233A.386.386 0 1 0 6.32 12h-.416a.702.702 0 0 1-.419-.139l-.277-.206a.302.302 0 1 0-.298.52l.761.325Z"/>
@@ -437,7 +475,7 @@ const SetUser: NextPage = () => {
                                 </div>
                             </li>
                             <li className="flex items-center">
-                                <div className="flex items-center p-8 bg-white shadow rounded-lg">
+                                <div className="flex items-center p-4 bg-white rounded-lg">
                                     <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-teal-600 bg-teal-100 rounded-full mr-6">
                                         <svg  aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="h-6 w-6">
                                             <path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z"/>
@@ -452,7 +490,7 @@ const SetUser: NextPage = () => {
                                 </div>
                             </li>
                             <li className="flex items-center">
-                                <div className="flex items-center p-8 bg-white shadow rounded-lg">
+                                <div className="flex items-center p-4 bg-white rounded-lg">
                                     <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
                                         { isLoading ?
                                         <>

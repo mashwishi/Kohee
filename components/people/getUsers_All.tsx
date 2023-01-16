@@ -45,7 +45,8 @@ const GetUser_All = (props: GetUser_All) => {
                     </div>
 
                     <div className="mt-4 flex justify-center">
-                        <img className="h-28 w-28 rounded-full bg-gray-100 shadow sm:h-28 sm:w-28" src={props.profile_image_url} alt={props.username} />
+                        {/* sm:h-28 sm:w-28 */}
+                        <img className="h-28 w-28 rounded-full bg-gray-100 shadow object-cover" src={props.profile_image_url} alt={props.username} />
                     </div>
 
                     <div className="mt-6 flex justify-between text-center">
