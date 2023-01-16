@@ -74,6 +74,8 @@ const SetUser: NextPage = () => {
     const [followStatus, setfollowStatus] = useState('normal')
     const [followStatusAmount, setfollowStatusAmount] = useState(0)
 
+    const [formatfollowStatusAmount, setFormatInputNumberText] = useState('');
+
     const [visitData, setVisitData] = useState(0)
     const [shareData, setShareData] = useState(0)
     const [clickData, setClickData] = useState(0)
@@ -83,6 +85,8 @@ const SetUser: NextPage = () => {
     const [topDevice, setTopDevice] = useState('')
         
     const [isCopied, setCopied] = useClipboard(`${process.env.NEXT_PUBLIC_HOSTNAME}/${user?.username ? user?.username : ''}`)
+
+    
 
     //Anti-double run
     const effectRan = useRef(false)
@@ -144,6 +148,7 @@ const SetUser: NextPage = () => {
             const unfollowCount = analytics.filter((event: { type: string; }) => event.type === 'unfollow')?.length || 0;
 
             setfollowStatusAmount(followCount - unfollowCount)
+            numFormat(followCount - unfollowCount)
             setFollowData(followCount)
             setUnFollowData(unfollowCount)
 
@@ -262,6 +267,15 @@ const SetUser: NextPage = () => {
             console.error(error)
         }
     }
+
+    async function numFormat(n: number){
+        if (n === undefined) return setFormatInputNumberText('0');
+        if (n < 1e3) return setFormatInputNumberText(`${n}`) ;
+        if (n >= 1e3 && n < 1e6) return setFormatInputNumberText(+(n / 1e3).toFixed(1) + "K") ;
+        if (n >= 1e6 && n < 1e9) return setFormatInputNumberText(+(n / 1e6).toFixed(1) + "M") ;
+        if (n >= 1e9 && n < 1e12) return setFormatInputNumberText(+(n / 1e9).toFixed(1) + "B") ;
+        if (n >= 1e12) return setFormatInputNumberText(+(n / 1e12).toFixed(1) + "T") ;
+    };
 
     useEffect(() => {
         if(effectRan.current === false){
@@ -403,7 +417,6 @@ const SetUser: NextPage = () => {
                         </svg>
                     </div>
                     <div>
-
                         {
                         isLoading ? 
                         <LoadingText/>
@@ -411,8 +424,12 @@ const SetUser: NextPage = () => {
                         <>
                             <span className="inline-block text-2xl font-bold mr-1"><NumberFormatter input_number={followData}/></span>
                             <span className={`inline-block text-x font-semibold ${followStatus == 'normal' ? `text-gray-500` : followStatus == 'negative' ? `text-red-500` : followStatus == 'positive' ? `text-green-500` : `text-gray-500`}`}>
-                            { followStatusAmount == 0 ? `` : followStatusAmount < 0 ? `(${<NumberFormatter input_number={followStatusAmount}/>} loss)` :  followStatusAmount > 0 ? `(${<NumberFormatter input_number={followStatusAmount}/>} gain)` : `` }
+                            { 
+                            followStatusAmount == 0 ? `` : 
+                                followStatusAmount < 0 ? `(-${formatfollowStatusAmount})` :  
+                                    followStatusAmount > 0 ? `(+${formatfollowStatusAmount})` : `` }
                             </span>
+                            {/* <NumberFormatter input_number={followStatusAmount}/> */}
                         </>
                         }
                         <span className="block text-gray-500">Follower{followData > 1 ? `s` : ``}</span>
