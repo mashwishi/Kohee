@@ -22,13 +22,13 @@ const Footer = () => {
                         </Link>
                     </div>
                     <div className="px-5 py-2">
-                        <Link href="/docs/api" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                            API
-                        </Link>
+                        <a href="https://docs.kohee.app" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                            Docs
+                        </a>
                     </div>
                     <div className="px-5 py-2">
                         <Link href="/referral" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                            referral
+                            Referral
                         </Link>
                     </div>
                     <div className="px-5 py-2">
