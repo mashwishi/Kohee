@@ -28,6 +28,8 @@ import ReactGA from 'react-ga'
 import moment from "moment";
 import useClipboard from "react-use-clipboard";
 
+import QRCode from 'qrcode.react';
+
 interface OptionsDays {
     value: number;
     label: string;
@@ -86,8 +88,6 @@ const SetUser: NextPage = () => {
         
     const [isCopied, setCopied] = useClipboard(`${process.env.NEXT_PUBLIC_HOSTNAME}/${user?.username ? user?.username : ''}`)
 
-    
-
     //Anti-double run
     const effectRan = useRef(false)
 
@@ -99,7 +99,6 @@ const SetUser: NextPage = () => {
         }
         return color;
     }
-
 
     async function fetchData(NumberOfDays: number) {
 
@@ -311,28 +310,7 @@ const SetUser: NextPage = () => {
                         ))}
                         </select>
 
-                            <a 
-                            href={`/${user?.username ? user?.username : ''}`} 
-                            onClick={() => gaEventTracker('Card Live Preview', 'Card Live Preview')}
-                            className="inline-flex px-5 py-3 bg-primary hover:bg-secondary rounded-md ml-6 mb-3">
-                                <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
-                                    <path fillRule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
-                                    <path fillRule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
-                                </svg>
-                                Profile
-                            </a>
-
-                            <Link href="/user?tab=links">
-                                <div className="inline-flex px-4 py-3 bg-primary hover:bg-secondary rounded-md ml-1 mb-3">
-                                    <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
-                                        <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
-                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
-                                    </svg>
-                                    Links
-                                </div>
-                            </Link>
-
-                            <div onClick={setCopied} className="inline-flex px-4 py-3 bg-primary hover:bg-secondary rounded-md ml-1 mb-3">
+                            <div onClick={setCopied} className="inline-flex px-4 py-3 bg-gray-200 hover:bg-primary rounded-md ml-1 mb-3">
                                 {
                                     isCopied ?
                                     <>
@@ -353,6 +331,76 @@ const SetUser: NextPage = () => {
                                     </>
                                 }
                             </div>
+
+                            {/* Start QR Modal */}
+                            <input type="checkbox" id={`qr`} className="modal-toggle" />
+                            <div className="modal modal-bottom sm:modal-middle">
+                            <div className="modal-box">
+                                <div className="text-center">
+                                    <strong>
+                                        <h3 className="font-bold text-xl">
+                                            {user?.username ? `${user?.username[0].toUpperCase() + user?.username.slice(1)}'s` : `Share your`} QR
+                                        </h3>
+                                    </strong>
+                                </div>
+                                <div className="">
+                                    <QRCode id="qr-code" className="mx-auto my-8" value={user?.username ? `https://kohee.app/${user?.username}` : ''} size={300} fgColor={'#54361D'} />
+                                </div>
+                                <div className="modal-action">
+                                    <label className="btn bg-slate-600 text-slate-200 cursor-no-drop">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" className="bi bi-qr-code-scan" viewBox="0 0 16 16">
+                                            <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z"/>
+                                            <path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z"/>
+                                            <path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z"/>
+                                            <path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z"/>
+                                            <path d="M12 9h2V8h-2v1Z"/>
+                                        </svg>
+                                    </label>
+                                    <label htmlFor={`qr`} className="btn btn-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                            </div>
+                            {/* End QR Modal */}
+                            {/* Start QR Button */}
+                            <label htmlFor={`qr`} className="cursor-pointer">
+                                <div className="inline-flex px-4 py-3 bg-gray-200 hover:bg-primary rounded-md ml-1 mb-3">
+                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-qr" data-tip="QR">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1E2933" className="bi bi-qr-code-scan" viewBox="0 0 16 16">
+                                            <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z"/>
+                                            <path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z"/>
+                                            <path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z"/>
+                                            <path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z"/>
+                                            <path d="M12 9h2V8h-2v1Z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </label>
+                            {/* End QR Button */}
+
+                            <a 
+                            href={`/${user?.username ? user?.username : ''}`} 
+                            onClick={() => gaEventTracker('Card Live Preview', 'Card Live Preview')}
+                            className="inline-flex px-5 py-3 bg-primary hover:bg-secondary rounded-md ml-1 mb-3">
+                                <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
+                                    <path fillRule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                                    <path fillRule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                                </svg>
+                                Profile
+                            </a>
+
+                            <Link href="/user?tab=links">
+                                <div className="inline-flex px-4 py-3 bg-primary hover:bg-secondary rounded-md ml-1 mb-3">
+                                    <svg aria-hidden="true" fill="none" viewBox="0 0 16 16" stroke="currentColor" className="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
+                                        <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                                    </svg>
+                                    Links
+                                </div>
+                            </Link>
 
                             {/* /user?tab=links */}
                     </div>
@@ -619,7 +667,6 @@ const SetUser: NextPage = () => {
                 </section>
                 
                 {/* <section className="text-right font-semibold text-gray-500"></section> */}
-
                 </main>
             </div>
         </>

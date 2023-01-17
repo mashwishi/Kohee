@@ -1,6 +1,6 @@
 {
   "name": "Kohee",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -25,6 +25,7 @@
     "nanoid": "^4.0.0",
     "next": "12.2.2",
     "npm": "^9.1.2",
+    "qrcode.react": "^3.1.0",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-colorful": "^5.6.1",
