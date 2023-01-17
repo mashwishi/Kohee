@@ -75,6 +75,14 @@ type GetUser_Sample = {
     userContinentLoc: string;
     userContinentCode: string;
     is_verified: number;
+    is_admin: number;
+    is_mod: number;
+    is_vip: number;
+    is_partner: number;
+    is_contibutor: number;
+    is_sponsor: number;
+    is_supporter: number;
+    is_business: number;
 };
 
 const GetUser_Sample = (props: GetUser_Sample) => {

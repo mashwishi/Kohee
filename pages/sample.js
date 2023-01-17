@@ -51,6 +51,14 @@ const Sample = () => {
     <>
         <GetUser_Sample 
         is_verified={data.is_verified}
+        is_admin={data.is_admin}
+        is_mod={data.is_mod}
+        is_vip={data.is_vip}
+        is_partner={data.is_partner}
+        is_contibutor={data.is_contibutor}
+        is_sponsor={data.is_sponsor}
+        is_supporter={data.is_sponsor}
+        is_business={data.is_business}
         followers={4968}
         visits={2458}
         ratings={5} 

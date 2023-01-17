@@ -67,6 +67,14 @@ const Username = ({ user_data, location }) => {
         {effectRan.current = true}
         <GetUser
         is_verified={udata.is_verified}
+        is_admin={udata.is_admin}
+        is_mod={udata.is_mod}
+        is_vip={udata.is_vip}
+        is_partner={udata.is_partner}
+        is_contibutor={udata.is_contibutor}
+        is_sponsor={udata.is_sponsor}
+        is_supporter={udata.is_business}
+        is_business={udata.is_business}
         data_username={udata.username}
         data_banner={udata.banner}
         data_bio={udata.bio}
