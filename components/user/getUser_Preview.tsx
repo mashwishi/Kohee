@@ -520,41 +520,74 @@ const GetUser_Preview = (props: GetUser_Preview) => {
                         <div className="text-sm">
                             <div className="flex flex-row ml-auto items-center">
                                 <div className="mb-1">
-                                    {/* User Badge - Temporary set all to mashwishi for preview */}
-                                    {props.username.toLowerCase() == 'mashwishi' ? 
+
                                     <div className="flex flex-row items-center mt-4">
-                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-admin" data-tip="Admin">
-                                    <img className="mr-1" src="/badge/others/admin.png" alt="admin-badge" width="24px" height="28px"/>
+                                        {props.is_admin === 1 ? 
+                                        <>
+                                            <div className="tooltip-primary tooltip hover:tooltip-open tooltip-admin" data-tip="Admin">
+                                            <img className="mr-1" src="/badge/others/admin.png" alt="admin-badge" width="24px" height="28px"/>
+                                            </div>
+                                        </>
+                                        :<></>}
+
+                                        {props.is_mod === 1 ? 
+                                        <>
+                                            <div className="tooltip-primary tooltip hover:tooltip-open tooltip-mod" data-tip="Moderator">
+                                            <img className="mr-1" src="/badge/others/moderator.png" alt="mod-badge" width="24px" height="28px"/>
+                                            </div>
+                                        </>
+                                        :<></>}
+
+                                        {props.is_vip === 1 ? 
+                                        <>
+                                            <div className="tooltip-primary tooltip hover:tooltip-open tooltip-vip" data-tip="VIP">
+                                            <img className="mr-1" src="/badge/others/vip.png" alt="vip-badge" width="24px" height="28px"/>
+                                            </div>
+                                        </>
+                                        :<></>}
+
+                                        {props.is_partner === 1 ? 
+                                        <>
+                                            <div className="tooltip-primary tooltip hover:tooltip-open tooltip-partner" data-tip="Partner">
+                                            <img className="mr-1" src="/badge/others/partner.png" alt="partner-badge" width="24px" height="28px"/>
+                                            </div>
+                                        </>
+                                        :<></>}
+
+                                        {props.is_contibutor === 1 ? 
+                                        <>
+                                            <div className="tooltip-primary tooltip hover:tooltip-open tooltip-contributor" data-tip="Contributor">
+                                            <img className="mr-1" src="/badge/others/contributor.png" alt="contributor-badge" width="24px" height="28px"/>
+                                            </div>
+                                        </>
+                                        :<></>}
+
+                                        {props.is_sponsor === 1 ? 
+                                        <>
+                                            <div className="tooltip-primary tooltip hover:tooltip-open tooltip-sponsor" data-tip="Sponsor">
+                                            <img className="mr-1" src="/badge/others/sponsor.png" alt="sponsor-badge" width="24px" height="28px"/>
+                                            </div>
+                                        </>
+                                        :<></>}
+
+                                        {props.is_supporter === 1 ? 
+                                        <>
+                                            <div className="tooltip-primary tooltip hover:tooltip-open tooltip-supporter" data-tip="Supporter">
+                                            <img className="mr-1" src="/badge/others/supporter.png" alt="supporter-badge" width="24px" height="28px"/>
+                                            </div>
+                                        </>
+                                        :<></>}
+
+                                        {props.is_business === 1 ? 
+                                        <>
+                                            <div className="tooltip-primary tooltip hover:tooltip-open tooltip-business" data-tip="Business">
+                                            <img className="mr-1" src="/badge/others/business.png" alt="business-badge" width="24px" height="28px"/>
+                                            </div>
+                                        </>
+                                        :<></>}
+
                                     </div>
-                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-mod" data-tip="Moderator">
-                                    <img className="mr-1" src="/badge/others/moderator.png" alt="mod-badge" width="24px" height="28px"/>
-                                    </div>
-                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-vip" data-tip="VIP">
-                                    <img className="mr-1" src="/badge/others/vip.png" alt="vip-badge" width="24px" height="28px"/>
-                                    </div>
-                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-partner" data-tip="Partner">
-                                    <img className="mr-1" src="/badge/others/partner.png" alt="partner-badge" width="24px" height="28px"/>
-                                    </div>
-                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-contributor" data-tip="Contributor">
-                                    <img className="mr-1" src="/badge/others/contributor.png" alt="contributor-badge" width="24px" height="28px"/>
-                                    </div>
-                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-sponsor" data-tip="Sponsor">
-                                    <img className="mr-1" src="/badge/others/sponsor.png" alt="sponsor-badge" width="24px" height="28px"/>
-                                    </div>
-                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-supporter" data-tip="Supporter">
-                                    <img className="mr-1" src="/badge/others/supporter.png" alt="supporter-badge" width="24px" height="28px"/>
-                                    </div>
-                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-business" data-tip="Business">
-                                    <img className="mr-1" src="/badge/others/business.png" alt="business-badge" width="24px" height="28px"/>
-                                    </div>
-                                    </div>
-                                    :
-                                    <div className="flex flex-row items-center mt-4">
-                                    <div className="tooltip-primary tooltip hover:tooltip-open tooltip-empty" data-tip="Empty">
-                                    <img className="mr-1" src="/badge/empty.png" alt="empty-badge" width="24px" height="28px"/>
-                                    </div>
-                                    </div>
-                                    }
+
                                 </div>
                             </div>
                         </div>
