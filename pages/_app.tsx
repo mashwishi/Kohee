@@ -43,15 +43,15 @@ interface optionsPagesType {
   slug: string; } 
 
 const optionsPagesType: optionsPagesType[] = [   
-  { id: 1, slug: '/sign-up', title: 'Sign Up', description: 'Create an account', image: 'https://i.imgur.com/WHshbGu.png' },
-  { id: 2, slug: '/sign-in', title: 'Sign In', description: 'Login your kohee account', image: 'https://i.imgur.com/WHshbGu.png' },
-  { id: 3, slug: '/docs/api', title: 'API Documentation', description: 'Learn more about kohee api', image: 'https://i.imgur.com/WHshbGu.png' },
-  { id: 4, slug: '/people', title: 'Discover', description: 'List of all users in this app, Explore users that are part of kohee.', image: 'https://i.imgur.com/WHshbGu.png' },
-  { id: 5, slug: '/referral', title: 'Referral', description: 'Invite new users, Get more feature!', image: 'https://i.imgur.com/WHshbGu.png' },
-  { id: 6, slug: '/terms-and-condition', title: 'Terms and Condition', description: 'Our Terms And Condition', image: 'https://i.imgur.com/WHshbGu.png' },
-  { id: 7, slug: '/privacy-policy', title: 'Privacy Policy', description: 'Our Privacy Policy', image: 'https://i.imgur.com/WHshbGu.png' },
-  { id: 8, slug: '/about', title: 'About', description: 'Learn more about Kohee', image: 'https://i.imgur.com/WHshbGu.png' },
-  { id: 9, slug: '/', title: 'Create a better profile!', description: 'Gather all of the content you produce and share, Put it in one place where it can be easily found.', image: 'https://i.imgur.com/WHshbGu.png' },
+  { id: 1, slug: '/sign-up', title: 'Sign Up', description: 'Create an account', image: 'https://i.imgur.com/tw6hBDm.png' },
+  { id: 2, slug: '/sign-in', title: 'Sign In', description: 'Login your kohee account', image: 'https://i.imgur.com/tw6hBDm.png' },
+  { id: 3, slug: '/docs/api', title: 'API Documentation', description: 'Learn more about kohee api', image: 'https://i.imgur.com/tw6hBDm.png' },
+  { id: 4, slug: '/people', title: 'Discover', description: 'List of all users in this app, Explore users that are part of kohee.', image: 'https://i.imgur.com/tw6hBDm.png' },
+  { id: 5, slug: '/referral', title: 'Referral', description: 'Invite new users, Get more feature!', image: 'https://i.imgur.com/tw6hBDm.png' },
+  { id: 6, slug: '/terms-and-condition', title: 'Terms and Condition', description: 'Our Terms And Condition', image: 'https://i.imgur.com/tw6hBDm.png' },
+  { id: 7, slug: '/privacy-policy', title: 'Privacy Policy', description: 'Our Privacy Policy', image: 'https://i.imgur.com/tw6hBDm.png' },
+  { id: 8, slug: '/about', title: 'About', description: 'Learn more about Kohee', image: 'https://i.imgur.com/tw6hBDm.png' },
+  { id: 9, slug: '/', title: 'Create a better profile!', description: 'Gather all of the content you produce and share, Put it in one place where it can be easily found.', image: 'https://i.imgur.com/tw6hBDm.png' },
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -95,7 +95,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta name="twitter:description" content={userMeta.bio} />
             <meta name="twitter:image" content={userMeta.profile_image_url} />
 
-            <link rel="icon" type="image/png" href={userMeta.profile_image_url} />
+            <link rel="icon" type="image/png" href='/favicon.ico' />
             <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${userMeta.username}&profile_image_url=${userMeta.profile_image_url}`}/>
             <meta name="theme-color" content="#E0A82E" />
 
@@ -134,7 +134,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <meta name="twitter:description" content={data.description} />
                   <meta name="twitter:image" content={data.image} />
 
-                  <link rel="icon" type="image/png" href='/bean.png' />
+                  <link rel="icon" type="image/png" href='/favicon.ico' />
 
                   <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${data.title}&profile_image_url=${data.image}`}/>
                   <meta name="theme-color" content="#E0A82E" />

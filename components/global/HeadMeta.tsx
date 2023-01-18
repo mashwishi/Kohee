@@ -31,7 +31,7 @@ const HeadMeta = (props: HeadMeta) => {
           <meta property="og:url" content={props.og_url ? `${props.og_url}` : `${process.env.NEXT_PUBLIC_HOSTNAME}`} />
           <meta property="og:type" content="website"/>
 
-          <meta property="og:image" content={props.og_image ? `${props.og_image}` : `https://i.imgur.com/WHshbGu.png`} />
+          <meta property="og:image" content={props.og_image ? `${props.og_image}` : `https://i.imgur.com/tw6hBDm.png`} />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
 
@@ -44,10 +44,10 @@ const HeadMeta = (props: HeadMeta) => {
           <meta property="twitter:url" content={`${props.og_url ? `${props.og_url}` : `${process.env.NEXT_PUBLIC_HOSTNAME}`}`} />
           <meta name="twitter:title" content={`Kohee. ${props.title_ext ? `| ${props.title_ext}` : `Create a better profile!`}`} />
           <meta name="twitter:description" content={props.description ? `${props.description}` : `${temp_desc}`} />
-          <meta name="twitter:image" content={props.og_image ? `${props.og_image}` : `https://i.imgur.com/WHshbGu.png`} />
+          <meta name="twitter:image" content={props.og_image ? `${props.og_image}` : `https://i.imgur.com/tw6hBDm.png`} />
       
 
-          <link rel="icon" type="image/png" href="/bean.png" />
+          <link rel="icon" type="image/png" href="/favicon.ico" />
           <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=optional" rel="stylesheet" />
       </Head>
     </>
