@@ -32,14 +32,14 @@ const Landing: NextPage = () => {
                     <Image className="cursor-pointer mx-auto sm:w-1/4" src="/kohee-fill.webp" alt="kohee" width="235" height="255" priority />
                 </div> */}
 
-                <div className="flex justify-center mb-24">
+                <div className="flex justify-center">
                     <div className="flex justify-center content-center relative" >
 
                         <div className="cursor-pointer animate-bounce">
-                            <Image  src="/bean.png" alt="kohee" width="350" height="250"  priority/>
+                            <Image  src="/kohee_cup.webp" alt="kohee" width="300" height="330"  priority/>
                         </div>
-                        <div className="cursor-pointer ml-[-80px] mt-[100px] animate-bounce">
-                            <Image src="/bean.png" width="150" height="100" alt="kohee" priority/>
+                        <div className="cursor-pointer ml-[-55px] mt-[80px] animate-bounce">
+                            <Image src="/splash.png" width="25" height="60" alt="kohee" priority/>
                         </div>
                     
                     </div>

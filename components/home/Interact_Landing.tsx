@@ -26,14 +26,14 @@ const Interact_Landing: NextPage = () => {
             <div className="flex flex-wrap items-center sm:-mx-3">
             <div className="w-full md:w-1/2 md:px-3">
 
-                <div className="flex justify-center mb-2">
+                <div className="flex justify-center ">
                     <div className="flex justify-center content-center relative" >
 
                         <div className="cursor-pointer animate-bounce">
-                            <Image  src="/bean.png" alt="kohee" width="350" height="250"  priority/>
+                            <Image  src="/kohee_cup.webp" alt="kohee" width="300" height="330"  priority/>
                         </div>
-                        <div className="cursor-pointer ml-[-80px] mt-[100px] animate-bounce">
-                            <Image src="/bean.png" width="150" height="100" alt="kohee" priority/>
+                        <div className="cursor-pointer ml-[-55px] mt-[100px] animate-bounce">
+                            <Image src="/splash.png" width="30" height="65" alt="kohee" priority/>
                         </div>
                     
                     </div>

@@ -9,7 +9,7 @@
 <div align="center">
 <br />
   <a href="https://github.com/mashwishi/kohee">
-    <img src="https://i.imgur.com/z750UGd.png" alt="Logo" width="300">
+    <img src="https://kohee.app/kohee_cup.webp" alt="Logo" width="300">
   </a>
 <br /><br />
   <p align="center">
@@ -129,6 +129,8 @@ This section list of major frameworks/libraries we used to our your project.
 - [x] User Followers and Visits
 - [x] Front-End Enhancement
 - [X] User Analytics
+- [X] QR Generator
+- [ ] QR Scanner
 - [ ] Ads to support the project
 - [ ] Progressive Website Application Feature
 - [ ] Referral Program to earn more feature
