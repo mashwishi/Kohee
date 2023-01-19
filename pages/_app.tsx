@@ -27,12 +27,14 @@ const publicPages = [
   "/terms-and-condition",
   "/privacy-policy",
   "/about",
+  "/_offline"
 ];
 
 const DisableNav = [
   "/[username]", 
   "/preview/[username]", 
   "/sample", 
+  "/_offline"
 ];
 
 interface optionsPagesType {
@@ -95,7 +97,23 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta name="twitter:description" content={userMeta.bio} />
             <meta name="twitter:image" content={userMeta.profile_image_url} />
 
+            <meta name="application-name" content="Kohee" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+            <meta name="apple-mobile-web-app-title" content="Kohee" />
+            <meta name="description" content="Gather all of the content you produce and share, Put it in one place where it can be easily found." />
+            <meta name="format-detection" content="telephone=no" />
+            <meta name="mobile-web-app-capable" content="yes" />
+            <meta name="theme-color" content="#E0A82E" />
+
+            <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+            <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+            <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+
+            <link rel="manifest" href='/manifest.json' />
             <link rel="icon" type="image/png" href='/favicon.ico' />
+
             <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${userMeta.username}&profile_image_url=${userMeta.profile_image_url}`}/>
             <meta name="theme-color" content="#E0A82E" />
 
@@ -134,6 +152,21 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <meta name="twitter:description" content={data.description} />
                   <meta name="twitter:image" content={data.image} />
 
+                  <meta name="application-name" content="Kohee" />
+                  <meta name="apple-mobile-web-app-capable" content="yes" />
+                  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+                  <meta name="apple-mobile-web-app-title" content="Kohee" />
+                  <meta name="description" content="Gather all of the content you produce and share, Put it in one place where it can be easily found." />
+                  <meta name="format-detection" content="telephone=no" />
+                  <meta name="mobile-web-app-capable" content="yes" />
+                  <meta name="theme-color" content="#E0A82E" />
+
+                  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+                  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+                  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+                  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+
+                  <link rel="manifest" href='/manifest.json' />
                   <link rel="icon" type="image/png" href='/favicon.ico' />
 
                   <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${data.title}&profile_image_url=${data.image}`}/>

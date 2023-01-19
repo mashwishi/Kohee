@@ -129,10 +129,10 @@ This section list of major frameworks/libraries we used to our your project.
 - [x] User Followers and Visits
 - [x] Front-End Enhancement
 - [X] User Analytics
+- [X] Progressive Website Application Feature
 - [X] QR Generator
 - [ ] QR Scanner
 - [ ] Ads to support the project
-- [ ] Progressive Website Application Feature
 - [ ] Referral Program to earn more feature
 - [ ] Release on Google Play Store for Android
 - [ ] Release on App Store Store for iOS
