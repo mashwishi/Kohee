@@ -27,14 +27,13 @@ const publicPages = [
   "/terms-and-condition",
   "/privacy-policy",
   "/about",
-  "/_offline"
+  "/faq"
 ];
 
 const DisableNav = [
   "/[username]", 
   "/preview/[username]", 
   "/sample", 
-  "/_offline"
 ];
 
 interface optionsPagesType {

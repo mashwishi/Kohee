@@ -16,101 +16,11 @@ const NavBar: NextPage = () => {
 
   return (
     <>
-
         <div className="bg-gray-200 h-full w-full">
             {/* Code block starts */}
             <nav className="bg-white shadow xl:block hidden">
                 <div className="mx-auto container px-6 py-2 xl:py-0">
                     <div className="flex items-center justify-between">
-                        <div className="inset-y-0 left-0 flex items-center xl:hidden">
-                            <div className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                                <div className="visible xl:hidden">
-
-                                    {/* Start - Menu List - Hidden on XL */}
-                                    <ul className="p-2 border-r bg-white absolute rounded left-0 right-0 shadow mt-8 md:mt-8 hidden">
-                                        <SignedIn>
-                                        <li className="flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-[#7A4521] focus:text-[#7A4521] focus:outline-none">
-                                            <div className="flex items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                                    <rect x={4} y={4} width={6} height={6} rx={1} />
-                                                    <rect x={14} y={4} width={6} height={6} rx={1} />
-                                                    <rect x={4} y={14} width={6} height={6} rx={1} />
-                                                    <rect x={14} y={14} width={6} height={6} rx={1} />
-                                                </svg>
-                                                <span className="ml-2 font-bold">Dashboard</span>
-                                            </div>
-                                        </li>
-                                        </SignedIn>
-                                        <li className="flex xl:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-[#7A4521] focus:text-[#7A4521] focus:outline-none flex justify-center">
-                                            <div className="flex items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                                    <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
-                                                </svg>
-                                                <span className="ml-2 font-bold">Products</span>
-                                            </div>
-                                        </li>
-                                        <li className="flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-[#7A4521] flex items-center focus:text-[#7A4521] focus:outline-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                <polyline points="8 16 10 10 16 8 14 14 8 16" />
-                                                <circle cx={12} cy={12} r={9} />
-                                            </svg>
-                                            <span className="ml-2 font-bold">Performance</span>
-                                        </li>
-                                        <li className="border-b border-gray-300 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-4 hover:text-[#7A4521] flex items-center focus:text-[#7A4521] focus:outline-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-code" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                <polyline points="7 8 3 12 7 16" />
-                                                <polyline points="17 8 21 12 17 16" />
-                                                <line x1={14} y1={4} x2={10} y2={20} />
-                                            </svg>
-                                            <span className="ml-2 font-bold">API Docs</span>
-                                        </li>
-                                        <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-[#7A4521] flex items-center focus:text-[#7A4521] focus:outline-none">
-                                            <div className="flex items-center">
-                                                <div className="w-12 cursor-pointer flex text-sm border-2 border-transparent rounded focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                                                    <img className="rounded h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png" alt="logo" />
-                                                </div>
-                                                <p className="text-sm ml-2 cursor-pointer">Jane Doe</p>
-                                                <div className="sm:ml-2 text-white relative">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-down cursor-pointer" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                                        <polyline points="6 9 12 15 18 9" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-[#7A4521] focus:text-[#7A4521] focus:outline-none">
-                                            <div className="flex items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                                    <circle cx={12} cy={7} r={4} />
-                                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                                                </svg>
-                                                <span className="ml-2">Profile</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-
-                                    <svg aria-haspopup="true" aria-label="Main Menu" xmlns="http://www.w3.org/2000/svg" className="show-m-menu icon icon-tabler icon-tabler-menu" width={28} height={28} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <line x1={4} y1={8} x2={20} y2={8} />
-                                        <line x1={4} y1={16} x2={20} y2={16} />
-                                    </svg>
-                                    {/* End - Menu List - Hidden on XL */}
-
-                                </div>
-                                <div className="hidden close-m-menu text-gray-700" >
-                                    <svg aria-label="Close" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <line x1={18} y1={6} x2={6} y2={18} />
-                                        <line x1={6} y1={6} x2={18} y2={18} />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
                         <div className="flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">
                             <div className="flex items-center">
                                 <Link href='/'>
@@ -171,6 +81,18 @@ const NavBar: NextPage = () => {
                                         </span>
                                         Docs
                                     </a>
+                                <Link href='/faq'>
+                                    <a className="flex px-5 items-center py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
+                                        <span className="mr-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-patch-question" viewBox="0 0 16 16">
+                                                <path d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745z"/>
+                                                <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
+                                                <path d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>
+                                            </svg>
+                                        </span>
+                                        FAQ
+                                    </a>
+                                </Link>
                             </div>
                             {/* End - Menu List - Default */}
 
@@ -239,7 +161,7 @@ const NavBar: NextPage = () => {
                 </div>
                 {/*Mobile responsive sidebar*/}
                 <div className={show ? "w-full xl:hidden h-full absolute z-40  transform  translate-x-0 " : "   w-full xl:hidden h-full absolute z-40  transform -translate-x-full"}>
-                    <div className="bg-gray-800 opacity-50 w-full h-full" onClick={() => setShow(!show)} />
+                    <div className="bg-gray-800 opacity-50 w-full h-screen" onClick={() => setShow(!show)} />
                     <div className="w-64 z-40 fixed overflow-y-auto z-40 top-0 bg-white shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out">
                         <div className="px-6 h-full">
                             <div className="flex flex-col justify-between h-full w-full">
@@ -295,7 +217,7 @@ const NavBar: NextPage = () => {
                                                                     <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
                                                                 </svg>
                                                             </div>
-                                                            <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">referral</p>
+                                                            <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">Referral</p>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -317,7 +239,7 @@ const NavBar: NextPage = () => {
                                                 </li>
                                             </a>
                                         </Link>
-                                        <Link href='/docs/api'>
+                                        <a href='https://docs.kohee.app'>
                                             <a className="cursor-pointer">
                                                 <li className="text-gray-800 pt-8 cursor-pointer">
                                                     <div className="flex items-center justify-between">
@@ -330,7 +252,25 @@ const NavBar: NextPage = () => {
                                                                     <line x1={14} y1={4} x2={10} y2={20} />
                                                                 </svg>
                                                             </div>
-                                                            <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">API Docs</p>
+                                                            <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">Docs</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </a>
+                                        </a>
+                                        <Link href='/faq'>
+                                            <a className="cursor-pointer">
+                                                <li className="text-gray-800 pt-8">
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center">
+                                                            <div className="w-6 h-6 md:w-8 md:h-8 text-gray-800">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-patch-question" viewBox="0 0 16 16">
+                                                                    <path d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745z"/>
+                                                                    <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
+                                                                    <path d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>
+                                                                </svg>
+                                                            </div>
+                                                            <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">FAQ</p>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -382,7 +322,6 @@ const NavBar: NextPage = () => {
        
 
         </div>
-
     </>
   );
 };
