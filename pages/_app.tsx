@@ -116,7 +116,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${userMeta.username}&profile_image_url=${userMeta.profile_image_url}`}/>
             <meta name="theme-color" content="#E0A82E" />
 
-            <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT}`} crossOrigin="anonymous"></script>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1971863279565387" crossOrigin="anonymous"></script>
             <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
           </Head>
         :
@@ -171,7 +171,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${data.title}&profile_image_url=${data.image}`}/>
                   <meta name="theme-color" content="#E0A82E" />
 
-                  <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLEADS_CLIENT}`} crossOrigin="anonymous"></script>
+                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1971863279565387" crossOrigin="anonymous"></script>
                   <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
                 </>
               ))}
