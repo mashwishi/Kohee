@@ -69,9 +69,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Head>
             <title>Kohee. {`| ${userMeta.username}`}</title>
 
-            <meta charSet="utf-8" />
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-
             <meta name="description" content={userMeta.bio} />
           
             {/* Facebook Meta Tags */}
@@ -85,9 +82,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
 
-            <meta property="fb:app_id" content="695286688778792" />
-
-
             {/* Twitter Meta Tags */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta property="twitter:domain" content='kohee.app' />
@@ -96,27 +90,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta name="twitter:description" content={userMeta.bio} />
             <meta name="twitter:image" content={userMeta.profile_image_url} />
 
-            <meta name="application-name" content="Kohee" />
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-            <meta name="apple-mobile-web-app-title" content="Kohee" />
-            <meta name="description" content="Gather all of the content you produce and share, Put it in one place where it can be easily found." />
-            <meta name="format-detection" content="telephone=no" />
-            <meta name="mobile-web-app-capable" content="yes" />
-            <meta name="theme-color" content="#E0A82E" />
-
-            <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-            <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
-            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
-            <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
-
-            <link rel="manifest" href='/manifest.json' />
-            <link rel="icon" type="image/png" href='/favicon.ico' />
-
-            <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${userMeta.username}&profile_image_url=${userMeta.profile_image_url}`}/>
-            <meta name="theme-color" content="#E0A82E" />
-
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1971863279565387" crossOrigin="anonymous"></script>
             <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
           </Head>
         :
@@ -124,9 +97,6 @@ function MyApp({ Component, pageProps }: AppProps) {
               {filteredOptionsPagesType.map((data) => (
                 <>
                   <title>Kohee. {`| ${data.title}`}</title>
-
-                  <meta charSet="utf-8" />
-                  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
                   <meta name="description" content={data.description} />
 
@@ -141,8 +111,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <meta property="og:image:width" content="1200" />
                   <meta property="og:image:height" content="630" />
 
-                  <meta property="fb:app_id" content="695286688778792" />
-
                   {/* Twitter Meta Tags */}
                   <meta name="twitter:card" content="summary_large_image" />
                   <meta property="twitter:domain" content='kohee.app' />
@@ -151,27 +119,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <meta name="twitter:description" content={data.description} />
                   <meta name="twitter:image" content={data.image} />
 
-                  <meta name="application-name" content="Kohee" />
-                  <meta name="apple-mobile-web-app-capable" content="yes" />
-                  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-                  <meta name="apple-mobile-web-app-title" content="Kohee" />
-                  <meta name="description" content="Gather all of the content you produce and share, Put it in one place where it can be easily found." />
-                  <meta name="format-detection" content="telephone=no" />
-                  <meta name="mobile-web-app-capable" content="yes" />
-                  <meta name="theme-color" content="#E0A82E" />
-
-                  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-                  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
-                  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
-                  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
-
-                  <link rel="manifest" href='/manifest.json' />
-                  <link rel="icon" type="image/png" href='/favicon.ico' />
-
-                  <link type="application/json+oembed" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/api/oembed?username=${data.title}&profile_image_url=${data.image}`}/>
-                  <meta name="theme-color" content="#E0A82E" />
-
-                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1971863279565387" crossOrigin="anonymous"></script>
                   <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
                 </>
               ))}
