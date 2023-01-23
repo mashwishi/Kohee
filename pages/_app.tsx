@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 import { Analytics } from '@vercel/analytics/react';
 import NavBar from "../components/global/NavBar";
 import Footer from "../components/global/Footer";
+import Script from 'next/script'
 
 // GOOGLE ANALYTICS
 import ReactGA from 'react-ga';
@@ -64,6 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Script data-ad-client="ca-pub-1971863279565387" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></Script>
       {
         userMeta ?
           <Head>
