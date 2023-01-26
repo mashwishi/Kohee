@@ -539,7 +539,11 @@ const GetUser_Sample = (props: GetUser_Sample) => {
                         </div>
 
                         {/*FullName*/}
-                        <div className="h-5 w-96">{userFullname}</div>
+                        <div className="h-5 inline-block w-[200px]">
+                            <span className="font-semibold truncate block">
+                                {userFullname}
+                            </span>                          
+                        </div>
 
                         {/*Bio*/}
                         <div className="py-2 break-all bbcode">
