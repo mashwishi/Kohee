@@ -160,7 +160,7 @@ const NavBar: NextPage = () => {
                     </div>
                 </div>
                 {/*Mobile responsive sidebar*/}
-                <div className={show ? "w-full xl:hidden h-full absolute z-40  transform  translate-x-0 " : "   w-full xl:hidden h-full absolute z-40  transform -translate-x-full"}>
+                <div className={show ? "w-full xl:hidden h-full fixed z-40 " : "   w-full xl:hidden h-full absolute z-40  transform -translate-x-full"}>
                     <div className="bg-gray-800 opacity-50 w-full h-screen" onClick={() => setShow(!show)} />
                     <div className="w-64 z-40 fixed overflow-y-auto z-40 top-0 bg-white shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out">
                         <div className="px-6 h-full">
