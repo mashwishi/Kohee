@@ -74,6 +74,13 @@ const GetUser = (props: GetUser) => {
     //isVisitorSginein
     const [userSignedInID, setUserSignedInID] = useState(isSignedIn ? user?.id : null)
 
+    //userMessage
+    const [userMessage, setUserMessage] = useState<any | null>(null);
+
+    //Follow Mouse Over Button
+    const [followMouseOver, setFollowMouseOver] = useState(false)
+    
+
     const [userFullname, setuserFullname] = useState(props.data_last_name !== 'null' &&  props.data_last_name !== null ?  `${props.data_first_name} ${props.data_last_name}` : `${props.data_first_name}`);
 
     //Anti-double run
@@ -521,50 +528,128 @@ const GetUser = (props: GetUser) => {
                             </div>    
                         </div>
 
-                        {/*Follow Function*/}
-                        <div className="abosolute flex flex-row justify-end mr-4 px-2 mt-8">
-                            <div className="flex flex-row space-x-2">
+                        {/* Start Msg Modal */}
+                        <input type="checkbox" id={`send-msg`} className="modal-toggle" />
+                        <div className="modal modal-bottom sm:modal-middle">
+                        <div className="modal-box">
+                            <div className="text-center">
+                                    <p className="font-semibold text-xl">
+                                        Send message to <strong>{props.data_username}</strong>.
+                                    </p>
                             </div>
-                            <div className="flex flex-row space-x-2">
-                                <div className="h-5 w-20">
+                            <div className="relative mt-4 w-[100%]">
+                                <textarea
+                                className="max-h-36 min-h-24 cursor-pointer hXjh5Waxs3XN6zW5pfXs w-[100%] py-2 px-3 rounded-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue"
+                                placeholder="Feature not yet available, Coming Soon!"
+                                maxLength={200}
+                                value={userMessage}
+                                onChange={(e) => setUserMessage(e.target.value)}
+                                />
+                                <div className="absolute bottom-2 right-2 text-xs text-gray-500">{userMessage?.length ? userMessage?.length : 0}/200</div>
+                            </div>
+
+                            <div className="flex items-center">
+                                <input type="checkbox" className="checkbox checkbox-primary mr-2" />
+                                <span className="label-text text-md">Send message as annonymous</span>
+                            </div>
+
+                            <div className="modal-action">
+                                <label className="btn btn-outline btn-accent cursor-no-drop">
+                                    <svg xmlns="http://www.w3.org/2000/svg"  width="18" height="18" fill="currentColor" className="bi bi-send" viewBox="0 0 16 16">
+                                        <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                                    </svg>
+                                </label>
+                                <label htmlFor={`send-msg`} className="btn btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+                        </div>
+                        {/* End Msg Modal */}
+
+                        {/* Start - Message, Follow and Dashboard Button */}
+                        <div className="abosolute flex flex-row justify-end mr-4 px-2 mt-8">
+                            <div className="">
+                                    {/* Start Msg Button */}
+                                    <label htmlFor={`send-msg`} className="cursor-pointer rounded-full btn-primary btn-circle  btn-outline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" className="bi bi-chat" viewBox="0 0 16 16">
+                                        <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
+                                        </svg>
+                                    </label>
+                                    {/* End Msg Button */}
+                            </div>
+                            <div className="ml-2">
+                                    {/* Start Follow Button */}
                                     <SignedIn>
                                     {
                                         user?.username?.toString().toLocaleLowerCase() === props.data_username.toLocaleLowerCase() ?
                                             <Link href="/">
-                                                <button className="rounded-xl px-3 py-1 font-semibold bg-ghost">
-                                                    Dashboard
-                                                </button>
+                                                <span className="cursor-pointer rounded-full btn-primary btn-circle  btn-outline" onClick={() => setLoading(true)}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="bi bi-bar-chart-line" viewBox="0 0 16 16">
+                                                        <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+                                                    </svg>
+                                                </span>
                                             </Link>
                                             :
                                             isLoading ? 
                                             <>
-                                                <button className="rounded-xl px-3 py-1 font-semibold bg-gray-500 text-slate-900 cursor-wait" disabled>
-                                                Processing
-                                                </button>
+                                                <span className="cursor-wait animate-pulse rounded-full btn-primary btn-circle  btn-outline" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person" viewBox="0 0 16 16">
+                                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                                    </svg>
+                                                </span>
                                             </>
                                             :
                                                 userIsFollowing ?
                                                 <>
-                                                    <button onClick={() => updateFollow()} className="rounded-xl px-3 py-1 font-semibold bg-primary">
-                                                    Following
-                                                    </button>
+                                                    <div onMouseOver={() => setFollowMouseOver(true)} onMouseOut={() => setFollowMouseOver(false)}>
+                                                        { followMouseOver ?
+                                                        <>
+                                                            <span onClick={() => updateFollow()} className="cursor-pointer rounded-full btn-primary btn-circle  btn-outline" >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-dash" viewBox="0 0 16 16">
+                                                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1Zm0-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                                                                    <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+                                                                </svg>
+                                                            </span>
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <span className="cursor-pointer rounded-full btn-primary btn-circle  btn-outline" >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-check" viewBox="0 0 16 16">
+                                                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                                                                    <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+                                                                </svg>
+                                                            </span>
+                                                        </>
+                                                        }
+
+                                                    </div>
                                                 </>
                                                 :
                                                 <>
-                                                    <button onClick={() => updateFollow()} className="rounded-xl px-3 py-1 font-semibold bg-secondary">
-                                                    Follow
-                                                    </button>
+                                                    <span onClick={() => updateFollow()} className="cursor-pointer rounded-full btn-primary btn-circle  btn-outline" >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-add" viewBox="0 0 16 16">
+                                                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                                                            <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+                                                        </svg>
+                                                    </span>
                                                 </>
                                     }
                                     </SignedIn>
                                     <SignedOut>
-                                        <button onClick={() => openSignIn()} className="rounded-xl px-3 py-1 font-semibold bg-secondary">
-                                        Follow
-                                        </button>
+                                        <span onClick={() => openSignIn()} className="cursor-pointer rounded-full btn-primary btn-circle  btn-outline" >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-add" viewBox="0 0 16 16">
+                                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                                                <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+                                            </svg>
+                                        </span>
                                     </SignedOut>
-                                </div>
+                                    {/* End Follow Button */}
                             </div>
                         </div>
+                        {/* End - Message, Follow and Dashboard Button */}
 
                     </div>
 
