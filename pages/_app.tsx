@@ -132,6 +132,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         <ClerkLoaded>
 
+        <div data-theme="bumblebee">
+
           {DisableNav.includes(router.pathname) ? <></> :
             <>
                 <BrowserView>
@@ -163,7 +165,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
           {/* footer */}
           <Footer/>
-
+          
+        </div>
 
         </ClerkLoaded>
 

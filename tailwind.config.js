@@ -27,7 +27,6 @@ module.exports = {
     logs: true,
     rtl: false,
     prefix: "",
-    darkTheme: "bumblebee",
     themes: [
       "light",
       "dark",
