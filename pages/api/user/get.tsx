@@ -17,7 +17,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
     await axios.get(get_api_url, {headers: headers})
     .then(response => {
-        console.log( response.data.users[0])
         res.json(
         response.status == 200 ? 
         {
