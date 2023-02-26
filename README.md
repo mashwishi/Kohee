@@ -66,7 +66,9 @@ To get a local copy up and running follow these simple example steps.
 3. Enter your ENV in `.env` or `.env.local`
 
    ```js
-   CLERK_SECRET_KEY = "";
+   CLERK_JWT_KEY = "";
+   CLERK_API_KEY = "";
+   NEXT_PUBLIC_CLERK_FRONTEND_API = "";
    HASURA_ADMIN_SECRET = "";
 
    ENDPOINT_KEY_PROD = "";
@@ -74,7 +76,6 @@ To get a local copy up and running follow these simple example steps.
 
    NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT = "";
    NEXT_PUBLIC_HASURA_REST_API = "";
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = "";
    NEXT_PUBLIC_HOSTNAME = "https://<yourdomainhere>";
 
    NEXT_PUBLIC_GOOGLEADS_CLIENT = IMGUR_CLIENT_ID = "";
