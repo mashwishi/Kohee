@@ -1,9 +1,3 @@
-
-
-
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -28,15 +22,11 @@
   </p>
 </div>
 
-
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -57,6 +47,7 @@
 </details>
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 This is the instructions on setting up your project locally.
@@ -72,46 +63,47 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm install
    ```
-3. Enter your ENV in `.env` or `.env.local` 
-    ```js
-    CLERK_API_KEY=''
-    HASURA_ADMIN_SECRET=''
+3. Enter your ENV in `.env` or `.env.local`
 
-    ENDPOINT_KEY_PROD=''
-    ENDPOINT_KEY_LOCAL=''
+   ```js
+   CLERK_SECRET_KEY = "";
+   HASURA_ADMIN_SECRET = "";
 
-    NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT=''
-    NEXT_PUBLIC_HASURA_REST_API=''
-    NEXT_PUBLIC_CLERK_FRONTEND_API=''
-    NEXT_PUBLIC_HOSTNAME='https://<yourdomainhere>'
+   ENDPOINT_KEY_PROD = "";
+   ENDPOINT_KEY_LOCAL = "";
 
-    NEXT_PUBLIC_GOOGLEADS_CLIENT=
+   NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT = "";
+   NEXT_PUBLIC_HASURA_REST_API = "";
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = "";
+   NEXT_PUBLIC_HOSTNAME = "https://<yourdomainhere>";
 
-    IMGUR_CLIENT_ID=''
-    IMGUR_CLIENT_SECRET=''
+   NEXT_PUBLIC_GOOGLEADS_CLIENT = IMGUR_CLIENT_ID = "";
+   IMGUR_CLIENT_SECRET = "";
 
-    GOOGLE_ANALYTICS_TRACKING_ID ='UA-'
+   GOOGLE_ANALYTICS_TRACKING_ID = "UA-";
 
-    GEOAPIFY_URL = ''
-    GEOAPIFY_KEY = '' 
-    ```
-    Universal Analytics will no longer process new data in standard properties beginning July 1, 2023.
-    The `react-ga` is now deprecated (12/18/2022) since it is still not July 1, 2023 I will keep this configuration and wait for `react-ga` updates while waiting for an alternative solution.
+   GEOAPIFY_URL = "";
+   GEOAPIFY_KEY = "";
+   ```
+
+   Universal Analytics will no longer process new data in standard properties beginning July 1, 2023.
+   The `react-ga` is now deprecated (12/18/2022) since it is still not July 1, 2023 I will keep this configuration and wait for `react-ga` updates while waiting for an alternative solution.
+
 4. Run on local using `npm run dev` or on prod using `npm run`
 
 ### Built With
 
-This section list of major frameworks/libraries we used to our your project. 
+This section list of major frameworks/libraries we used to our your project.
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Clerk][Clerk]][Clerk-url]
-* [![Tailwind][Tailwind]][Tailwind-url]
-* [![Hasura][Hasura]][Hasura-url]
-* [![DaisyUI][DaisyUI]][DaisyUI-url]
-
+- [![Next][next.js]][next-url]
+- [![React][react.js]][react-url]
+- [![Clerk][clerk]][clerk-url]
+- [![Tailwind][tailwind]][tailwind-url]
+- [![Hasura][hasura]][hasura-url]
+- [![DaisyUI][daisyui]][daisyui-url]
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
 - [x] Create a repo
@@ -124,13 +116,13 @@ This section list of major frameworks/libraries we used to our your project.
 - [x] Sharable profiles
 - [x] Follow System
 - [x] Kohee user dashboard
-- [X] User Discovery
+- [x] User Discovery
 - [x] API Webhooks and Endpoints
 - [x] User Followers and Visits
 - [x] Front-End Enhancement
-- [X] User Analytics
-- [X] Progressive Website Application Feature
-- [X] QR Generator
+- [x] User Analytics
+- [x] Progressive Website Application Feature
+- [x] QR Generator
 - [ ] QR Scanner
 - [ ] Ads to support the project
 - [ ] Referral Program to earn more feature
@@ -139,8 +131,8 @@ This section list of major frameworks/libraries we used to our your project.
 
 See the [open issues](https://github.com/mashwishi/kohee/issues) for a full list of proposed features (and known issues).
 
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -154,31 +146,29 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the GNU License. See `LICENSE.txt` for more information.
 
-
 <!-- Contributors / Collaborators -->
+
 ## Contributors / Collaborators
 
 [@Mashwishi](https://github.com/Mashwishi), [@Exarus](https://github.com/Exaruss), [@Aspect](https://github.com/aspectdev-ph)
 
 <!-- Partners -->
+
 ## Partners
 
 <!-- Sponsors -->
+
 ## Sponsors
-
-
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/mashwishi/kohee.svg?style=for-the-badge
 [contributors-url]: https://github.com/mashwishi/kohee/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/mashwishi/kohee.svg?style=for-the-badge
@@ -189,23 +179,16 @@ Distributed under the GNU License. See `LICENSE.txt` for more information.
 [issues-url]: https://github.com/mashwishi/kohee/issues
 [license-shield]: https://img.shields.io/github/license/mashwishi/kohee.svg?style=for-the-badge
 [license-url]: https://github.com/mashwishi/kohee/blob/main/LICENSE
-
 [product-screenshot]: images/screenshot.png
-
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-
-[Clerk]: https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=Clerk&logoColor=white
-[Clerk-url]: https://clerk.dev/
-
-[Hasura]: https://img.shields.io/badge/Hasura-1EB4D4?style=for-the-badge&logo=Hasura&logoColor=white
-[Hasura-url]: https://clerk.dev/
-
-[Tailwind]: https://img.shields.io/badge/Tailwind-0EA5E9?style=for-the-badge&logo=TailwindCSS&logoColor=white
-[Tailwind-url]: https://hasura.io/
-
-[DaisyUI]: https://img.shields.io/badge/DaisyUI-F000B8?style=for-the-badge&logo=DaisyUI&logoColor=white
-[DaisyUI-url]: https://daisyui.com/
+[next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[next-url]: https://nextjs.org/
+[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[react-url]: https://reactjs.org/
+[clerk]: https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=Clerk&logoColor=white
+[clerk-url]: https://clerk.dev/
+[hasura]: https://img.shields.io/badge/Hasura-1EB4D4?style=for-the-badge&logo=Hasura&logoColor=white
+[hasura-url]: https://clerk.dev/
+[tailwind]: https://img.shields.io/badge/Tailwind-0EA5E9?style=for-the-badge&logo=TailwindCSS&logoColor=white
+[tailwind-url]: https://hasura.io/
+[daisyui]: https://img.shields.io/badge/DaisyUI-F000B8?style=for-the-badge&logo=DaisyUI&logoColor=white
+[daisyui-url]: https://daisyui.com/
